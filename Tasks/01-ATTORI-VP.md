@@ -43,3 +43,4 @@ La ripartizione avviene quindi:
 - [SPECIFICHE DEL DOCENTE](https://docs.google.com/document/d/1IXagE_L6TtFBPx2kVvV35wJbfZ9Ls8r0ThPXx25XXpE/edit?tab=t.0#heading=h.wpfo4ajj0vtq)
 
 ## Note Aggiuntive
+Modificare i Goals, senza utilizzare termini come gestione ecc.., ma farli specifichi con nomi di casi d'uso es: crea prodotto...
