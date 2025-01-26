@@ -2,7 +2,7 @@
 type: task
 title: REALIZZAZIONE DEI SEQUENCE DIAGRAM
 dataInserimento: 2025-01-20
-dataScadenza: 2025-01-26
+dataScadenza: 2025-01-31
 ---
 # REALIZZAZIONE DEI SEQUENCE DIAGRAM
 ## Descrizione
@@ -19,11 +19,11 @@ La ripartizione avviene quindi:
 
 ## CASI D'USO CON IMPORTANZA ELEVATA
 #### GIORGIO PRANZETTI
-| CASI D'USO                                                                                                                                                     | ATTORE                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| AGGIUNGI UTENTE<br>RIMUOVI UTENTE<br>VISUALIZZA LISTA UTENTI                                                                                                   | GESTORE DELLA PIATTAFORMA |
-| INSERISCI METODOLOGIA DI COLTIVAZIONE<br>VISUALIZZA METODOLOGIE DI COLTIVAZIONE<br>MODIFICA METODOLOGIA DI COLTIVAZIONE<br>ELIMINA METODOLOGIA DI COLTIVAZIONE | PRODUTTORE                |
-| AGGIUNGI EVENTO<br>MODIFICA EVENTO<br>ELIMINA EVENTO<br>VISUALIZZA EVENTI<br>INVIARE INVITI PER EVENTO                                                         | ANIMATORE DELLA FILIERA   |
+| CASI D'USO                                                                                                                                                     | ATTORE                    | STATO                     |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- |
+| AGGIUNGI UTENTE<br>RIMUOVI UTENTE<br>VISUALIZZA LISTA UTENTI                                                                                                   | GESTORE DELLA PIATTAFORMA | COMPLETATO 24/01/2025     |
+| INSERISCI METODOLOGIA DI COLTIVAZIONE<br>VISUALIZZA METODOLOGIE DI COLTIVAZIONE<br>MODIFICA METODOLOGIA DI COLTIVAZIONE<br>ELIMINA METODOLOGIA DI COLTIVAZIONE | PRODUTTORE                |                           |
+| AGGIUNGI EVENTO<br>MODIFICA EVENTO<br>ELIMINA EVENTO<br>VISUALIZZA EVENTI<br>INVIARE INVITI PER EVENTO                                                         | ANIMATORE DELLA FILIERA   |                           |
 #### GIULIA BALESTRA
 | CASI D'USO                                                                                                                                       | ATTORE                   |
 | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
@@ -31,13 +31,13 @@ La ripartizione avviene quindi:
 | INSERISCI ALLERGENE<br>VISUALIZZA ALLERGENI<br>MODIFICA ALLERGENE<br>ELIMINA ALLERGENE                                                           | PRODUTTORE               |
 | VISUALIZZARE LE RICHIESTE DI REVISIONE<br>RISPOSTA DELLE RICHIESTE DI REVISIONE                                                                  | CURATORE                 |
 #### FRANCESCO VALENTINI
-| CASI D'USO                                                                                                                                                                                                              | ATTORE            |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| INSERIMENTO INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE<br>MODIFICA INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE<br>ELIMINAZIONE INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE                                             | TRASFORMATORE     |
-| MODIFICARE LE PROPRIE INFORMAZIONI<br>ACQUISTARE PRODOTTI NEL MARKETPLACE<br>RICERCA INFORMAZIONI SU PRODOTTI<br>ISCRIVERSI AD EVENTO<br>MOSTRA PRENOTAZIONI EVENTI<br>RICERCA EVENTI<br>ANNULLARE ISCRIZIONE AD EVENTO | UTENTE REGISTRATO |
+| CASI D'USO                                                                                                                                                                                                              | ATTORE            | STATO                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------- |
+| INSERIMENTO INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE<br>MODIFICA INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE<br>ELIMINAZIONE INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE                                             | TRASFORMATORE     | COMPLETATO 26/01/2025     |
+| MODIFICARE LE PROPRIE INFORMAZIONI<br>ACQUISTARE PRODOTTI NEL MARKETPLACE<br>RICERCA INFORMAZIONI SU PRODOTTI<br>ISCRIVERSI AD EVENTO<br>MOSTRA PRENOTAZIONI EVENTI<br>RICERCA EVENTI<br>ANNULLARE ISCRIZIONE AD EVENTO | UTENTE REGISTRATO |                           |
 
 ## Scadenza
-**Scadenza:** 26-01-2025
+**Scadenza:** 31-01-2025
 
 ## Risorse Necessarie
 - [SPECIFICHE DEL DOCENTE](https://docs.google.com/document/d/1IXagE_L6TtFBPx2kVvV35wJbfZ9Ls8r0ThPXx25XXpE/edit?tab=t.0#heading=h.wpfo4ajj0vtq)
