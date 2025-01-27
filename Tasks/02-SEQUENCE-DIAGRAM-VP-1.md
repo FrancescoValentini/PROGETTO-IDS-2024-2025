@@ -22,13 +22,12 @@ La ripartizione avviene quindi:
 | CASI D'USO                                                                                                                                                     | ATTORE                    | STATO                     |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- |
 | AGGIUNGI UTENTE<br>RIMUOVI UTENTE<br>VISUALIZZA LISTA UTENTI                                                                                                   | GESTORE DELLA PIATTAFORMA | COMPLETATO 24/01/2025     |
-| INSERISCI METODOLOGIA DI COLTIVAZIONE<br>VISUALIZZA METODOLOGIE DI COLTIVAZIONE<br>MODIFICA METODOLOGIA DI COLTIVAZIONE<br>ELIMINA METODOLOGIA DI COLTIVAZIONE | PRODUTTORE                |                           |
 | AGGIUNGI EVENTO<br>MODIFICA EVENTO<br>ELIMINA EVENTO<br>VISUALIZZA EVENTI<br>INVIARE INVITI PER EVENTO                                                         | ANIMATORE DELLA FILIERA   |                           |
 #### GIULIA BALESTRA
-| CASI D'USO                                                                                                                                       | ATTORE                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
+| CASI D'USO                                                                                                                                       | ATTORE                   | STATO                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ | ------------------------- |
 | VISUALIZZA PACCHETTI DI PRODOTTI<br>CREARE UN PACCHETTO DI PRODOTTI<br>MODIFICARE UN PACCHETTO DI PRODOTTI<br>ELIMINARE UN PACCHETTO DI PRODOTTI | DISTRIBUTORE DI TIPICITÀ |
-| INSERISCI ALLERGENE<br>VISUALIZZA ALLERGENI<br>MODIFICA ALLERGENE<br>ELIMINA ALLERGENE                                                           | PRODUTTORE               |
+| INSERISCI METODOLOGIA DI COLTIVAZIONE<br>VISUALIZZA METODOLOGIE DI COLTIVAZIONE<br>MODIFICA METODOLOGIA DI COLTIVAZIONE<br>ELIMINA METODOLOGIA DI COLTIVAZIONE INSERISCI ALLERGENE<br>VISUALIZZA ALLERGENI<br>MODIFICA ALLERGENE<br>ELIMINA ALLERGENE                                                           | PRODUTTORE               | COMPLETATO 27/01/2025     |
 | VISUALIZZARE LE RICHIESTE DI REVISIONE<br>RISPOSTA DELLE RICHIESTE DI REVISIONE                                                                  | CURATORE                 |
 #### FRANCESCO VALENTINI
 | CASI D'USO                                                                                                                                                                                                              | ATTORE            | STATO                     |
