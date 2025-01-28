@@ -29,12 +29,12 @@ La ripartizione avviene quindi:
 | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ | ------------------------- |
 | VISUALIZZA PACCHETTI DI PRODOTTI<br>CREARE UN PACCHETTO DI PRODOTTI<br>MODIFICARE UN PACCHETTO DI PRODOTTI<br>ELIMINARE UN PACCHETTO DI PRODOTTI | DISTRIBUTORE DI TIPICITÀ | COMPLETATO 28/01/2025 |
 | INSERISCI METODOLOGIA DI COLTIVAZIONE<br>VISUALIZZA METODOLOGIE DI COLTIVAZIONE<br>MODIFICA METODOLOGIA DI COLTIVAZIONE<br>ELIMINA METODOLOGIA DI COLTIVAZIONE INSERISCI ALLERGENE<br>VISUALIZZA ALLERGENI<br>MODIFICA ALLERGENE<br>ELIMINA ALLERGENE                                                           | PRODUTTORE               | COMPLETATO 27/01/2025     |
-| VISUALIZZARE LE RICHIESTE DI REVISIONE<br>RISPOSTA DELLE RICHIESTE DI REVISIONE                                                                  | CURATORE                 |
 #### FRANCESCO VALENTINI
 | CASI D'USO                                                                                                                                                                                                              | ATTORE            | STATO                     |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------- |
 | INSERIMENTO INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE<br>MODIFICA INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE<br>ELIMINAZIONE INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE                                             | TRASFORMATORE     | COMPLETATO 26/01/2025     |
 | ISCRIVERSI AD EVENTO<br>MOSTRA PRENOTAZIONI EVENTI<br>RICERCA EVENTI<br>ANNULLARE ISCRIZIONE AD EVENTO | UTENTE REGISTRATO |                           |
+| VISUALIZZARE LE RICHIESTE DI REVISIONE<br>RISPOSTA DELLE RICHIESTE DI REVISIONE                                                                  | CURATORE                 |
 
 ## Scadenza
 **Scadenza:** 31-01-2025
