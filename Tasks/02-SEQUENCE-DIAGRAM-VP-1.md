@@ -22,8 +22,8 @@ La ripartizione avviene quindi:
 | CASI D'USO                                                                                                                                                     | ATTORE                    | STATO                     |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- |
 | AGGIUNGI UTENTE<br>RIMUOVI UTENTE<br>VISUALIZZA LISTA UTENTI                                                                                                   | GESTORE DELLA PIATTAFORMA | COMPLETATO 24/01/2025     |
-| AGGIUNGI EVENTO<br>MODIFICA EVENTO<br>ELIMINA EVENTO<br>VISUALIZZA EVENTI<br>INVIARE INVITI PER EVENTO                                                         | ANIMATORE DELLA FILIERA   |                           |
-| MODIFICARE LE PROPRIE INFORMAZIONI<br>ACQUISTARE PRODOTTI NEL MARKETPLACE<br>RICERCA INFORMAZIONI SU PRODOTTI                                                  | UTENTE REGISTRATO         |                           |
+| AGGIUNGI EVENTO<br>MODIFICA EVENTO<br>ELIMINA EVENTO<br>VISUALIZZA EVENTI<br>INVIARE INVITI PER EVENTO                                                         | ANIMATORE DELLA FILIERA   | COMPLETATO 29/01/2025*    |
+| MODIFICARE LE PROPRIE INFORMAZIONI<br>ACQUISTARE PRODOTTI NEL MARKETPLACE<br>RICERCA INFORMAZIONI SU PRODOTTI                                                  | UTENTE REGISTRATO         | COMPLETATO 29/01/2025     |
 #### GIULIA BALESTRA
 | CASI D'USO                                                                                                                                       | ATTORE                   | STATO                     |
 | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ | ------------------------- |
