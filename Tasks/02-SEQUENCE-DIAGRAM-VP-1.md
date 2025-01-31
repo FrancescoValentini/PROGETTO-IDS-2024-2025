@@ -33,7 +33,7 @@ La ripartizione avviene quindi:
 | CASI D'USO                                                                                                                                                                                                              | ATTORE            | STATO                     |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------- |
 | INSERIMENTO INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE<br>MODIFICA INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE<br>ELIMINAZIONE INFORMAZIONI SUI PROCESSI DI TRASFORMAZIONE                                             | TRASFORMATORE     | COMPLETATO 26/01/2025     |
-| ISCRIVERSI AD EVENTO<br>MOSTRA PRENOTAZIONI EVENTI<br>RICERCA EVENTI<br>ANNULLARE ISCRIZIONE AD EVENTO                                                                                                                  | UTENTE REGISTRATO |                           |
+| ISCRIVERSI AD EVENTO<br>MOSTRA PRENOTAZIONI EVENTI<br>RICERCA EVENTI<br>ANNULLARE ISCRIZIONE AD EVENTO                                                                                                                  | UTENTE REGISTRATO | COMPLETATO 31/01/2025     |
 | VISUALIZZARE LE RICHIESTE DI REVISIONE<br>RISPOSTA DELLE RICHIESTE DI REVISIONE                                                                                                                                         | CURATORE          | COMPLETATO 29/01/2025     |
 
 ## Scadenza
