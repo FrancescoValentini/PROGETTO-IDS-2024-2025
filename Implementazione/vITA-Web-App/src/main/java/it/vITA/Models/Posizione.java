@@ -17,6 +17,8 @@ public class Posizione {
 	private String latitudine;
 	private String longitudine;
 	
+	public Posizione() {}
+	
 	/**
 	 * Posizione geografica
 	 * 

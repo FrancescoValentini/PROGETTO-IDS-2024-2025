@@ -21,6 +21,8 @@ public class UtenteRegistrato {
 	private String cognome;
 	private String telefono;
 	private String biografia;
+	
+	public UtenteRegistrato() {}
 	/**
 	 * Costruttore per un utente registrato nella piattaforma
 	 * 
