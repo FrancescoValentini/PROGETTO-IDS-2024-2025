@@ -2,6 +2,7 @@ package it.vITA.Models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -33,23 +34,26 @@ public class Evento {
 	
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-	public TipologiaEvento tipologiaEvento;
+    private TipologiaEvento tipologiaEvento;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "posizione_id", referencedColumnName = "id")
 	private Posizione posizioneGeografica;
 	
 	
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "evento_id") 
-	public ArrayList<Iscrizione> iscrizioni;
+    private List<Iscrizione> iscrizioni;
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "evento_id") 
-	public ArrayList<Invito> inviti;
+    private List<Invito> inviti;
 	
 	
-	public Evento() {}
+	public Evento() {
+		this.iscrizioni = new ArrayList<>();
+		this.inviti = new ArrayList<>();
+	}
 
 
 	/**
@@ -160,7 +164,7 @@ public class Evento {
 	}
 
 
-	public ArrayList<Iscrizione> getIscrizioni() {
+	public List<Iscrizione> getIscrizioni() {
 		return iscrizioni;
 	}
 
@@ -170,7 +174,7 @@ public class Evento {
 	}
 
 
-	public ArrayList<Invito> getInviti() {
+	public List<Invito> getInviti() {
 		return inviti;
 	}
 
