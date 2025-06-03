@@ -8,15 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.EventoDTO;
-import it.vITA.DTO.PosizioneDTO;
 import it.vITA.Models.Evento;
 import it.vITA.Models.Posizione;
 import it.vITA.Repositories.EventiRepository;
@@ -65,7 +66,7 @@ public class EventoController {
 	 * @return evento creato
 	 */
 	@PostMapping
-	public ResponseEntity<Object> createPosizione(@RequestBody EventoDTO dtoEvento){
+	public ResponseEntity<Object> createEvento(@RequestBody EventoDTO dtoEvento){
 		
 		Posizione pEvento = null;
 		String idPosizione = dtoEvento.getPosizioneGeografica();
@@ -88,5 +89,53 @@ public class EventoController {
 		
 		repoEventi.save(e);
 		return new ResponseEntity<>(e,HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Aggiorna i dati di un evento
+	 * @param id dell'evento già esistente
+	 * @param dtoEvento
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateEvento(@PathVariable("id") String id, @RequestBody EventoDTO dtoEvento){
+		
+		Posizione pEvento = null;
+		String idPosizione = dtoEvento.getPosizioneGeografica();
+		
+		if(repoPosizioni.existsById(idPosizione)) {
+			pEvento = repoPosizioni.findById(idPosizione).get();
+		}else {
+			return new ResponseEntity<>("Posizione non trovata",HttpStatus.NOT_FOUND);
+		}
+		
+		
+		if(repoEventi.existsById(id)) {
+			Evento e = repoEventi.findById(id).get();
+			e.setDataEOraEvento(dtoEvento.getDataEOraEvento());
+			e.setTitolo(dtoEvento.getTitolo());
+			e.setDescrizione(dtoEvento.getDescrizione());
+			e.setPrezzoIngresso(dtoEvento.getPrezzoIngresso());
+			e.setPosti(dtoEvento.getPosti());
+			e.setPosizioneGeografica(pEvento);
+			
+			repoEventi.save(e);
+			return new ResponseEntity<>(e,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Evento non trovato",HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	/**
+	 * Elimina un evento dato il suo id
+	 * @param id dell'evento
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteEvento(@PathVariable("id") String id){
+		if(repoEventi.existsById(id)) {
+			repoEventi.deleteById(id);
+			return new ResponseEntity<>("Evento eliminato",HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Evento non trovato",HttpStatus.NOT_FOUND);
 	}
 }
