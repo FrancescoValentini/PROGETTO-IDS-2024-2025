@@ -9,10 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.vITA.DTO.AllergeneDTO;
+import it.vITA.DTO.PosizioneDTO;
 import it.vITA.Models.Allergene;
+import it.vITA.Models.Posizione;
 import it.vITA.Repositories.AllergeniRepository;
 
 /**
@@ -38,4 +44,27 @@ public class AllergeneController {
 		allergeni.forEach(x -> a.add(x));
 		return new ResponseEntity<>(allergeni,HttpStatus.OK);
 	}
+	/**
+	 * Restituisce un singolo allergene dato il suo id
+	 * @param id allergene
+	 */
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getAllergene(@PathVariable("id") String id) {
+		if(repoAllergeni.existsById(id)) {
+			return new ResponseEntity<>(repoAllergeni.findById(id).get(),HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Allergene non trovato",HttpStatus.NOT_FOUND);
+	}
+	
+	/**
+	 * Aggiunge un nuovo allergene
+	 * @param DTOallergene
+	 */
+	@PostMapping
+	public ResponseEntity<Object> createAllergene(@RequestBody AllergeneDTO DTOallergene){
+		Allergene aller = new Allergene(DTOallergene.getDenominazione(), DTOallergene.getDescrizione());
+		repoAllergeni.save(aller);
+		return new ResponseEntity<>(aller,HttpStatus.CREATED);
+	}
+	
 }
