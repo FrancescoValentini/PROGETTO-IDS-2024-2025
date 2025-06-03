@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,6 +46,17 @@ public class EventoController {
 		eventi.forEach(x -> ev.add(x));
 		return new ResponseEntity<>(ev,HttpStatus.OK);
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getEvento(@PathVariable("id") String id){
+		if(repoEventi.existsById(id)) {
+			return new ResponseEntity<>(repoEventi.findById(id).get(),HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Evento non trovato",HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
 	
 	
 	
