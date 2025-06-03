@@ -10,9 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.vITA.DTO.PosizioneDTO;
 import it.vITA.Models.Posizione;
 import it.vITA.Repositories.PosizioniRepository;
 
@@ -54,6 +57,19 @@ public class PosizioneController {
 		}
 		return new ResponseEntity<>("Posizione non trovata",HttpStatus.NOT_FOUND);
 	}
+	
+	/**
+	 * Aggiunge una nuova posizione
+	 * @param DTOposizione
+	 * @author Giulia Balestra
+	 */
+	@PostMapping
+	public ResponseEntity<Object> createPosizione(@RequestBody PosizioneDTO posizione){
+		Posizione pos = new Posizione(posizione.getLatitudine(), posizione.getLongitudine());
+		repoPosizioni.save(pos);
+		return new ResponseEntity<>(pos,HttpStatus.CREATED);
+	}
+	
 	
 	
 	
