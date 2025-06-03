@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -96,6 +97,18 @@ public class CertificazioneController {
 			
 			repoCertificazioni.save(c);
 			return new ResponseEntity<>(c,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Certificazione non trovata",HttpStatus.NOT_FOUND);
+	}
+	/**
+	 * Elimina una certificazione
+	 * @param id della certificazione
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteCertificazione(@PathVariable("id") String id) {
+		if(repoCertificazioni.existsById(id)) {
+			repoCertificazioni.deleteById(id);
+			return new ResponseEntity<>("Certificazione eliminata",HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Certificazione non trovata",HttpStatus.NOT_FOUND);
 	}
