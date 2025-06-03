@@ -45,8 +45,8 @@ public class CertificazioneController {
 	public ResponseEntity<Object> getCertificazioni(){
 		Iterable<Certificazione> certificazioni = repoCertificazioni.findAll();
 		List<Certificazione> c = new ArrayList<>();
-		c.forEach(x -> c.add(x));
-		return new ResponseEntity<>(c ,HttpStatus.OK);
+		certificazioni.forEach(x -> c.add(x));
+		return new ResponseEntity<>(certificazioni ,HttpStatus.OK);
 	}
 	/**
 	 * Restituisce una certificazione dato il suo id
