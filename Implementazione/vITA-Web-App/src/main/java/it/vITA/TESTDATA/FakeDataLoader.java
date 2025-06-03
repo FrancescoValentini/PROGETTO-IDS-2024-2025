@@ -39,7 +39,6 @@ public class FakeDataLoader implements CommandLineRunner {
 		
 		Evento e1 = new Evento(
 					LocalDateTime.now(),
-					LocalDateTime.now(), 
 					"EVENTO1-TITOLO", 
 					"EVENTO1-DESC", 
 					0, 
@@ -49,7 +48,6 @@ public class FakeDataLoader implements CommandLineRunner {
 		
 		Evento e2 = new Evento(
 				LocalDateTime.now(),
-				LocalDateTime.now(), 
 				"EVENTO2-TITOLO", 
 				"EVENTO2-DESC", 
 				50, 
@@ -58,7 +56,6 @@ public class FakeDataLoader implements CommandLineRunner {
 			);
 		
 		Evento e3 = new Evento(
-				LocalDateTime.now(),
 				LocalDateTime.now(), 
 				"EVENTO3-TITOLO", 
 				"EVENTO3-DESC", 
