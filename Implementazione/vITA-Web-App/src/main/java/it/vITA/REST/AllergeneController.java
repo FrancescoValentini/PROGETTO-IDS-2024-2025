@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,6 +66,23 @@ public class AllergeneController {
 		Allergene aller = new Allergene(DTOallergene.getDenominazione(), DTOallergene.getDescrizione());
 		repoAllergeni.save(aller);
 		return new ResponseEntity<>(aller,HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Aggiorna un allergene
+	 * @param DTOallergene
+	 * @param id
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateAllergene(@PathVariable("id") String id, @RequestBody AllergeneDTO DTOallergene){
+		if(repoAllergeni.existsById(id)) {
+			Allergene a = repoAllergeni.findById(id).get();
+			a.setDenominazione(DTOallergene.getDenominazione());
+			a.setDescrizione(DTOallergene.getDescrizione());
+			repoAllergeni.save(a);
+			return new ResponseEntity<>(a ,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Allergene non trovato",HttpStatus.NOT_FOUND);
 	}
 	
 }
