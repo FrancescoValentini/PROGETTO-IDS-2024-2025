@@ -25,8 +25,11 @@ import it.vITA.Models.MetodologiaColtivazione;
 import it.vITA.Models.Posizione;
 import it.vITA.Repositories.MetodologieColtivazioneRepository;
 /**
- * Rest controller che gestisce le metodologie di coltivazione
+ * Rest controller REST per operazioni CRUD su metodologie di coltivazione
+ * 
+ * @author Giulia Balestra
  */
+
 @RestController
 @RequestMapping("/api/metodologia")
 public class MetodologiaColtivazioneController {
@@ -51,7 +54,6 @@ public class MetodologiaColtivazioneController {
 	
 	/**
 	 * Restituisce una singola metodologia dato il suo id
-	 * 
 	 * @param id della metodologia
 	 * @author Giulia Balestra
 	 */
