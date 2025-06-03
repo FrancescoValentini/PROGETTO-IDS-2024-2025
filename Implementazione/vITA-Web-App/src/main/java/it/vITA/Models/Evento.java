@@ -68,10 +68,10 @@ public class Evento {
 	 * @param tipologiaEvento
 	 * @param posizioneGeografica
 	 */
-	public Evento(LocalDateTime dataEOraEvento, LocalDateTime dataEOraCreazione, String titolo, String descrizione,
+	public Evento(LocalDateTime dataEOraEvento, String titolo, String descrizione,
 			double prezzoIngresso, int posti, TipologiaEvento tipologiaEvento, Posizione posizioneGeografica) {
 		this.dataEOraEvento = dataEOraEvento;
-		this.dataEOraCreazione = dataEOraCreazione;
+		this.dataEOraCreazione = LocalDateTime.now();
 		this.titolo = titolo;
 		this.descrizione = descrizione;
 		this.prezzoIngresso = prezzoIngresso;
