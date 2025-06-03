@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,6 +82,18 @@ public class AllergeneController {
 			a.setDescrizione(DTOallergene.getDescrizione());
 			repoAllergeni.save(a);
 			return new ResponseEntity<>(a ,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Allergene non trovato",HttpStatus.NOT_FOUND);
+	}
+	/**
+	 * Elimina un allergene
+	 * @param id allergene
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteAllergene(@PathVariable("id") String id) {
+		if(repoAllergeni.existsById(id)) {
+			repoAllergeni.deleteById(id);
+			return new ResponseEntity<>("Allergene eliminato",HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Allergene non trovato",HttpStatus.NOT_FOUND);
 	}
