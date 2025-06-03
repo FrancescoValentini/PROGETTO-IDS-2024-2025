@@ -18,11 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.IscrizioneDTO;
-import it.vITA.DTO.PosizioneDTO;
 import it.vITA.Models.Iscrizione;
-import it.vITA.Models.Posizione;
 import it.vITA.Repositories.IscrizioneRepository;
-import it.vITA.Repositories.PosizioniRepository;
 /**
  * Rest controller che gestisce le iscrizioni
  */
