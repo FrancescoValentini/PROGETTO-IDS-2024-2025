@@ -1,5 +1,6 @@
 package it.vITA.REST;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.vITA.DTO.CertificazioneDTO;
 import it.vITA.Models.Certificazione;
 import it.vITA.Repositories.CertificazioniRepository;
 
@@ -54,6 +58,25 @@ public class CertificazioneController {
 		}
 		return new ResponseEntity<>("Certificazione non trovata",HttpStatus.NOT_FOUND);
 	}
+	/**
+	 * Crea una nuova certificazione
+	 * @param dtoCertificazione
+	 * @return certificazione creata
+	 */
+	@PostMapping
+	public ResponseEntity<Object> createCertificazione(@RequestBody CertificazioneDTO dtoCertificazione){
+		Certificazione cert = new Certificazione(
+				dtoCertificazione.getDenominazione(),
+				dtoCertificazione.getDescrizione(),
+				dtoCertificazione.getDenominazioneEnteCertificatore(),
+				LocalDateTime.now(),
+				dtoCertificazione.getDataScadenza()
+				);
+		
+		repoCertificazioni.save(cert);
+		return new ResponseEntity<>(cert,HttpStatus.CREATED);
+	}
+		
 	
 	
 }
