@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -76,6 +77,29 @@ public class CertificazioneController {
 		repoCertificazioni.save(cert);
 		return new ResponseEntity<>(cert,HttpStatus.CREATED);
 	}
+	/**
+	 * Aggiorna alcuni dati di una certificazione
+	 * @param id della certificazione già esistente
+	 * @param dtoCertificazione
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateCertificazione(@PathVariable("id") String id,
+			@RequestBody CertificazioneDTO dtoCertificazione){
+		
+		
+		
+		if(repoCertificazioni.existsById(id)) {
+			Certificazione c = repoCertificazioni.findById(id).get();
+			c.setDescrizione(dtoCertificazione.getDescrizione());
+			c.setDenominazioneEnteCertificatore(dtoCertificazione.getDenominazioneEnteCertificatore());
+			c.setDataScadenza(dtoCertificazione.getDataScadenza());
+			
+			repoCertificazioni.save(c);
+			return new ResponseEntity<>(c,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Certificazione non trovata",HttpStatus.NOT_FOUND);
+	}
+	
 		
 	
 	
