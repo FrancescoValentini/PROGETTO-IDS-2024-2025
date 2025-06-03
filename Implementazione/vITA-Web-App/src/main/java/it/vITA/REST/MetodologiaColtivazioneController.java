@@ -96,5 +96,16 @@ public class MetodologiaColtivazioneController {
 		return new ResponseEntity<>("Metodologia non trovata",HttpStatus.NOT_FOUND);
 	}
 	
-	
+	/**
+	 * Elimina una metodologia
+	 * @param id della metodologia
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteMetodologia(@PathVariable("id") String id) {
+		if(repoMetodologie.existsById(id)) {
+			repoMetodologie.deleteById(id);
+			return new ResponseEntity<>("Metodologia eliminata",HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Metodologia non trovata",HttpStatus.NOT_FOUND);
+	}
 }
