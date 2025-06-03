@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.vITA.DTO.EventoDTO;
 import it.vITA.DTO.MetodologiaColtivazioneDTO;
 import it.vITA.DTO.PosizioneDTO;
+import it.vITA.Models.Evento;
 import it.vITA.Models.MetodologiaColtivazione;
 import it.vITA.Models.Posizione;
 import it.vITA.Repositories.MetodologieColtivazioneRepository;
@@ -67,11 +69,32 @@ public class MetodologiaColtivazioneController {
 	 * @author Giulia Balestra
 	 */
 	@PostMapping
-	public ResponseEntity<Object> createMetodologia(@RequestBody MetodologiaColtivazioneDTO metodologia){
-		MetodologiaColtivazione met = new MetodologiaColtivazione(metodologia.getDenominazione(), 
-				metodologia.getDescrizione());
+	public ResponseEntity<Object> createMetodologia(@RequestBody MetodologiaColtivazioneDTO dtometodologia){
+		MetodologiaColtivazione met = new MetodologiaColtivazione(dtometodologia.getDenominazione(), 
+				dtometodologia.getDescrizione());
 		repoMetodologie.save(met);
 		return new ResponseEntity<>(met,HttpStatus.CREATED);
 	}
+	
+	/**
+	 * Aggiorna i dati di una metodologia
+	 * @param id della metodologia di coltivazione già esistente
+	 * @param dtoMetodologia
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateMetodologia(@PathVariable("id") String id, @RequestBody MetodologiaColtivazioneDTO dtoMetodologia){
+		
+		if(repoMetodologie.existsById(id)) {
+			MetodologiaColtivazione metCol = repoMetodologie.findById(id).get();
+			metCol.setDenominazione(dtoMetodologia.getDenominazione());
+			metCol.setDescrizione(dtoMetodologia.getDescrizione());
+			
+			repoMetodologie.save(metCol);
+			
+			return new ResponseEntity<>(metCol ,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Metodologia non trovata",HttpStatus.NOT_FOUND);
+	}
+	
 	
 }
