@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,6 +69,20 @@ public class PosizioneController {
 		Posizione pos = new Posizione(posizione.getLatitudine(), posizione.getLongitudine());
 		repoPosizioni.save(pos);
 		return new ResponseEntity<>(pos,HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Elimina una posizione
+	 * @param id della posizione
+	 * @author Giorgio Pranzetti
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deletePosizione(@PathVariable("id") String id) {
+		if(repoPosizioni.existsById(id)) {
+			repoPosizioni.deleteById(id);
+			return new ResponseEntity<>("Posizione eliminata",HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Posizione non trovata",HttpStatus.NOT_FOUND);
 	}
 	
 	
