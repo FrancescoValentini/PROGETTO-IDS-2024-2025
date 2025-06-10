@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.InvitoDTO;
+import it.vITA.DTO.UtenteRegistratoDTO;
 import it.vITA.Models.Invito;
 import it.vITA.Models.UtenteRegistrato;
 import it.vITA.Repositories.InvitiRepository;
@@ -55,6 +56,27 @@ public class UtenteRegistratoController {
 			return new ResponseEntity<>(utentiRegistrati.findById(id).get(),HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Invito non trovato",HttpStatus.NOT_FOUND);
+	}
+	
+	/**
+	 * Crea un nuovo utente
+	 */
+
+	@PostMapping
+	public ResponseEntity<Object> createUtenteRegistrato(@RequestBody UtenteRegistratoDTO dtoUtenteRegistrato){
+		UtenteRegistrato utente = new UtenteRegistrato();
+		
+		utente.setNome(dtoUtenteRegistrato.getNome());
+		utente.setCognome(dtoUtenteRegistrato.getCognome());
+		utente.setEmail(dtoUtenteRegistrato.getEmail());
+		utente.setTelefono(dtoUtenteRegistrato.getTelefono());
+		utente.setBiografia(dtoUtenteRegistrato.getBiografia());
+		utente.setUsername(dtoUtenteRegistrato.getUsername());
+		utente.setPassword(dtoUtenteRegistrato.getPassword());
+		
+		utentiRegistrati.save(utente);
+		
+		return new ResponseEntity<>(utente,HttpStatus.CREATED);
 	}
 	
 }
