@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.vITA.DTO.InvitoDTO;
 import it.vITA.DTO.UtenteRegistratoDTO;
 import it.vITA.Models.Invito;
+import it.vITA.Models.Posizione;
 import it.vITA.Models.UtenteRegistrato;
 import it.vITA.Repositories.InvitiRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
@@ -61,7 +63,6 @@ public class UtenteRegistratoController {
 	/**
 	 * Crea un nuovo utente
 	 */
-
 	@PostMapping
 	public ResponseEntity<Object> createUtenteRegistrato(@RequestBody UtenteRegistratoDTO dtoUtenteRegistrato){
 		UtenteRegistrato utente = new UtenteRegistrato();
@@ -78,5 +79,28 @@ public class UtenteRegistratoController {
 		
 		return new ResponseEntity<>(utente,HttpStatus.CREATED);
 	}
+	
+	/**
+	 * Aggiorna un utente registrato
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateUtenteRegistrato(@PathVariable("id") String id, @RequestBody UtenteRegistratoDTO dtoUtenteRegistrato){
+		if(utentiRegistrati.existsById(id)) {
+			UtenteRegistrato utente = utentiRegistrati.findById(id).get();
+			
+			utente.setNome(dtoUtenteRegistrato.getNome());
+			utente.setCognome(dtoUtenteRegistrato.getCognome());
+			utente.setEmail(dtoUtenteRegistrato.getEmail());
+			utente.setTelefono(dtoUtenteRegistrato.getTelefono());
+			utente.setBiografia(dtoUtenteRegistrato.getBiografia());
+			utente.setUsername(dtoUtenteRegistrato.getUsername());
+			utente.setPassword(dtoUtenteRegistrato.getPassword());
+			
+			utentiRegistrati.save(utente);
+			return new ResponseEntity<>(utente ,HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Posizione non trovata",HttpStatus.NOT_FOUND);
+	}
+	
 	
 }
