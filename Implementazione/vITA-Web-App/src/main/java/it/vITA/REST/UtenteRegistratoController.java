@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.vITA.DTO.InvitoDTO;
 import it.vITA.DTO.UtenteRegistratoDTO;
-import it.vITA.Models.Invito;
-import it.vITA.Models.Posizione;
 import it.vITA.Models.UtenteRegistrato;
-import it.vITA.Repositories.InvitiRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
 
 /**
@@ -57,11 +54,12 @@ public class UtenteRegistratoController {
 		if(utentiRegistrati.existsById(id)) {
 			return new ResponseEntity<>(utentiRegistrati.findById(id).get(),HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Invito non trovato",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
 	}
 	
 	/**
 	 * Crea un nuovo utente
+	 * @author Francesco Valentini 
 	 */
 	@PostMapping
 	public ResponseEntity<Object> createUtenteRegistrato(@RequestBody UtenteRegistratoDTO dtoUtenteRegistrato){
@@ -82,6 +80,7 @@ public class UtenteRegistratoController {
 	
 	/**
 	 * Aggiorna un utente registrato
+	 * @author Francesco Valentini 
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateUtenteRegistrato(@PathVariable("id") String id, @RequestBody UtenteRegistratoDTO dtoUtenteRegistrato){
@@ -99,8 +98,21 @@ public class UtenteRegistratoController {
 			utentiRegistrati.save(utente);
 			return new ResponseEntity<>(utente ,HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Posizione non trovata",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
 	}
 	
+	/**
+	 * Elimina un utente registrato
+	 * @author Francesco Valentini 
+	 * 
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteUtenteRegistrato(@PathVariable("id") String id) {
+		if(utentiRegistrati.existsById(id)) {
+			utentiRegistrati.deleteById(id);
+			return new ResponseEntity<>("Utente Eliminato",HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
+	}
 	
 }
