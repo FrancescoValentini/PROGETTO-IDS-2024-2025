@@ -2,6 +2,8 @@ package it.vITA.Models;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.vITA.DataExporter.CSVExportable;
 import it.vITA.DataExporter.DataExporter;
 import jakarta.persistence.Column;
@@ -30,6 +32,7 @@ public class Invito implements CSVExportable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "evento_id", referencedColumnName = "id")
+	@JsonIgnore
 	private Evento evento;
 	
 	public Invito() {}

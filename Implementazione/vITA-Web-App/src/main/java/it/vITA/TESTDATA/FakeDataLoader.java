@@ -92,12 +92,12 @@ public class FakeDataLoader implements CommandLineRunner {
         repoUtentiRegistrati.save(ur5);
         
         
-        Invito i1 = new Invito(ur1);
-        Invito i2 = new Invito(ur1);
-        Invito i3 = new Invito(ur1);
-        Invito i4 = new Invito(ur2);
-        Invito i5 = new Invito(ur3);
-        Invito i6 = new Invito(ur4);
+        Invito i1 = new Invito(ur1,e1);
+        Invito i4 = new Invito(ur2,e1);
+        Invito i6 = new Invito(ur4,e1);
+        Invito i2 = new Invito(ur1,e2);
+        Invito i3 = new Invito(ur1,e2);
+        Invito i5 = new Invito(ur3,e3);
 
         repoInviti.save(i1);
         repoInviti.save(i2);
