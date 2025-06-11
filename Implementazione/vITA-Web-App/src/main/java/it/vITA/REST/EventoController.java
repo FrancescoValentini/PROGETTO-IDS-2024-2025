@@ -61,6 +61,17 @@ public class EventoController {
 	}
 	
 	/**
+	 * Restituisce tutti gli eventi in formato CSV
+	 * 
+	 * @return
+	 * @author Francesco Valentini
+	 */
+	@GetMapping("/csv")
+	public ResponseEntity<Object> csvExport(){
+		throw new UnsupportedOperationException("Non implementato!");
+	}
+	
+	/**
 	 * Crea un nuovo evento
 	 * @param dtoEvento
 	 * @return evento creato
