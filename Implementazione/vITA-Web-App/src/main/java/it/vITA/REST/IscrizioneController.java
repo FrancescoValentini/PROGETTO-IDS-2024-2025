@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.vITA.DTO.IscrizioneDTO;
 import it.vITA.Models.Iscrizione;
 import it.vITA.Repositories.IscrizioneRepository;
+import it.vITA.Repositories.UtenteRegistratoRepository;
 /**
  * Rest controller che gestisce le iscrizioni
  */
@@ -31,7 +32,8 @@ public class IscrizioneController {
 	
 	@Autowired
 	IscrizioneRepository repoIscrizioni;
-	
+	@Autowired
+	UtenteRegistratoRepository repoUtenti;	
 	/**
 	 * Restituisce tutte le iscrizioni memorizzate nel db
 	 * 
@@ -66,9 +68,13 @@ public class IscrizioneController {
 	 */
 	@PostMapping
 	public ResponseEntity<Object> createIscrizione(@RequestBody IscrizioneDTO iscrizione){
-		Iscrizione is = new Iscrizione();//verifica
-		repoIscrizioni.save(is);
-		return new ResponseEntity<>(is,HttpStatus.CREATED);
+		Iscrizione is = new Iscrizione();
+		if(repoUtenti.existsById(iscrizione.getIdUtenteRegistrato())) {
+			is.setIscritto(repoUtenti.findById(iscrizione.getIdUtenteRegistrato()).get());
+			repoIscrizioni.save(is);
+			return new ResponseEntity<>(is,HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
 	}
 	
 	/**
@@ -95,11 +101,14 @@ public class IscrizioneController {
 	public ResponseEntity<Object> updateIscrizione(@PathVariable("id") String id, @RequestBody IscrizioneDTO iscrizione){
 		if(repoIscrizioni.existsById(id)) {
 			Iscrizione i = repoIscrizioni.findById(id).get();
-			i.setIscritto(null);//null perchè dovemo aspetta utente
-			repoIscrizioni.save(i);
-			return new ResponseEntity<>(i ,HttpStatus.OK);
+			if(repoUtenti.existsById(iscrizione.getIdUtenteRegistrato())) {
+				i.setIscritto(repoUtenti.findById(iscrizione.getIdUtenteRegistrato()).get());
+				repoIscrizioni.save(i);
+				return new ResponseEntity<>(i,HttpStatus.CREATED);
+			}
+			return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>("Posizione non trovata",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Iscrizione non trovata",HttpStatus.NOT_FOUND);
 	}
 	
 	
