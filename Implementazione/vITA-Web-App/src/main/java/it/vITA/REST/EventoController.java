@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.EventoDTO;
+import it.vITA.DataExporter.CSVExportable;
+import it.vITA.DataExporter.CSVExporter;
 import it.vITA.Models.Evento;
 import it.vITA.Models.Posizione;
 import it.vITA.Repositories.EventiRepository;
@@ -68,7 +70,13 @@ public class EventoController {
 	 */
 	@GetMapping("/csv")
 	public ResponseEntity<Object> csvExport(){
-		throw new UnsupportedOperationException("Non implementato!");
+		CSVExporter exportVisitor = new CSVExporter();
+		
+		List<CSVExportable> eventi = new ArrayList<>();
+		repoEventi.findAll().forEach(e -> eventi.add(e));
+		
+		return new ResponseEntity<>(exportVisitor.export(eventi),HttpStatus.OK); 
+		
 	}
 	
 	/**
