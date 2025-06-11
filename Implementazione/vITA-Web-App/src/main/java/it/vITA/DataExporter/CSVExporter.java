@@ -34,7 +34,7 @@ public class CSVExporter implements DataExporter {
 		if(elemento instanceof Evento) {
 			return "Id;DataEOraCreazione;DataEOraEvento;Titolo;Descrizione;PrezzoIngresso;TipologiaEvento;PosizioneGeografica\n";
 		}else if(elemento instanceof Invito) {
-			return "\n";
+			return "Id;DataEOraCreazione;IdInvitato\n";
 		}
 		return "";
 	}
@@ -61,11 +61,19 @@ public class CSVExporter implements DataExporter {
 		
 		return sb.toString();
 	}
+	
 
 	@Override
 	public String exportInvito(Invito invito) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(invito.getId());
+		sb.append(";");
+		sb.append(invito.getDataEoraCreazioneInvito());
+		sb.append(";");
+		sb.append(invito.getInvitato().getId());
+		
+		return sb.toString();
 	}
 
 }

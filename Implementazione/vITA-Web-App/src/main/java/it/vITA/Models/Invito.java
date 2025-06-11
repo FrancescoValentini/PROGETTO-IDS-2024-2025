@@ -42,6 +42,10 @@ public class Invito implements CSVExportable {
 		this.dataEoraCreazioneInvito = LocalDateTime.now();
 		this.invitato = invitato;
 	}
+	
+	public String getId() {
+		return id;
+	}
 
 	public UtenteRegistrato getInvitato() {
 		return invitato;
@@ -69,9 +73,7 @@ public class Invito implements CSVExportable {
 
 	@Override
 	public String accept(DataExporter exporter) {
-		// TODO Auto-generated method stub
-		return null;
+		return exporter.exportInvito(this);
 	}
-
 
 }

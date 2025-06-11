@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import it.vITA.DTO.InvitoDTO;
+import it.vITA.DataExporter.CSVExportable;
+import it.vITA.DataExporter.CSVExporter;
 import it.vITA.Models.Invito;
 import it.vITA.Repositories.InvitiRepository;
 
@@ -60,11 +62,17 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 	 * Restituisce tutti gli inviti in formato CSV
 	 * 
 	 * @return
-	 * @author Francesco Valentini
+	 * @author Giulia Balestra
 	 */
 	@GetMapping("/csv")
 	public ResponseEntity<Object> csvExport(){
-		throw new UnsupportedOperationException("Non implementato!");
+		CSVExporter exportVisitor = new CSVExporter();
+		
+		List<CSVExportable> inviti = new ArrayList<>();
+		repoInviti.findAll().forEach(i -> inviti.add(i));
+		
+		return new ResponseEntity<>(exportVisitor.export(inviti),HttpStatus.OK); 
+		
 	}
 	
 	/**
