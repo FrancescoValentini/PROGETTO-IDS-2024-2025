@@ -57,6 +57,17 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 	}
 	
 	/**
+	 * Restituisce tutti gli inviti in formato CSV
+	 * 
+	 * @return
+	 * @author Francesco Valentini
+	 */
+	@GetMapping("/csv")
+	public ResponseEntity<Object> csvExport(){
+		throw new UnsupportedOperationException("Non implementato!");
+	}
+	
+	/**
 	 * Crea un nuovo invito
 	 * @param InvitoDTO
 	 * @return invito creato

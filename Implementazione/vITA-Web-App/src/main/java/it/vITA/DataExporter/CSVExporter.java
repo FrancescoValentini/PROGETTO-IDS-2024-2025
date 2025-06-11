@@ -11,13 +11,55 @@ import java.util.List;
 public class CSVExporter implements DataExporter {
 	
 	public String export(List<CSVExportable> elementi) {
-		return null;
+		StringBuilder sb = new StringBuilder();
+		
+		if(elementi.size() > 0) sb.append(addCSVHeader(elementi.get(0)));
+		
+		for(CSVExportable elemento : elementi) {
+			sb.append(elemento.accept(this)).append("\n");
+		}
+		
+		return sb.toString();
+		
+	}
+	
+	/**
+	 * Aggiunge l'header per il CSV in base al tipo di elemento passato
+	 * 
+	 * @param elemento
+	 * @return Header CSV
+	 * @author Francesco Valentini
+	 */
+	private String addCSVHeader(CSVExportable elemento) {
+		if(elemento instanceof Evento) {
+			return "Id;DataEOraCreazione;DataEOraEvento;Titolo;Descrizione;PrezzoIngresso;TipologiaEvento;PosizioneGeografica\n";
+		}else if(elemento instanceof Invito) {
+			return "\n";
+		}
+		return "";
 	}
 	
 	@Override
 	public String exportEvento(Evento evento) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(evento.getId());
+		sb.append(";");
+		sb.append(evento.getDataEOraCreazione());
+		sb.append(";");
+		sb.append(evento.getDataEOraEvento());
+		sb.append(";");
+		sb.append(evento.getTitolo());
+		sb.append(";");
+		sb.append(evento.getDescrizione());
+		sb.append(";");
+		sb.append(evento.getPrezzoIngresso());
+		sb.append(";");
+		sb.append(evento.getTipologiaEvento());
+		sb.append(";");
+		sb.append(evento.getPosizioneGeografica());
+		
+		return sb.toString();
 	}
 
 	@Override

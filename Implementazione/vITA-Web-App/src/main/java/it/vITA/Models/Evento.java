@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.vITA.DataExporter.CSVExportable;
+import it.vITA.DataExporter.DataExporter;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +22,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "EVENTI")
-public class Evento {
+public class Evento implements CSVExportable {
 	@Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", columnDefinition = "VARCHAR(64)")
@@ -195,6 +197,12 @@ public class Evento {
 				+ ", titolo=" + titolo + ", descrizione=" + descrizione + ", prezzoIngresso=" + prezzoIngresso
 				+ ", posti=" + posti + ", tipologiaEvento=" + tipologiaEvento + ", posizioneGeografica="
 				+ posizioneGeografica + ", iscrizioni=" + iscrizioni + ", inviti=" + inviti + "]";
+	}
+
+
+	@Override
+	public String accept(DataExporter exporter) {
+		return exporter.exportEvento(this);
 	}
 	
 	
