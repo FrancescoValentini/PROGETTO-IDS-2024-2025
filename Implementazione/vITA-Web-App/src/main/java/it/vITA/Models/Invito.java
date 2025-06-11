@@ -2,9 +2,10 @@ package it.vITA.Models;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.vITA.DataExporter.CSVExportable;
 import it.vITA.DataExporter.DataExporter;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,9 +26,14 @@ public class Invito implements CSVExportable {
 	
 	private LocalDateTime dataEoraCreazioneInvito;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "invitato_id", referencedColumnName = "id")
 	private UtenteRegistrato invitato;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "evento_id", referencedColumnName = "id")
+	@JsonIgnore
+	private Evento evento;
 	
 	public Invito() {}
 	
@@ -38,9 +44,10 @@ public class Invito implements CSVExportable {
 	 * 
 	 * @param invitato
 	 */
-	public Invito(UtenteRegistrato invitato) {
+	public Invito(UtenteRegistrato invitato, Evento evento) {
 		this.dataEoraCreazioneInvito = LocalDateTime.now();
 		this.invitato = invitato;
+		this.evento = evento;
 	}
 	
 	public String getId() {
@@ -70,10 +77,24 @@ public class Invito implements CSVExportable {
 		return "Invito [id=" + id + ", dataEoraCreazioneInvito=" + dataEoraCreazioneInvito + ", invitato=" + invitato
 				+ "]";
 	}
+	
+	
 
 	@Override
 	public String accept(DataExporter exporter) {
 		return exporter.exportInvito(this);
+	}
+
+
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 }
