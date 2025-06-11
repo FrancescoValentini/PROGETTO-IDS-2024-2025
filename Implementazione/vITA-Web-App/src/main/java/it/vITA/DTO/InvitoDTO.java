@@ -1,21 +1,21 @@
 package it.vITA.DTO;
 
 public class InvitoDTO {
-private String idUtenteRegistarto;
+private String idUtenteRegistrato;
 
 /**
  * @param idUtenteRegistarto
  */
 public InvitoDTO(String idUtenteRegistrato) {
-	this.idUtenteRegistarto = idUtenteRegistarto;
+	this.idUtenteRegistrato = idUtenteRegistrato;
 }
 
-public String getIdUtenteRegistarto() {
-	return idUtenteRegistarto;
+public String getIdUtenteRegistrato() {
+	return idUtenteRegistrato;
 }
 
-public void setIdUtenteRegistarto(String idUtenteRegistarto) {
-	this.idUtenteRegistarto = idUtenteRegistarto;
+public void setIdUtenteRegistrato(String idUtenteRegistrato) {
+	this.idUtenteRegistrato = idUtenteRegistrato;
 }
 
 }
