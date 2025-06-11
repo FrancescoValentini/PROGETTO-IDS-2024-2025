@@ -23,6 +23,7 @@ import it.vITA.DataExporter.CSVExportable;
 import it.vITA.DataExporter.CSVExporter;
 import it.vITA.Models.Invito;
 import it.vITA.Repositories.InvitiRepository;
+import it.vITA.Repositories.UtenteRegistratoRepository;
 
 /**
  * Controller REST per operazioni su inviti
@@ -34,6 +35,8 @@ import it.vITA.Repositories.InvitiRepository;
 public class InvitoController {
 	@Autowired
 	InvitiRepository repoInviti;
+	@Autowired
+	UtenteRegistratoRepository repoUtenti;
 	
 private static final Logger logger = LoggerFactory.getLogger(InvitoController.class);
 	
@@ -83,10 +86,13 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 	@PostMapping
 	public ResponseEntity<Object> createInvito(@RequestBody InvitoDTO dtoInvito){
 		
-		Invito i = new Invito();//verifica
-		
-		repoInviti.save(i);
-		return new ResponseEntity<>(i,HttpStatus.CREATED);
+		Invito i = null;
+		if(repoUtenti.existsById(dtoInvito.getIdUtenteRegistrato())) {
+			i = new Invito(repoUtenti.findById(dtoInvito.getIdUtenteRegistrato()).get());
+			repoInviti.save(i);
+			return new ResponseEntity<>(i,HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
 	}
 	
 	/**
@@ -99,10 +105,12 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 		
 		if(repoInviti.existsById(id)) {
 			Invito i = repoInviti.findById(id).get();
-			i.setInvitato(null);
-			
-			repoInviti.save(i);
-			return new ResponseEntity<>(i,HttpStatus.OK);
+			if(repoUtenti.existsById(dtoInvito.getIdUtenteRegistrato())) {
+				i = new Invito(repoUtenti.findById(dtoInvito.getIdUtenteRegistrato()).get());
+				repoInviti.save(i);
+				return new ResponseEntity<>(i,HttpStatus.CREATED);
+			}
+			return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>("Invito non trovato",HttpStatus.NOT_FOUND);
 	}
