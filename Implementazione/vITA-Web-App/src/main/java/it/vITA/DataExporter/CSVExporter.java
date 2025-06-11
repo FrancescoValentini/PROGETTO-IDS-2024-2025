@@ -13,16 +13,30 @@ public class CSVExporter implements DataExporter {
 	public String export(List<CSVExportable> elementi) {
 		StringBuilder sb = new StringBuilder();
 		
+		if(elementi.size() > 0) sb.append(addCSVHeader(elementi.get(0)));
+		
 		for(CSVExportable elemento : elementi) {
-			if(elemento instanceof Evento) {
-				sb.append(elemento.accept(this)).append("\n");
-			}else if(elemento instanceof Invito) {
-				
-			}
+			sb.append(elemento.accept(this)).append("\n");
 		}
 		
 		return sb.toString();
 		
+	}
+	
+	/**
+	 * Aggiunge l'header per il CSV in base al tipo di elemento passato
+	 * 
+	 * @param elemento
+	 * @return Header CSV
+	 * @author Francesco Valentini
+	 */
+	private String addCSVHeader(CSVExportable elemento) {
+		if(elemento instanceof Evento) {
+			return "Id;DataEOraCreazione;DataEOraEvento;Titolo;Descrizione;PrezzoIngresso;TipologiaEvento;PosizioneGeografica\n";
+		}else if(elemento instanceof Invito) {
+			return "\n";
+		}
+		return "";
 	}
 	
 	@Override
