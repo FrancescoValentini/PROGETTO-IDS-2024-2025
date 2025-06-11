@@ -21,9 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import it.vITA.DTO.InvitoDTO;
 import it.vITA.DataExporter.CSVExportable;
 import it.vITA.DataExporter.CSVExporter;
+import it.vITA.Models.Evento;
 import it.vITA.Models.Invito;
+import it.vITA.Models.UtenteRegistrato;
+import it.vITA.Repositories.EventiRepository;
 import it.vITA.Repositories.InvitiRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
+import jakarta.transaction.Transactional;
 
 /**
  * Controller REST per operazioni su inviti
@@ -37,9 +41,12 @@ public class InvitoController {
 	InvitiRepository repoInviti;
 	@Autowired
 	UtenteRegistratoRepository repoUtenti;
-	
-private static final Logger logger = LoggerFactory.getLogger(InvitoController.class);
-	
+
+	@Autowired
+	EventiRepository repoEventi;
+
+	private static final Logger logger = LoggerFactory.getLogger(InvitoController.class);
+
 	/**
 	 * Restituisce tutti gli inviti
 	 * 
@@ -52,7 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 		inviti.forEach(x -> in.add(x));
 		return new ResponseEntity<>(in,HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getInvito(@PathVariable("id") String id){
 		if(repoInviti.existsById(id)) {
@@ -60,7 +67,7 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 		}
 		return new ResponseEntity<>("Invito non trovato",HttpStatus.NOT_FOUND);
 	}
-	
+
 	/**
 	 * Restituisce tutti gli inviti in formato CSV
 	 * 
@@ -70,14 +77,14 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 	@GetMapping("/csv")
 	public ResponseEntity<Object> csvExport(){
 		CSVExporter exportVisitor = new CSVExporter();
-		
+
 		List<CSVExportable> inviti = new ArrayList<>();
 		repoInviti.findAll().forEach(i -> inviti.add(i));
-		
+
 		return new ResponseEntity<>(exportVisitor.export(inviti),HttpStatus.OK); 
-		
+
 	}
-	
+
 	/**
 	 * Crea un nuovo invito
 	 * @param InvitoDTO
@@ -85,16 +92,26 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 	 */
 	@PostMapping
 	public ResponseEntity<Object> createInvito(@RequestBody InvitoDTO dtoInvito){
-		
+
 		Invito i = null;
-		if(repoUtenti.existsById(dtoInvito.getIdUtenteRegistrato())) {
-			i = new Invito(repoUtenti.findById(dtoInvito.getIdUtenteRegistrato()).get());
+
+		boolean utenteExist = repoUtenti.existsById(dtoInvito.getIdUtenteRegistrato());
+		boolean eventoExist = repoEventi.existsById(dtoInvito.getIdEvento());
+
+		if(utenteExist && eventoExist ) {
+			i = new Invito(
+					repoUtenti.findById(dtoInvito.getIdUtenteRegistrato()).get(),
+					repoEventi.findById(dtoInvito.getIdEvento()).get()
+					);
 			repoInviti.save(i);
 			return new ResponseEntity<>(i,HttpStatus.CREATED);
 		}
-		return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
+
+		if(!utenteExist) return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
+		else return new ResponseEntity<>("Evento non trovato",HttpStatus.NOT_FOUND);
+
 	}
-	
+
 	/**
 	 * Aggiorna i dati di un invitp
 	 * @param id dell'invito già esistente
@@ -102,29 +119,45 @@ private static final Logger logger = LoggerFactory.getLogger(InvitoController.cl
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateInvito(@PathVariable("id") String id, @RequestBody InvitoDTO dtoInvito){
+		// 1) Verifica se l'invito da modificare esiste
+		if (!repoInviti.existsById(id)) return new ResponseEntity<>("Invito non trovato", HttpStatus.NOT_FOUND);
+
+		//2) Verifica se esistono gli eventi e l'utente specificati
+		boolean utenteExist = repoUtenti.existsById(dtoInvito.getIdUtenteRegistrato());
+		boolean eventoExist = repoEventi.existsById(dtoInvito.getIdEvento());
+
+		Invito i = null;
+		Evento e = null;
+		UtenteRegistrato u = null;
 		
-		if(repoInviti.existsById(id)) {
-			Invito i = repoInviti.findById(id).get();
-			if(repoUtenti.existsById(dtoInvito.getIdUtenteRegistrato())) {
-				i = new Invito(repoUtenti.findById(dtoInvito.getIdUtenteRegistrato()).get());
-				repoInviti.save(i);
-				return new ResponseEntity<>(i,HttpStatus.CREATED);
-			}
-			return new ResponseEntity<>("Utente non trovato",HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>("Invito non trovato",HttpStatus.NOT_FOUND);
+		//3) Se evento o utente non esistono da errore altrimenti ottiene i loro oggetti
+		if(eventoExist) e = repoEventi.findById(dtoInvito.getIdEvento()).get();
+		else return new ResponseEntity<>("Evento non trovato", HttpStatus.NOT_FOUND);
+
+		if(utenteExist) u = repoUtenti.findById(dtoInvito.getIdUtenteRegistrato()).get();
+		else return new ResponseEntity<>("Utente non trovato", HttpStatus.NOT_FOUND);
+
+		// Aggiorna l'invito
+
+		i = repoInviti.findById(id).get();
+		i.setEvento(e);
+		i.setInvitato(u);
+		repoInviti.save(i);
+		return new ResponseEntity<>(i, HttpStatus.CREATED);
+
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Elimina un invito dato il suo id
 	 * @param id dell'invito
 	 */
 	@DeleteMapping("/{id}")
+	@Transactional
 	public ResponseEntity<Object> deleteInvito(@PathVariable("id") String id){
 		if(repoInviti.existsById(id)) {
-			repoInviti.deleteById(id);
+			repoInviti.deleteInvitoById(id);
 			return new ResponseEntity<>("Invito eliminato",HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Invito non trovato",HttpStatus.NOT_FOUND);
