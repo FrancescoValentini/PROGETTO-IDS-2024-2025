@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,6 +82,45 @@ public class ProdottoController {
         repoProdotti.save(prodotto);
         return new ResponseEntity<>(prodotto, HttpStatus.CREATED);
     }
+    
+    /**
+     * Aggiorna un prodotto esistente
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateProdotto(@PathVariable("id") String id, @RequestBody ProdottoDTO dto) {
+        Optional<Prodotto> optionalProdotto = repoProdotti.findById(id);
+
+        if (!optionalProdotto.isPresent()) {
+            return new ResponseEntity<>("Prodotto non trovato", HttpStatus.NOT_FOUND);
+        }
+
+        Prodotto prodotto = optionalProdotto.get();
+
+        prodotto.setDenominazione(dto.getDenominazione());
+        prodotto.setDescrizione(dto.getDescrizione());
+        prodotto.setDataEoraProduzione(dto.getDataEoraProduzione());
+        prodotto.setDataEoraScadenza(dto.getDataEoraScadenza());
+
+        if (dto.getProduttore() != null && repoProduttori.existsById(dto.getProduttore())) {
+            prodotto.setProduttore((Produttore) repoProduttori.findById(dto.getProduttore()).get());
+        }
+
+        repoProdotti.save(prodotto);
+        return new ResponseEntity<>(prodotto, HttpStatus.OK);
+    }
+
+    /**
+     * Elimina un prodotto per ID
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteProdotto(@PathVariable("id") String id) {
+        if (!repoProdotti.existsById(id)) {
+            return new ResponseEntity<>("Prodotto non trovato", HttpStatus.NOT_FOUND);
+        }
+        repoProdotti.deleteById(id);
+        return new ResponseEntity<>("Prodotto eliminato", HttpStatus.OK);
+    }
+    
 
 
 }
