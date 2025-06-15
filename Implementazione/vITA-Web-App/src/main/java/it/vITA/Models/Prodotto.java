@@ -2,6 +2,7 @@ package it.vITA.Models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -29,33 +30,25 @@ public class Prodotto {
 	  private boolean approvato = false;
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "metodologia_id")
-	  private ArrayList<MetodologiaColtivazione> metodologieColtivazione;
+	  private List<MetodologiaColtivazione> metodologieColtivazione;
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "allergene_id")
-	  private ArrayList<Allergene> allergeni;
+	  private List<Allergene> allergeni;
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "certificazione_id")
-	  private ArrayList<Certificazione> certificazioni;
+	  private List<Certificazione> certificazioni;
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "trasformazione_id")
-	  private ArrayList<Trasformazione> trasformazione;
+	  private List<Trasformazione> trasformazione;
 	  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "produttore_id", referencedColumnName = "id")
 	  private Produttore produttore;
 	  
-	  public Prodotto () {}
+	  public Prodotto () {
+			this.certificazioni = new ArrayList<>();
+			this.trasformazione = new ArrayList<>();
+	  }
 
-	public Prodotto(String denominazione, String descrizione, LocalDateTime dataEoraProduzione,
-			LocalDateTime dataEoraScadenza, ArrayList<Certificazione> certificazioni,
-			ArrayList<Trasformazione> trasformazione, Produttore produttore) {
-		this.denominazione = denominazione;
-		this.descrizione = descrizione;
-		this.dataEoraProduzione = dataEoraProduzione;
-		this.dataEoraScadenza = dataEoraScadenza;
-		this.certificazioni = certificazioni;
-		this.trasformazione = trasformazione;
-		this.produttore = produttore;
-	}
 	
 	public Prodotto(String denominazione, String descrizione, LocalDateTime dataEoraProduzione,
 			LocalDateTime dataEoraScadenza, Produttore produttore) {
@@ -110,7 +103,7 @@ public class Prodotto {
 		this.approvato = approvato;
 	}
 
-	public ArrayList<MetodologiaColtivazione> getMetodologieColtivazione() {
+	public List<MetodologiaColtivazione> getMetodologieColtivazione() {
 		return metodologieColtivazione;
 	}
 
@@ -118,7 +111,7 @@ public class Prodotto {
 		this.metodologieColtivazione = metodologieColtivazione;
 	}
 
-	public ArrayList<Allergene> getAllergeni() {
+	public List<Allergene> getAllergeni() {
 		return allergeni;
 	}
 
@@ -126,7 +119,7 @@ public class Prodotto {
 		this.allergeni = allergeni;
 	}
 
-	public ArrayList<Certificazione> getCertificazioni() {
+	public List<Certificazione> getCertificazioni() {
 		return certificazioni;
 	}
 
@@ -134,7 +127,7 @@ public class Prodotto {
 		this.certificazioni = certificazioni;
 	}
 
-	public ArrayList<Trasformazione> getTrasformazione() {
+	public List<Trasformazione> getTrasformazione() {
 		return trasformazione;
 	}
 
@@ -145,6 +138,8 @@ public class Prodotto {
 	public Produttore getProduttore() {
 		return produttore;
 	}
+	
+	
 
 	public void setProduttore(Produttore produttore) {
 		this.produttore = produttore;

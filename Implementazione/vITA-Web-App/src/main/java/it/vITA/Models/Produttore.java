@@ -13,7 +13,7 @@ public class Produttore extends UtenteRegistrato {
 	private String denominazioneAzienda;
 	private String telefonoAziendale;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "posizione_id", referencedColumnName = "id")
 	private Posizione posizioneGeografica;
 	

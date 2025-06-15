@@ -2,8 +2,6 @@ package it.vITA.DTO;
 
 import java.time.LocalDateTime;
 
-import it.vITA.Models.Produttore;
-
 public class ProdottoDTO {
 	  private String denominazione;
 	  private String descrizione;

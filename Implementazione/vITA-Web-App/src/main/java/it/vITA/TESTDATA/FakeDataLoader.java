@@ -6,11 +6,14 @@ import org.springframework.stereotype.Component;
 import it.vITA.Models.Evento;
 import it.vITA.Models.Invito;
 import it.vITA.Models.Posizione;
+import it.vITA.Models.Prodotto;
+import it.vITA.Models.Produttore;
 import it.vITA.Models.TipologiaEvento;
 import it.vITA.Models.UtenteRegistrato;
 import it.vITA.Repositories.EventiRepository;
 import it.vITA.Repositories.InvitiRepository;
 import it.vITA.Repositories.PosizioniRepository;
+import it.vITA.Repositories.ProdottoRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
 
 import java.time.LocalDateTime;
@@ -34,6 +37,9 @@ public class FakeDataLoader implements CommandLineRunner {
 
 	@Autowired
 	InvitiRepository repoInviti;
+	
+	@Autowired
+	ProdottoRepository repoProdotti;
 	
 	
 	
@@ -105,6 +111,34 @@ public class FakeDataLoader implements CommandLineRunner {
         repoInviti.save(i4);
         repoInviti.save(i5);
         repoInviti.save(i6);
+        
+        
+
+
+
+        // === CREAZIONE PRODOTTI ===
+        Prodotto prod1 = new Prodotto("Mela Rossa", "Mela croccante e succosa", LocalDateTime.now().minusDays(10), LocalDateTime.now().plusDays(20), null);
+        Prodotto prod2 = new Prodotto("Pera Verde", "Dolce e succosa, ideale per dolci", LocalDateTime.now().minusDays(8), LocalDateTime.now().plusDays(18), null);
+        Prodotto prod3 = new Prodotto("Pomodoro", "Ideale per sughi e insalate", LocalDateTime.now().minusDays(6), LocalDateTime.now().plusDays(15), null);
+        Prodotto prod4 = new Prodotto("Carota Bio", "Coltivata senza pesticidi", LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(10), null);
+        Prodotto prod5 = new Prodotto("Zucchina", "Fresca e leggera", LocalDateTime.now().minusDays(4), LocalDateTime.now().plusDays(12), null);
+        Prodotto prod6 = new Prodotto("Patata Gialla", "Per fritture perfette", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(30), null);
+        Prodotto prod7 = new Prodotto("Cipolla Rossa", "Intensa e saporita", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(25), null);
+        Prodotto prod8 = new Prodotto("Lattuga", "Croccante e fresca", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(5), null);
+        Prodotto prod9 = new Prodotto("Sedano", "Ottimo per soffritti", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(7), null);
+        Prodotto prod10 = new Prodotto("Cavolo Nero", "Ricco di fibre", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(10), null);
+
+        repoProdotti.save(prod1);
+        repoProdotti.save(prod2);
+        repoProdotti.save(prod3);
+        repoProdotti.save(prod4);
+        repoProdotti.save(prod5);
+        repoProdotti.save(prod6);
+        repoProdotti.save(prod7);
+        repoProdotti.save(prod8);
+        repoProdotti.save(prod9);
+        repoProdotti.save(prod10);
+
         
         
 		
