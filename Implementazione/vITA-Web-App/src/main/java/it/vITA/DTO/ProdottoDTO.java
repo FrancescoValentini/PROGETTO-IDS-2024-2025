@@ -9,7 +9,7 @@ public class ProdottoDTO {
 	  private String descrizione;
 	  private LocalDateTime dataEoraProduzione;
 	  private LocalDateTime dataEoraScadenza;
-	  private Produttore produttore;
+	  private String idProduttore;
 	/**
 	 * @param denominazione
 	 * @param descrizione
@@ -18,12 +18,12 @@ public class ProdottoDTO {
 	 * @param produttore
 	 */
 	public ProdottoDTO(String denominazione, String descrizione, LocalDateTime dataEoraProduzione,
-			LocalDateTime dataEoraScadenza, Produttore produttore) {
+			LocalDateTime dataEoraScadenza, String idProduttore) {
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
 		this.dataEoraProduzione = dataEoraProduzione;
 		this.dataEoraScadenza = dataEoraScadenza;
-		this.produttore = produttore;
+		this.idProduttore = idProduttore;
 	}
 	public String getDenominazione() {
 		return denominazione;
@@ -49,11 +49,11 @@ public class ProdottoDTO {
 	public void setDataEoraScadenza(LocalDateTime dataEoraScadenza) {
 		this.dataEoraScadenza = dataEoraScadenza;
 	}
-	public Produttore getProduttore() {
-		return produttore;
+	public String getProduttore() {
+		return idProduttore;
 	}
-	public void setProduttore(Produttore produttore) {
-		this.produttore = produttore;
+	public void setProduttore(String idProduttore) {
+		this.idProduttore = idProduttore;
 	}
 	  
 	  
