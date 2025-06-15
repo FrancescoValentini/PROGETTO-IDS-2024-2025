@@ -56,6 +56,19 @@ public class Prodotto {
 		this.trasformazione = trasformazione;
 		this.produttore = produttore;
 	}
+	
+	public Prodotto(String denominazione, String descrizione, LocalDateTime dataEoraProduzione,
+			LocalDateTime dataEoraScadenza, Produttore produttore) {
+		this.denominazione = denominazione;
+		this.descrizione = descrizione;
+		this.dataEoraProduzione = dataEoraProduzione;
+		this.dataEoraScadenza = dataEoraScadenza;
+		this.certificazioni = new ArrayList<>();
+		this.trasformazione = new ArrayList<>();
+		this.produttore = produttore;
+	}
+	
+	
 
 	public String getDenominazione() {
 		return denominazione;
