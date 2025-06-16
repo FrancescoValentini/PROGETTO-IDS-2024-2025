@@ -38,7 +38,7 @@ public class Trasformazione {
 	  
 	  public Trasformazione() {}
 
-	  public Trasformazione(String id, String denominazione, String descrizione, LocalDateTime dataInizioFase,
+	  public Trasformazione(String denominazione, String descrizione, LocalDateTime dataInizioFase,
 			LocalDateTime dataFineFase, Trasformatore trasformatore, List<Certificazione> certificazioni) {
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;

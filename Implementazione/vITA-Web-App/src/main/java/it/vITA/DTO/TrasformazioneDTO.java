@@ -9,17 +9,17 @@ public class TrasformazioneDTO {
     private String descrizione;
     private LocalDateTime dataFineFase;
     private String idTrasformatore;
-    private List<String> idCertificazioni;
+    private List<String> idCertificazione;
 
     public TrasformazioneDTO() {}
 
     public TrasformazioneDTO(String denominazione, String descrizione, LocalDateTime dataFineFase,
-                            String idTrasformatore, ArrayList<String> idCertificazioni) {
+                            String idTrasformatore, ArrayList<String> idCertificazione) {
         this.denominazione = denominazione;
         this.descrizione = descrizione;
         this.dataFineFase = dataFineFase;
         this.idTrasformatore = idTrasformatore;
-        this.idCertificazioni = idCertificazioni;
+        this.idCertificazione = idCertificazione;
     }
 
     public String getDenominazione() {
@@ -54,11 +54,11 @@ public class TrasformazioneDTO {
         this.idTrasformatore = idTrasformatore;
     }
 
-    public List<String> getIdCertificazioni() {
-        return idCertificazioni;
+    public List<String> getIdCertificazione() {
+        return idCertificazione;
     }
 
-    public void setIdCertificazioni(List<String> idCertificazioni) {
-        this.idCertificazioni = idCertificazioni;
+    public void setIdCertificazioni(List<String> idCertificazione) {
+        this.idCertificazione = idCertificazione;
     }
 }

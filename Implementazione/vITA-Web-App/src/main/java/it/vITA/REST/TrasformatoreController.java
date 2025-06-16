@@ -22,6 +22,7 @@ import it.vITA.Models.Posizione;
 import it.vITA.Models.Trasformatore;
 import it.vITA.Repositories.PosizioniRepository;
 import it.vITA.Repositories.TrasformatoreRepository;
+import jakarta.transaction.Transactional;
 
 /**
  * Controller REST per operazioni su trasformatore
@@ -137,6 +138,7 @@ public class TrasformatoreController {
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
+	@Transactional  
 	public ResponseEntity<Object> deleteTrasformatore(@PathVariable("id") String id) {
 	    if (!repoTrasformatori.existsById(id)) {
 	        return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
