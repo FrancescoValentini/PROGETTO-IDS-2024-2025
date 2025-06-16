@@ -57,5 +57,9 @@ public class ProdottoInVendita {
 		return this.prezzo;
 	}
 
+	public void setProdotto(Prodotto prodotto) {
+		this.prodotto = prodotto;
+	}
+
 
 }
