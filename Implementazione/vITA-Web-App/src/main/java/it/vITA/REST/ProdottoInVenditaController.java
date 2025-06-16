@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +52,22 @@ public class ProdottoInVenditaController {
         }
         return new ResponseEntity<>("Prodotto in vendita non trovato", HttpStatus.NOT_FOUND);
     }
-
     
+    
+
+    /**
+     * Elimina un prodotto in vendita dato il suo ID
+     * @param id ID del prodotto da eliminare
+     * @return Messaggio di conferma o errore 404 se non trovato
+     * @author Francesco Valentini
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteProdottoInVendita(@PathVariable("id") String id) {
+        if (!ProdottiInVenditaRepository.existsById(id)) {
+            return new ResponseEntity<>("Prodotto in vendita non trovato", HttpStatus.NOT_FOUND);
+        }
+
+        ProdottiInVenditaRepository.deleteById(id);
+        return new ResponseEntity<>("Prodotto in vendita eliminato", HttpStatus.OK);
+    }
 }
