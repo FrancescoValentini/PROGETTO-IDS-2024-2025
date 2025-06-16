@@ -20,126 +20,117 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.TrasformazioneDTO;
 import it.vITA.Models.Certificazione;
+import it.vITA.Models.Trasformatore;
 import it.vITA.Models.Trasformazione;
 import it.vITA.Repositories.CertificazioniRepository;
 import it.vITA.Repositories.TrasformatoreRepository;
 import it.vITA.Repositories.TrasformazioniRepository;
 
 /**
- * Controller REST per operazioni su trasformazioni
+ * Controller REST per operazioni CRUD su trasformazioni
+ * 
  * @author Giulia Balestra
  */
-
-
 @RestController
 @RequestMapping("/api/trasformazione")
 public class TrasformazioneController {
 	
 	@Autowired
-	TrasformazioniRepository repoTrasformazioni;  // Repository per operazioni su trasformazioni
+	TrasformazioniRepository repoTrasformazioni;
+	
 	@Autowired
-	TrasformatoreRepository repoTrasformatori;    // Repository per operazioni su trasformatori
+	TrasformatoreRepository repoTrasformatori;
+	
 	@Autowired
 	CertificazioniRepository repoCertificazioni;
-	
-private static final Logger logger = LoggerFactory.getLogger(TrasformazioneController.class);
-	
-	
-	CertificazioniRepository repoCertificazioni;  // Repository per operazioni su certificazioni
 	
 	private static final Logger logger = LoggerFactory.getLogger(TrasformazioneController.class);
 
 	/**
-	 * Ottiene tutte le trasformazioni dal database
-	 * @return lista di trasformazioni con codice HTTP 200
+	 * Restituisce tutte le trasformazioni
 	 */
 	@GetMapping
 	public ResponseEntity<Object> getTrasformazioni() {
 		Iterable<Trasformazione> trasformazioni = repoTrasformazioni.findAll();
 		List<Trasformazione> t = new ArrayList<>();
 		trasformazioni.forEach(x -> t.add(x));
-		return new ResponseEntity<>(trasformazioni,HttpStatus.OK);
-		trasformazioni.forEach(t::add);  // Copio gli elementi in una lista ArrayList
 		return new ResponseEntity<>(t, HttpStatus.OK);
 	}
 
 	/**
-	 * Restituisce una singola trasformazione dato il suo id
-	 * @param id allergene
-	 * @param id trasformazione
-	 * Ottiene una singola trasformazione dato l'id
-	 * @param id identificativo della trasformazione
-	 * @return trasformazione trovata o messaggio di errore 404 se non trovata
+	 * Restituisce una trasformazione dato il suo id
+	 * @param id
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getTrasformazione(@PathVariable("id") String id) {
-		if(repoTrasformazioni.existsById(id)) {
-			return new ResponseEntity<>(repoTrasformazioni.findById(id).get(),HttpStatus.OK);
+		if (repoTrasformazioni.existsById(id)) {
 			return new ResponseEntity<>(repoTrasformazioni.findById(id).get(), HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Trasformazione non trovata",HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
 	}
-	
 
 	/**
 	 * Crea una nuova trasformazione
-	 * @param TrasformazioneDTO
-	 * @return trasformazione aggiunta
-	 * @param dto dati della trasformazione da creare
-	 * @return trasformazione creata con codice 201 oppure errore 404 se trasformatore non esiste
+	 * @param dtoTrasformazione
+	 * @return trasformazione creata
 	 */
-	
 	@PostMapping
 	public ResponseEntity<Object> createTrasformazione(@RequestBody TrasformazioneDTO dto) {
-		// Verifica che il trasformatore esista
+
+	    if (dto.getIdTrasformatore() == null || !repoTrasformatori.existsById(dto.getIdTrasformatore())) {
+	        return new ResponseEntity<>("Trasformatore non valido", HttpStatus.BAD_REQUEST);
+	    }
+
+	    Trasformatore trasformatore = repoTrasformatori.findById(dto.getIdTrasformatore()).get();
+
+	    Trasformazione trasformazione = new Trasformazione();
+	    trasformazione.setDenominazione(dto.getDenominazione());
+	    trasformazione.setDescrizione(dto.getDescrizione());
+	    trasformazione.setDataInizioFase(LocalDateTime.now());
+	    trasformazione.setDataFineFase(dto.getDataFineFase());
+	    trasformazione.setTrasformatore(trasformatore);
+	    
+	    List<Certificazione> certificazioni = new ArrayList<>();
+
+	    if (dto.getIdCertificazione() != null) {
+	        for (String id : dto.getIdCertificazione()) {
+	            if (repoCertificazioni.existsById(id)) {
+	                Certificazione cert = repoCertificazioni.findById(id).get();
+	                certificazioni.add(cert);
+	            }
+	        }
+	    }
+	    trasformazione.setCertificazioni(certificazioni);
+
+	    repoTrasformazioni.save(trasformazione);
+
+	    return new ResponseEntity<>(trasformazione, HttpStatus.CREATED);
+	}
+
+	/**
+	 * Aggiorna alcuni dati di una trasformazione
+	 * @param id della trasformazione già esistente
+	 * @param dtoTrasformazione
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateTrasformazione(@PathVariable("id") String id, @RequestBody TrasformazioneDTO dto) {
+		if (!repoTrasformazioni.existsById(id)) {
+			return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
+		}
+
 		if (!repoTrasformatori.existsById(dto.getIdTrasformatore())) {
 			return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
 		}
 
-	    Trasformazione t = null;
-
-	    boolean trasformatoreExist = repoTrasformatori.existsById(dto.getIdTrasformatore());
-
-	    if (trasformatoreExist) {
-	        t = new Trasformazione();
-	        t.setDenominazione(dto.getDenominazione());
-	        t.setDescrizione(dto.getDescrizione());
-	        t.setDataInizioFase(LocalDateTime.now());
-	        t.setDataFineFase(dto.getDataFineFase());
-	        t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
-	        t.setCertificazioni(dto.getCertificazioni());
-
-	        repoTrasformazioni.save(t);
-	        return new ResponseEntity<>(t, HttpStatus.CREATED);
-	    if (!trasformatoreExist) {
-	        return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
-	    }
-
-	    t = new Trasformazione();
-	    t.setDenominazione(dto.getDenominazione());
-	    t.setDescrizione(dto.getDescrizione());
-	    t.setDataInizioFase(LocalDateTime.now());
-	    t.setDataFineFase(dto.getDataFineFase());
-	    t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
-	    ArrayList<Certificazione> certificazioni = new ArrayList<>();
-	    for (String idCert : dto.getIdCertificazioni()) {
-	        if (repoCertificazioni.existsById(idCert)) {
-	        }
-	    }
-	    t.setCertificazioni(certificazioni);
-		// Creo nuova trasformazione e imposto i campi
-		Trasformazione t = new Trasformazione();
+		Trasformazione t = repoTrasformazioni.findById(id).get();
 		t.setDenominazione(dto.getDenominazione());
 		t.setDescrizione(dto.getDescrizione());
-		t.setDataInizioFase(LocalDateTime.now());  // Data inizio impostata a ora corrente
 		t.setDataFineFase(dto.getDataFineFase());
 		t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
 
-		// Gestione delle certificazioni collegate
-		ArrayList<Certificazione> certificazioni = new ArrayList<>();
-		if (dto.getIdCertificazioni() != null) {
-			for (String idCert : dto.getIdCertificazioni()) {
+		List<Certificazione> certificazioni = new ArrayList<>();
+		if (dto.getIdCertificazione() != null) {
+			for (String idCert : dto.getIdCertificazione()) {
 				if (repoCertificazioni.existsById(idCert)) {
 					certificazioni.add(repoCertificazioni.findById(idCert).get());
 				}
@@ -147,183 +138,16 @@ private static final Logger logger = LoggerFactory.getLogger(TrasformazioneContr
 		}
 		t.setCertificazioni(certificazioni);
 
-	    repoTrasformazioni.save(t);
-	    return new ResponseEntity<>(t, HttpStatus.CREATED);
-		// Salvo la trasformazione nel database
-		repoTrasformazioni.save(t);
-		return new ResponseEntity<>(t, HttpStatus.CREATED);
-	}
-	
-
-	/**
-	 * Aggiorna i dati di una trasformazione
-	 * @param id trasformazione
-    @Autowired
-    TrasformazioniRepository repoTrasformazioni;
-    @Autowired
-    TrasformatoreRepository repoTrasformatori;
-    @Autowired
-    CertificazioniRepository repoCertificazioni;
-    
-    private static final Logger logger = LoggerFactory.getLogger(InvitoController.class);
-
-
-    @GetMapping
-    public ResponseEntity<Object> getTrasformazioni() {
-        Iterable<Trasformazione> trasformazioni = repoTrasformazioni.findAll();
-        ArrayList<Trasformazione> t = new ArrayList<>();
-        trasformazioni.forEach(x -> t.add(x));
-        return new ResponseEntity<>(t, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getTrasformazione(@PathVariable("id") String id) {
-        if (repoTrasformazioni.existsById(id)) {
-            return new ResponseEntity<>(repoTrasformazioni.findById(id).get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
-    }
-
-    @PostMapping
-    public ResponseEntity<Object> createTrasformazione(@RequestBody TrasformazioneDTO dto) {
-    	//1) se il trasformatore non esiste --> NotFound
-        if (!repoTrasformatori.existsById(dto.getIdTrasformatore())) {
-            return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
-        }
-        //2) crea una nuova trasformazione
-        Trasformazione t = new Trasformazione();
-        t.setDenominazione(dto.getDenominazione());
-        t.setDescrizione(dto.getDescrizione());
-        t.setDataInizioFase(LocalDateTime.now());
-        t.setDataFineFase(dto.getDataFineFase());
-        t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
-        
-        ArrayList<Certificazione> certificazioni = new ArrayList<>();
-        if (dto.getIdCertificazioni() != null) {
-            for (String idCert : dto.getIdCertificazioni()) {
-                if (repoCertificazioni.existsById(idCert)) {
-                    certificazioni.add(repoCertificazioni.findById(idCert).get());
-                }
-            }
-        }
-        t.setCertificazioni(certificazioni);
-
-        repoTrasformazioni.save(t);
-        return new ResponseEntity<>(t, HttpStatus.CREATED);
-    }
-    /**
-	 * Aggiorna alcuni dati di una trasformazione
-	 * @param id della trasformazione già esistente
-	 * @param dtoTrasformazione
-	 * Aggiorna una trasformazione esistente
-	 * @param id identificativo della trasformazione da aggiornare
-	 * @param dto dati aggiornati
-	 * @return trasformazione aggiornata o errore 404 se non trovata o trasformatore mancante
-	 */
-	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateTrasformazione(@PathVariable("id") String id, @RequestBody TrasformazioneDTO dto) {
-		// Controllo esistenza trasformazione
-		if (!repoTrasformazioni.existsById(id)) {
-			return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
-		}
-		// Controllo esistenza trasformatore
-		if (!repoTrasformatori.existsById(dto.getIdTrasformatore())) {
-			return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
-		}
-
-	    if (!repoTrasformazioni.existsById(id)) {
-	        return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
-	    }
-
-	    if (!repoTrasformatori.existsById(dto.getIdTrasformatore())) {
-	        return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
-	    }
-
-	    return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
-	    Trasformazione t = repoTrasformazioni.findById(id).get();
-		// Recupero la trasformazione da aggiornare
-		Trasformazione t = repoTrasformazioni.findById(id).get();
-
-	    t.setDenominazione(dto.getDenominazione());
-	    t.setDescrizione(dto.getDescrizione());
-	    t.setDataFineFase(dto.getDataFineFase());
-	    t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
-		// Aggiorno i campi modificabili
-		t.setDenominazione(dto.getDenominazione());
-		t.setDescrizione(dto.getDescrizione());
-		t.setDataFineFase(dto.getDataFineFase());
-		t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
-
-	    // NON modifico certificazioni!
-		// NON modifico le certificazioni!
-
-	    repoTrasformazioni.save(t);
-	    return new ResponseEntity<>(t, HttpStatus.OK);
-		// Salvo la trasformazione aggiornata
 		repoTrasformazioni.save(t);
 		return new ResponseEntity<>(t, HttpStatus.OK);
 	}
 
-	/**
-	 * Elimina una trasformazione
-	 * @param id della trasformazione già esistente
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateTrasformazione(@PathVariable("id") String id, @RequestBody TrasformazioneDTO dto) {
-    	
-    	//1) Se la trasformazione non esiste --> NotFound
-        if (!repoTrasformazioni.existsById(id)) {
-            return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
-        }
-        
-        //2) Se il trasformatore non esiste --> NotFound
-        if (!repoTrasformatori.existsById(dto.getIdTrasformatore())) {
-            return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
-        }
-
-        Trasformazione t = repoTrasformazioni.findById(id).get();
-
-        t.setDenominazione(dto.getDenominazione());
-        t.setDescrizione(dto.getDescrizione());
-        t.setDataFineFase(dto.getDataFineFase());
-        t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
-
-        // Non modifico certificazioni!
-
-        repoTrasformazioni.save(t);
-        return new ResponseEntity<>(t, HttpStatus.OK);
-    }
-    /**
-	 * Elimina trasformazione
-	 * @param id della trasformazione da eliminare
-	 * @param dtoTrasformazione
-	 * Elimina una trasformazione esistente
-	 * @param id identificativo della trasformazione da eliminare
-	 * @return messaggio di conferma o errore 404 se trasformazione non trovata
-	 */
-	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteTrasformazione(@PathVariable("id") String id) {
-	    if (!repoTrasformazioni.existsById(id)) {
-	        return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
-	    }
-	    repoTrasformazioni.deleteById(id);
-	    return new ResponseEntity<>("Trasformazione eliminata", HttpStatus.OK);
-		if (!repoTrasformazioni.existsById(id)) {
-			return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
+		if (repoTrasformazioni.existsById(id)) {
+			repoTrasformazioni.deleteById(id);
+			return new ResponseEntity<>("Trasformazione eliminata", HttpStatus.OK);
 		}
-		repoTrasformazioni.deleteById(id);
-		return new ResponseEntity<>("Trasformazione eliminata", HttpStatus.OK);
+		return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
 	}
-
-	
-	
-	
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteTrasformazione(@PathVariable("id") String id) {
-        if (!repoTrasformazioni.existsById(id)) {
-            return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
-        }
-        repoTrasformazioni.deleteById(id);
-        return new ResponseEntity<>("Trasformazione eliminata", HttpStatus.OK);
-    }
 }

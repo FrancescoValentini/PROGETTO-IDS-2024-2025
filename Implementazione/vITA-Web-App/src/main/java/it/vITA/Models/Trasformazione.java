@@ -34,7 +34,7 @@ public class Trasformazione {
 	  
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "certificazione_id")
-	  public List<Certificazione> certificazioni;
+	  private List<Certificazione> certificazioni;
 	  
 	  public Trasformazione() {}
 
@@ -89,11 +89,11 @@ public class Trasformazione {
 	}
 
 	public List<Certificazione> getCertificazioni() {
-		return certificazioni;
+	    return certificazioni;
 	}
 
-	public void setCertificazioni(ArrayList<Certificazione> certificazioni) {
-		this.certificazioni = certificazioni;
+	public void setCertificazioni(List<Certificazione> certificazioni) {
+	    this.certificazioni = certificazioni;
 	}
 
 	public String getId() {
