@@ -2,13 +2,14 @@ package it.vITA.DTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TrasformazioneDTO {
     private String denominazione;
     private String descrizione;
     private LocalDateTime dataFineFase;
     private String idTrasformatore;
-    private ArrayList<String> idCertificazioni;
+    private List<String> idCertificazioni;
 
     public TrasformazioneDTO() {}
 
@@ -53,11 +54,11 @@ public class TrasformazioneDTO {
         this.idTrasformatore = idTrasformatore;
     }
 
-    public ArrayList<String> getIdCertificazioni() {
+    public List<String> getIdCertificazioni() {
         return idCertificazioni;
     }
 
-    public void setIdCertificazioni(ArrayList<String> idCertificazioni) {
+    public void setIdCertificazioni(List<String> idCertificazioni) {
         this.idCertificazioni = idCertificazioni;
     }
 }

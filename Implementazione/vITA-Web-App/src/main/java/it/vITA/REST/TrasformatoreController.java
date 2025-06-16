@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -91,6 +93,59 @@ public class TrasformatoreController {
 	    return new ResponseEntity<>(trasformatore, HttpStatus.CREATED);
 	}
 	
+	/**
+	 * Aggiorna i dati del trasformatore
+	 * @param id
+	 * @param dtoTrasformatore
+	 * @return
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateTrasformatore(@PathVariable("id") String id, @RequestBody TrasformatoreDTO dtoTrasformatore) {
+
+	    Posizione posizione = null;
+	    String idPosizione = dtoTrasformatore.getIdPosizioneGeografica();
+
+	    // Controlla se la posizione esiste
+	    if (repoPosizioni.existsById(idPosizione)) {
+	        posizione = repoPosizioni.findById(idPosizione).get();
+	    } else {
+	        return new ResponseEntity<>("Posizione non trovata", HttpStatus.NOT_FOUND);
+	    }
+
+	    // Controlla se il trasformatore esiste
+	    if (repoTrasformatori.existsById(id)) {
+	        Trasformatore t = repoTrasformatori.findById(id).get();
+
+	        // Aggiorna i campi
+	        t.setPartitaIva(dtoTrasformatore.getPartitaIva());
+	        t.setDenominazioneAzienda(dtoTrasformatore.getDenominazioneAzienda());
+	        t.setTelefonoAziendale(dtoTrasformatore.getTelefonoAziendale());
+	        t.setPosizioneGeografica(posizione);
+
+	        // Salva il trasformatore aggiornato
+	        repoTrasformatori.save(t);
+
+	        return new ResponseEntity<>(t, HttpStatus.OK);
+	    }
+
+	    return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
+	}
+	
+	/**
+	 * Elimina un trasformatore dal DB
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteTrasformatore(@PathVariable("id") String id) {
+	    if (!repoTrasformatori.existsById(id)) {
+	        return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
+	    }
+	    repoTrasformatori.deleteById(id);
+	    return new ResponseEntity<>("Trasformatore eliminato", HttpStatus.OK);
+	}
+
+
 
 }
 	
