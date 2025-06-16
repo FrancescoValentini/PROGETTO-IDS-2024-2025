@@ -28,7 +28,8 @@ import it.vITA.Repositories.TrasformazioniRepository;
 
 
 /**
- * Rest controller che gestisce le trasformazioni
+ * Controller REST per operazioni su trasformazioni
+ * 
  * @author Giulia Balestra
  */
 
@@ -123,6 +124,62 @@ private static final Logger logger = LoggerFactory.getLogger(TrasformazioneContr
 	/**
 	 * Aggiorna i dati di una trasformazione
 	 * @param id trasformazione
+    @Autowired
+    TrasformazioniRepository repoTrasformazioni;
+    @Autowired
+    TrasformatoreRepository repoTrasformatori;
+    @Autowired
+    CertificazioniRepository repoCertificazioni;
+    
+    private static final Logger logger = LoggerFactory.getLogger(InvitoController.class);
+
+
+    @GetMapping
+    public ResponseEntity<Object> getTrasformazioni() {
+        Iterable<Trasformazione> trasformazioni = repoTrasformazioni.findAll();
+        ArrayList<Trasformazione> t = new ArrayList<>();
+        trasformazioni.forEach(x -> t.add(x));
+        return new ResponseEntity<>(t, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getTrasformazione(@PathVariable("id") String id) {
+        if (repoTrasformazioni.existsById(id)) {
+            return new ResponseEntity<>(repoTrasformazioni.findById(id).get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> createTrasformazione(@RequestBody TrasformazioneDTO dto) {
+    	//1) se il trasformatore non esiste --> NotFound
+        if (!repoTrasformatori.existsById(dto.getIdTrasformatore())) {
+            return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
+        }
+        //2) crea una nuova trasformazione
+        Trasformazione t = new Trasformazione();
+        t.setDenominazione(dto.getDenominazione());
+        t.setDescrizione(dto.getDescrizione());
+        t.setDataInizioFase(LocalDateTime.now());
+        t.setDataFineFase(dto.getDataFineFase());
+        t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
+        
+        ArrayList<Certificazione> certificazioni = new ArrayList<>();
+        if (dto.getIdCertificazioni() != null) {
+            for (String idCert : dto.getIdCertificazioni()) {
+                if (repoCertificazioni.existsById(idCert)) {
+                    certificazioni.add(repoCertificazioni.findById(idCert).get());
+                }
+            }
+        }
+        t.setCertificazioni(certificazioni);
+
+        repoTrasformazioni.save(t);
+        return new ResponseEntity<>(t, HttpStatus.CREATED);
+    }
+    /**
+	 * Aggiorna alcuni dati di una trasformazione
+	 * @param id della trasformazione già esistente
 	 * @param dtoTrasformazione
 	 */
 
@@ -154,6 +211,35 @@ private static final Logger logger = LoggerFactory.getLogger(TrasformazioneContr
 	/**
 	 * Elimina una trasformazione
 	 * @param id della trasformazione già esistente
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateTrasformazione(@PathVariable("id") String id, @RequestBody TrasformazioneDTO dto) {
+    	
+    	//1) Se la trasformazione non esiste --> NotFound
+        if (!repoTrasformazioni.existsById(id)) {
+            return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
+        }
+        
+        //2) Se il trasformatore non esiste --> NotFound
+        if (!repoTrasformatori.existsById(dto.getIdTrasformatore())) {
+            return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
+        }
+
+        Trasformazione t = repoTrasformazioni.findById(id).get();
+
+        t.setDenominazione(dto.getDenominazione());
+        t.setDescrizione(dto.getDescrizione());
+        t.setDataFineFase(dto.getDataFineFase());
+        t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
+
+        // Non modifico certificazioni!
+
+        repoTrasformazioni.save(t);
+        return new ResponseEntity<>(t, HttpStatus.OK);
+    }
+    /**
+	 * Elimina trasformazione
+	 * @param id della trasformazione da eliminare
+	 * @param dtoTrasformazione
 	 */
 	
 	@DeleteMapping("/{id}")
@@ -168,4 +254,12 @@ private static final Logger logger = LoggerFactory.getLogger(TrasformazioneContr
 	
 	
 	
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteTrasformazione(@PathVariable("id") String id) {
+        if (!repoTrasformazioni.existsById(id)) {
+            return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
+        }
+        repoTrasformazioni.deleteById(id);
+        return new ResponseEntity<>("Trasformazione eliminata", HttpStatus.OK);
+    }
 }
