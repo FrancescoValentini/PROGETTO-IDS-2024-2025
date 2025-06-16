@@ -24,7 +24,7 @@ public class ProdottoInVendita {
 	@JoinColumn(name = "prodotto_id", referencedColumnName = "id")
 	public Prodotto prodotto;
 	
-	
+	public ProdottoInVendita() {}
 
 	/**
 	 * @param qta
