@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import it.vITA.Models.Certificazione;
 
 public class TrasformazioneDTO {
-	 private String denominazione;
-	  private String descrizione;
-	  private LocalDateTime dataInizioFase;
 	  private LocalDateTime dataFineFase;
 	  private String idTrasformatore;
 	  private ArrayList<Certificazione> certificazioni;
@@ -32,42 +29,28 @@ public class TrasformazioneDTO {
 			this.certificazioni = certificazioni;
 		}
 
+    private LocalDateTime dataFineFase;
+    private String idTrasformatore;
+    private ArrayList<String> idCertificazioni;
 
-		public String getDenominazione() {
-	        return denominazione;
-	    }
+    public TrasformazioneDTO() {}
 
-	    public void setDenominazione(String denominazione) {
-	        this.denominazione = denominazione;
-	    }
+        this.descrizione = descrizione;
+        this.dataFineFase = dataFineFase;
+        this.idTrasformatore = idTrasformatore;
+        this.idCertificazioni = idCertificazioni;
+    }
 
-	    public String getDescrizione() {
-	        return descrizione;
-	    }
 
-	    public void setDescrizione(String descrizione) {
-	        this.descrizione = descrizione;
-	    }
 
-	    public LocalDateTime getDataInizioFase() {
-	        return dataInizioFase;
-	    }
 
-	    public void setDataInizioFase(LocalDateTime dataInizioFase) {
-	        this.dataInizioFase = dataInizioFase;
-	    }
 
-	    public LocalDateTime getDataFineFase() {
-	        return dataFineFase;
-	    }
 
-	    public void setDataFineFase(LocalDateTime dataFineFase) {
-	        this.dataFineFase = dataFineFase;
-	    }
 
-	    public String getIdTrasformatore() {
-	        return idTrasformatore;
-	    }
+
+    public ArrayList<String> getIdCertificazioni() {
+        return idCertificazioni;
+    }
 
 	    public ArrayList<Certificazione> getCertificazioni() {
 	        return certificazioni;
