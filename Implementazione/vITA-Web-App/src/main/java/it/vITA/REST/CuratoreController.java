@@ -19,12 +19,13 @@ import it.vITA.DTO.CuratoreDTO;
 import it.vITA.DTO.UtenteRegistratoDTO;
 import it.vITA.Models.Curatore;
 import it.vITA.Models.UtenteRegistrato;
+import it.vITA.Repositories.CuratoreRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
 
 public class CuratoreController {
 	private static final Logger logger = LoggerFactory.getLogger(CuratoreController.class);
 	@Autowired
-	UtenteRegistratoRepository curatori; //verificare bisogno nuova repository
+	CuratoreRepository curatori; //verificare bisogno nuova repository
 
 	/**
 	 * Restituisce tutti i curatori
@@ -78,7 +79,7 @@ public class CuratoreController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateCuratore(@PathVariable("id") String id, @RequestBody CuratoreDTO dtoCuratore){
 		if(curatori.existsById(id)) {
-			UtenteRegistrato cur = curatori.findById(id).get();
+			Curatore cur = curatori.findById(id).get();
 			
 			cur.setNome(dtoCuratore.getNome());
 			cur.setCognome(dtoCuratore.getCognome());
@@ -88,7 +89,7 @@ public class CuratoreController {
 			cur.setUsername(dtoCuratore.getUsername());
 			cur.setPassword(dtoCuratore.getPassword());
 			
-			dtoCuratore.save(cur);
+			curatori.save(cur);
 			return new ResponseEntity<>(cur ,HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Curatore non trovato",HttpStatus.NOT_FOUND);
