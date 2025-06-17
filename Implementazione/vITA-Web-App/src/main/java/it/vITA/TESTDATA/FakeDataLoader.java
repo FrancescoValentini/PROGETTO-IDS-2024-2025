@@ -8,6 +8,7 @@ import it.vITA.Models.Evento;
 import it.vITA.Models.Invito;
 import it.vITA.Models.Posizione;
 import it.vITA.Models.Prodotto;
+import it.vITA.Models.ProdottoInVendita;
 import it.vITA.Models.Produttore;
 import it.vITA.Models.TipologiaEvento;
 import it.vITA.Models.Trasformatore;
@@ -17,6 +18,7 @@ import it.vITA.Repositories.CertificazioniRepository;
 import it.vITA.Repositories.EventiRepository;
 import it.vITA.Repositories.InvitiRepository;
 import it.vITA.Repositories.PosizioniRepository;
+import it.vITA.Repositories.ProdottiInVenditaRepository;
 import it.vITA.Repositories.ProdottoRepository;
 import it.vITA.Repositories.TrasformatoreRepository;
 import it.vITA.Repositories.TrasformazioniRepository;
@@ -56,6 +58,10 @@ public class FakeDataLoader implements CommandLineRunner {
 
 	@Autowired
 	CertificazioniRepository repoCertificazioni;
+  
+  @Autowired
+	ProdottiInVenditaRepository repoProdottiInVendita;
+
 	
 	
 	
@@ -155,6 +161,15 @@ public class FakeDataLoader implements CommandLineRunner {
         repoProdotti.save(prod9);
         repoProdotti.save(prod10);
         
+        ProdottoInVendita pv1 = new ProdottoInVendita(50, 10, prod1);
+        ProdottoInVendita pv2 = new ProdottoInVendita(11, 25, prod2);
+        ProdottoInVendita pv3 = new ProdottoInVendita(14, 10, prod3);
+        ProdottoInVendita pv4 = new ProdottoInVendita(1, 5, prod4);
+        
+        repoProdottiInVendita.save(pv1);
+        repoProdottiInVendita.save(pv2);
+        repoProdottiInVendita.save(pv3);
+        repoProdottiInVendita.save(pv4);
         
      // === CREAZIONE TRASFORMATORI ===
         Trasformatore trasf1 = new Trasformatore("username", "password" , "email", "nome" , "cognome" ,
