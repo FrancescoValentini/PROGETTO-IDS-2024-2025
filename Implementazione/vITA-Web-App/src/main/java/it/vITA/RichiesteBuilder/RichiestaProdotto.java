@@ -8,24 +8,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class RichiestaProdotto {
-
-	  private boolean approvato = false;
-	  private String commentoCuratore;
-	  @ManyToOne(fetch = FetchType.EAGER)
-	  @JoinColumn(name = "utente_id", referencedColumnName = "id")
-	  public UtenteRegistrato creatore;
-	  @OneToOne(fetch = FetchType.EAGER)
-	  @JoinColumn(name = "prodotto_id", referencedColumnName = "id")
-	  public Prodotto prodotto;
-	  @Enumerated(EnumType.STRING)
-	  @Column(nullable = false)
-	  public TipoRichiesta tipoRichiesta;
+	@Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", columnDefinition = "VARCHAR(64)")
+	private String id;
+	private boolean approvato = false;
+	private String commentoCuratore;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "utente_id", referencedColumnName = "id")
+	public UtenteRegistrato creatore;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "prodotto_id", referencedColumnName = "id")
+	public Prodotto prodotto;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	public TipoRichiesta tipoRichiesta;
 	  
 	  public RichiestaProdotto(){
 	  }
@@ -38,6 +44,9 @@ public class RichiestaProdotto {
 		this.creatore = creatore;
 		this.prodotto = prodotto;
 		this.tipoRichiesta = TipoRichiesta.PRODOTTO;
+	}
+	public String getId() {
+		return id;
 	}
 
 	public boolean isApprovato() {

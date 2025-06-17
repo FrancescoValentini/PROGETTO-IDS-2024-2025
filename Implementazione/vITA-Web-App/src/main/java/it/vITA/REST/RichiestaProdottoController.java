@@ -8,14 +8,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.vITA.DTO.RichiestaProdottoDTO;
 import it.vITA.Models.Prodotto;
+import it.vITA.Models.UtenteRegistrato;
 import it.vITA.Repositories.ProdottoRepository;
 import it.vITA.Repositories.RichiestaProdottoRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
 import it.vITA.RichiesteBuilder.RichiestaProdotto;
+import it.vITA.RichiesteBuilder.RichiestaProdottoBuilder;
 
 
 /**
@@ -51,6 +56,36 @@ public class RichiestaProdottoController {
 	            return new ResponseEntity<>(repoRichiestaP.findById(id).get(), HttpStatus.OK);
 	        }
 	        return new ResponseEntity<>("Richiesta prodotto non trovata", HttpStatus.NOT_FOUND);
+	    }
+	    
+	    /**
+	     * Crea una nuova richiesta prodotto
+	     * @param dto
+	     * @return nuova richiesta prodotto
+	     */
+	    @PostMapping
+	    public ResponseEntity<Object> createRichiestaProdotto(@RequestBody RichiestaProdottoDTO dto) {
+
+	        if (!repoUtente.existsById(dto.getIdCreatore())) {
+	            return new ResponseEntity<>("Creatore non trovato", HttpStatus.NOT_FOUND);
+	        }
+	        if (!repoProdotto.existsById(dto.getIdProdotto())) {
+	            return new ResponseEntity<>("Prodotto non trovato", HttpStatus.NOT_FOUND);
+	        }
+	        
+	        UtenteRegistrato creatore = repoUtente.findById(dto.getIdCreatore()).get();
+	        Prodotto prodotto = repoProdotto.findById(dto.getIdProdotto()).get();
+
+	        RichiestaProdottoBuilder builder = new RichiestaProdottoBuilder();
+	        builder.setApprovato(false);
+	        builder.setCreatore(creatore);
+	        builder.setElemento(prodotto);
+
+	        RichiestaProdotto richiesta = builder.build();
+	        richiesta.setTipoRichiesta(dto.getTipoRichiesta());
+
+	        repoRichiestaP.save(richiesta);
+	        return new ResponseEntity<>(richiesta, HttpStatus.CREATED);
 	    }
 	    
 }
