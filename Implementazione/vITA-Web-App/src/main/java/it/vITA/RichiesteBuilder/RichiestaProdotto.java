@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class RichiestaProdotto implements I_RichiestaCuratore {
+public class RichiestaProdotto {
 
 	  private boolean approvato = false;
 	  private String commentoCuratore;
@@ -31,50 +31,13 @@ public class RichiestaProdotto implements I_RichiestaCuratore {
 	  }
 	  
 	public RichiestaProdotto(String commentoCuratore, UtenteRegistrato creatore,
-			Prodotto prodotto) {
+			Prodotto prodotto, boolean status) {
 		super();
-		this.approvato = false;
+		this.approvato = status;
 		this.commentoCuratore = commentoCuratore;
 		this.creatore = creatore;
 		this.prodotto = prodotto;
 		this.tipoRichiesta = TipoRichiesta.PRODOTTO;
-	}
-
-	@Override
-	public void approva() {
-		approvato = true;
-		
-	}
-
-	@Override
-	public void rifiuta(String commento) {
-		approvato = false;
-		this.commentoCuratore = commento;
-		
-	}
-
-	@Override
-	public UtenteRegistrato getCreatore() {
-		
-		return creatore;
-	}
-
-	@Override
-	public boolean getStatus() {
-		
-		return approvato;
-	}
-
-	@Override
-	public Object getElemento() {
-		
-		return prodotto;
-	}
-
-	@Override
-	public TipoRichiesta getTipoRichiesta() {
-	
-		return tipoRichiesta;
 	}
 
 	public boolean isApprovato() {
