@@ -2,6 +2,7 @@ package it.vITA.Models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -33,12 +34,12 @@ public class Trasformazione {
 	  
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "certificazione_id")
-	  public ArrayList<Certificazione> certificazioni;
+	  private List<Certificazione> certificazioni;
 	  
 	  public Trasformazione() {}
 
-	  public Trasformazione(String id, String denominazione, String descrizione, LocalDateTime dataInizioFase,
-			LocalDateTime dataFineFase, Trasformatore trasformatore, ArrayList<Certificazione> certificazioni) {
+	  public Trasformazione(String denominazione, String descrizione, LocalDateTime dataInizioFase,
+			LocalDateTime dataFineFase, Trasformatore trasformatore, List<Certificazione> certificazioni) {
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
 		this.dataInizioFase = dataInizioFase;
@@ -87,12 +88,12 @@ public class Trasformazione {
 		this.trasformatore = trasformatore;
 	}
 
-	public ArrayList<Certificazione> getCertificazioni() {
-		return certificazioni;
+	public List<Certificazione> getCertificazioni() {
+	    return certificazioni;
 	}
 
-	public void setCertificazioni(ArrayList<Certificazione> certificazioni) {
-		this.certificazioni = certificazioni;
+	public void setCertificazioni(List<Certificazione> certificazioni) {
+	    this.certificazioni = certificazioni;
 	}
 
 	public String getId() {

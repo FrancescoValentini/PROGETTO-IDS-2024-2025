@@ -3,6 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import it.vITA.Models.Certificazione;
 import it.vITA.Models.Evento;
 import it.vITA.Models.Invito;
 import it.vITA.Models.Posizione;
@@ -10,15 +11,21 @@ import it.vITA.Models.Prodotto;
 import it.vITA.Models.ProdottoInVendita;
 import it.vITA.Models.Produttore;
 import it.vITA.Models.TipologiaEvento;
+import it.vITA.Models.Trasformatore;
+import it.vITA.Models.Trasformazione;
 import it.vITA.Models.UtenteRegistrato;
+import it.vITA.Repositories.CertificazioniRepository;
 import it.vITA.Repositories.EventiRepository;
 import it.vITA.Repositories.InvitiRepository;
 import it.vITA.Repositories.PosizioniRepository;
 import it.vITA.Repositories.ProdottiInVenditaRepository;
 import it.vITA.Repositories.ProdottoRepository;
+import it.vITA.Repositories.TrasformatoreRepository;
+import it.vITA.Repositories.TrasformazioniRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +51,17 @@ public class FakeDataLoader implements CommandLineRunner {
 	ProdottoRepository repoProdotti;
 	
 	@Autowired
+	TrasformazioniRepository repoTrasformazioni;
+
+	@Autowired
+	TrasformatoreRepository repoTrasformatori;
+
+	@Autowired
+	CertificazioniRepository repoCertificazioni;
+  
+  @Autowired
 	ProdottiInVenditaRepository repoProdottiInVendita;
+
 	
 	
 	
@@ -143,7 +160,6 @@ public class FakeDataLoader implements CommandLineRunner {
         repoProdotti.save(prod8);
         repoProdotti.save(prod9);
         repoProdotti.save(prod10);
-
         
         ProdottoInVendita pv1 = new ProdottoInVendita(50, 10, prod1);
         ProdottoInVendita pv2 = new ProdottoInVendita(11, 25, prod2);
@@ -155,6 +171,52 @@ public class FakeDataLoader implements CommandLineRunner {
         repoProdottiInVendita.save(pv3);
         repoProdottiInVendita.save(pv4);
         
+     // === CREAZIONE TRASFORMATORI ===
+        Trasformatore trasf1 = new Trasformatore("username", "password" , "email", "nome" , "cognome" ,
+        		"telefono", "biografia" , "PIVA123", "Azienda Bio", "0123456789", null);
+        Trasformatore trasf2 = new Trasformatore("username", "password" , "email", "nome" , "cognome" ,
+        		"telefono", "biografia" ,"PIVA456", "Trasformazioni Verdi", "0987654321", null);
+        repoTrasformatori.save(trasf1);
+        repoTrasformatori.save(trasf2);
+        
+        
+     // === CREAZIONE CERTIFICAZIONI ===
+        Certificazione cert1 = new Certificazione();
+        cert1.setDenominazione("Certificazione Biologica");
+        cert1.setDescrizione("Conforme agli standard biologici UE");
+        cert1.setDenominazioneEnteCertificatore("BioEnte Europa");
+        cert1.setDataConseguimento(LocalDateTime.now());
+        cert1.setDataScadenza(LocalDateTime.now().plusYears(1));
+
+        Certificazione cert2 = new Certificazione();
+        cert2.setDenominazione("Certificazione Sostenibilità");
+        cert2.setDescrizione("Ridotto impatto ambientale nei processi produttivi");
+        cert2.setDenominazioneEnteCertificatore("GreenCert Italia");
+        cert2.setDataConseguimento(LocalDateTime.now());
+        cert2.setDataScadenza(LocalDateTime.now().plusYears(2));
+
+        repoCertificazioni.save(cert1);
+        repoCertificazioni.save(cert2);
+        
+     // === CREAZIONE TRASFORMAZIONI ===
+        Trasformazione t1 = new Trasformazione();
+        t1.setDenominazione("Trasformazione Frutta");
+        t1.setDescrizione("Produzione confetture biologiche");
+        t1.setDataInizioFase(LocalDateTime.now());
+        t1.setDataFineFase(LocalDateTime.now().plusDays(5));
+        //t1.setTrasformatore(trasf1);
+        //t1.setCertificazioni(List.of(cert1, cert2));
+
+        Trasformazione t2 = new Trasformazione();
+        t2.setDenominazione("Lavorazione Verdure");
+        t2.setDescrizione("Conserve di verdure stagionali");
+        t2.setDataInizioFase(LocalDateTime.now());
+        t2.setDataFineFase(LocalDateTime.now().plusDays(7));
+        //t2.setTrasformatore(trasf2);
+        //t2.setCertificazioni(List.of(cert2));
+
+        repoTrasformazioni.save(t1);
+        repoTrasformazioni.save(t2);
 		
 		logger.info("LOADED FAKE DATA");
 		
