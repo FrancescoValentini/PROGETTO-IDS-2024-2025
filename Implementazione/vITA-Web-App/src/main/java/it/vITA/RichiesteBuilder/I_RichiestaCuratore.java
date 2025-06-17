@@ -1,5 +1,6 @@
 package it.vITA.RichiesteBuilder;
 
+import it.vITA.Models.TipoRichiesta;
 import it.vITA.Models.UtenteRegistrato;
 
 public interface I_RichiestaCuratore {
