@@ -31,9 +31,9 @@ public class RichiestaTrasformazione {
 	  }
 	  
 	public RichiestaTrasformazione(String commentoCuratore, UtenteRegistrato creatore,
-			Trasformazione trasformazione) {
+			Trasformazione trasformazione , boolean status) {
 		super();
-		this.approvato = false;
+		this.approvato = status;
 		this.commentoCuratore = commentoCuratore;
 		this.creatore = creatore;
 		this.trasformazione = trasformazione;
