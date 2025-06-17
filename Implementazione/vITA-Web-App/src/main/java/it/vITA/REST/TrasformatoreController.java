@@ -73,7 +73,7 @@ public class TrasformatoreController {
 	public ResponseEntity<Object> createTrasformatore(@RequestBody TrasformatoreDTO dtoTrasformatore) {
 	    
 	    Posizione posizione = null;
-	    String idPosizione = dtoTrasformatore.getIdPosizioneGeografica();
+	    String idPosizione = dtoTrasformatore.getPosizioneGeografica();
 
 	    // Controlla se la posizione esiste
 	    if (repoPosizioni.existsById(idPosizione)) {
@@ -84,6 +84,13 @@ public class TrasformatoreController {
 
 	    // Crea il trasformatore usando il DTO e la posizione trovata
 	    Trasformatore trasformatore = new Trasformatore(
+	    	dtoTrasformatore.getUsername(),
+	    	dtoTrasformatore.getPassword(),
+	    	dtoTrasformatore.getEmail(),
+	    	dtoTrasformatore.getNome(),
+	    	dtoTrasformatore.getCognome(),
+	    	dtoTrasformatore.getTelefono(),
+	    	dtoTrasformatore.getBiografia(),
 	        dtoTrasformatore.getPartitaIva(),
 	        dtoTrasformatore.getDenominazioneAzienda(),
 	        dtoTrasformatore.getTelefonoAziendale(),
@@ -104,7 +111,7 @@ public class TrasformatoreController {
 	public ResponseEntity<Object> updateTrasformatore(@PathVariable("id") String id, @RequestBody TrasformatoreDTO dtoTrasformatore) {
 
 	    Posizione posizione = null;
-	    String idPosizione = dtoTrasformatore.getIdPosizioneGeografica();
+	    String idPosizione = dtoTrasformatore.getPosizioneGeografica();
 
 	    // Controlla se la posizione esiste
 	    if (repoPosizioni.existsById(idPosizione)) {

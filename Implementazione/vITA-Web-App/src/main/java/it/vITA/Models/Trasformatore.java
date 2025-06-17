@@ -19,10 +19,13 @@ public class Trasformatore extends UtenteRegistrato {
 	private Posizione posizioneGeografica;
 	
 	public Trasformatore() {}
-
-	public Trasformatore(String partitaIva, String denominazioneAzienda, String telefonoAziendale,
+	
+	
+	public Trasformatore(String username, String password, String email, String nome, String cognome,
+			String telefono, String biografia, String partitaIva, String denominazioneAzienda, String telefonoAziendale,
 			Posizione posizioneGeografica) {
-		super();
+		super(username, password, email, nome, cognome,
+				telefono, biografia);
 		this.partitaIva = partitaIva;
 		this.denominazioneAzienda = denominazioneAzienda;
 		this.telefonoAziendale = telefonoAziendale;
