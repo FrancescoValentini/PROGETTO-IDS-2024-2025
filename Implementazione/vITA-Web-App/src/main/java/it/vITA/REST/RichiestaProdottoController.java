@@ -29,6 +29,7 @@ import it.vITA.RichiesteBuilder.RichiestaProdottoBuilder;
  * Rest controller che gestisce le richieste prodotti
  * @author Giulia Balestra
  */
+
 @RestController
 @RequestMapping("/api/richiestaProdotto")
 public class RichiestaProdottoController {
@@ -51,7 +52,11 @@ public class RichiestaProdottoController {
 			richiestap.forEach(x -> r.add(x));
 			return new ResponseEntity<>(richiestap,HttpStatus.OK);
 		}
-	    
+	    /**
+	     * Restituisce info della richiesta prodotto dato il suo id
+	     * @param id
+	     * @return info richiesta prodotto
+	     */
 	    @GetMapping("/{id}")
 	    public ResponseEntity<Object> getRichiestaProdotto(@PathVariable String id) {
 	        if (repoRichiestaP.existsById(id)) {
@@ -82,6 +87,7 @@ public class RichiestaProdottoController {
 	        builder.setApprovato(false);
 	        builder.setCreatore(creatore);
 	        builder.setElemento(prodotto);
+	        builder.setCommento("aaa");
 
 	        RichiestaProdotto richiesta = builder.build();
 	        richiesta.setTipoRichiesta(dto.getTipoRichiesta());
@@ -93,7 +99,7 @@ public class RichiestaProdottoController {
 	    /**
 	     * Aggiorna una richiesta prodotto esistente
 	     * @param id
-	     * @param dti
+	     * @param dto
 	     * @return richiesta prodotto aggiornata
 	     */
 	    @PutMapping("/{id}")
@@ -129,12 +135,17 @@ public class RichiestaProdottoController {
 	        if (dto.getTipoRichiesta() != null) {
 	            richiesta.setTipoRichiesta(dto.getTipoRichiesta());
 	        }
-
+	        
 	        repoRichiestaP.save(richiesta);
 
 	        return new ResponseEntity<>(richiesta, HttpStatus.OK);
 	    }
 
+	    /**
+	     * Elimina una richiesta prodotto esistente
+	     * @param id
+	     * @return richiesta prodotto eliminata
+	     */
 	    @DeleteMapping("/{id}")
 	    public ResponseEntity<Object> deleteRichiestaProdotto(@PathVariable String id) {
 	        if (!repoRichiestaP.existsById(id)) {
@@ -142,8 +153,5 @@ public class RichiestaProdottoController {
 	        }
 	        repoRichiestaP.deleteById(id);
 	        return new ResponseEntity<>("Richiesta prodotto eliminata", HttpStatus.OK);
-	    }
-
-	    
-	    
+	    }   
 }
