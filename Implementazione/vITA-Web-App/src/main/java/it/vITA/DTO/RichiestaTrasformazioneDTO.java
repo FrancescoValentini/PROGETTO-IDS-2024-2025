@@ -6,14 +6,14 @@ public class RichiestaTrasformazioneDTO {
 
     private boolean approvato;
     private String commentoCuratore;
-    private Long creatoreId;
-    private Long trasformazioneId;
+    private String creatoreId;
+    private String trasformazioneId;
     private TipoRichiesta tipoRichiesta;
 
     public RichiestaTrasformazioneDTO() {
     }
 
-    public RichiestaTrasformazioneDTO(boolean approvato, String commentoCuratore, Long creatoreId, Long trasformazioneId, TipoRichiesta tipoRichiesta) {
+    public RichiestaTrasformazioneDTO(boolean approvato, String commentoCuratore, String creatoreId, String trasformazioneId, TipoRichiesta tipoRichiesta) {
         this.approvato = approvato;
         this.commentoCuratore = commentoCuratore;
         this.creatoreId = creatoreId;
@@ -37,19 +37,19 @@ public class RichiestaTrasformazioneDTO {
         this.commentoCuratore = commentoCuratore;
     }
 
-    public Long getCreatoreId() {
+    public String getCreatoreId() {
         return creatoreId;
     }
 
-    public void setCreatoreId(Long creatoreId) {
+    public void setCreatoreId(String creatoreId) {
         this.creatoreId = creatoreId;
     }
 
-    public Long getTrasformazioneId() {
+    public String getTrasformazioneId() {
         return trasformazioneId;
     }
 
-    public void setTrasformazioneId(Long trasformazioneId) {
+    public void setTrasformazioneId(String trasformazioneId) {
         this.trasformazioneId = trasformazioneId;
     }
 
