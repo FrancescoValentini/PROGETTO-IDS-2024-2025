@@ -87,10 +87,9 @@ public class RichiestaProdottoController {
 	        builder.setApprovato(false);
 	        builder.setCreatore(creatore);
 	        builder.setElemento(prodotto);
-	        builder.setCommento("aaa");
+	        builder.setCommento(dto.getCommentoCuratore());
 
 	        RichiestaProdotto richiesta = builder.build();
-	        richiesta.setTipoRichiesta(dto.getTipoRichiesta());
 
 	        repoRichiestaP.save(richiesta);
 	        return new ResponseEntity<>(richiesta, HttpStatus.CREATED);
@@ -132,9 +131,6 @@ public class RichiestaProdottoController {
 
 	        richiesta.setApprovato(dto.isApprovato());
 
-	        if (dto.getTipoRichiesta() != null) {
-	            richiesta.setTipoRichiesta(dto.getTipoRichiesta());
-	        }
 	        
 	        repoRichiestaP.save(richiesta);
 

@@ -14,18 +14,16 @@ public class RichiestaProdottoDTO {
 	private String commentoCuratore;
 	private String idCreatore;
 	private String idProdotto;
-	private TipoRichiesta tipoRichiesta;
+
 	
 	
 	public RichiestaProdottoDTO() {}
 	
-	public RichiestaProdottoDTO(boolean approvato, String commentoCuratore, String idCreatore, String idProdotto,
-			TipoRichiesta tipoRichiesta) {
+	public RichiestaProdottoDTO(boolean approvato, String commentoCuratore, String idCreatore, String idProdotto) {
 		this.approvato = approvato;
 		this.commentoCuratore = commentoCuratore;
 		this.idCreatore = idCreatore;
 		this.idProdotto = idProdotto;
-		this.tipoRichiesta = tipoRichiesta;
 	}
 
 	public boolean isApprovato() {
@@ -59,14 +57,5 @@ public class RichiestaProdottoDTO {
 	public void setIdProdotto(String idProdotto) {
 		this.idProdotto = idProdotto;
 	}
-
-	public TipoRichiesta getTipoRichiesta() {
-		return tipoRichiesta;
-	}
-
-	public void setTipoRichiesta(TipoRichiesta tipoRichiesta) {
-		this.tipoRichiesta = tipoRichiesta;
-	}
-	  
 	
 }
