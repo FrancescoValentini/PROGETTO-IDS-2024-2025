@@ -16,16 +16,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import it.vITA.DTO.CuratoreDTO;
+import it.vITA.DTO.RichiestaProdottoDTO;
 import it.vITA.DTO.UtenteRegistratoDTO;
 import it.vITA.Models.Curatore;
 import it.vITA.Models.UtenteRegistrato;
 import it.vITA.Repositories.CuratoreRepository;
+import it.vITA.Repositories.RichiestaProdottoRepository;
+import it.vITA.Repositories.RichiestaTrasformazioneRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
+import it.vITA.RichiesteBuilder.RichiestaProdotto;
 
 public class CuratoreController {
 	private static final Logger logger = LoggerFactory.getLogger(CuratoreController.class);
 	@Autowired
 	CuratoreRepository curatori; //verificare bisogno nuova repository
+	
+	@Autowired
+	RichiestaProdottoRepository richiestaProdottoRepo;
+	
+	@Autowired
+	RichiestaTrasformazioneRepository richiestaTrasformazioneRepo;
 
 	/**
 	 * Restituisce tutti i curatori
@@ -107,6 +117,27 @@ public class CuratoreController {
 			return new ResponseEntity<>("Curatore Eliminato",HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Curatore non trovato",HttpStatus.NOT_FOUND);
+	}
+	
+	/***
+	 * Metodo per valutare se approvare o rifiutare una richiestaProdotto
+	 * @param idRichiesta
+	 * @param dto
+	 * @return stato richiesta
+	 */
+	@PutMapping("/valutaProdotto/{idRichiesta}")
+	public ResponseEntity<Object> valutaProdotto(@PathVariable("id") String id,
+	                                             @RequestBody RichiestaProdottoDTO dto) {
+		if (richiestaProdottoRepo.existsById(id)) {
+			RichiestaProdotto richiesta = richiestaProdottoRepo.findById(id).get();
+			richiesta.setApprovato(dto.isApprovato());
+			richiesta.setCommentoCuratore(dto.getCommentoCuratore());
+			richiestaProdottoRepo.save(richiesta);
+
+			String stato = dto.isApprovato() ? "approvata" : "rifiutata";
+			return new ResponseEntity<>("Richiesta prodotto " + stato , HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Richiesta prodotto non trovata", HttpStatus.NOT_FOUND);
 	}
 
 }
