@@ -1,10 +1,13 @@
 package it.vITA.REST;
 
 import it.vITA.RichiesteBuilder.RichiestaTrasformazione;
-
+import it.vITA.RichiesteBuilder.RichiestaTrasformazioneBuilder;
 import it.vITA.DTO.RichiestaTrasformazioneDTO;
-
+import it.vITA.Models.Trasformazione;
+import it.vITA.Models.UtenteRegistrato;
 import it.vITA.Repositories.RichiestaTrasformazioneRepository;
+import it.vITA.Repositories.TrasformazioniRepository;
+import it.vITA.Repositories.UtenteRegistratoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +24,10 @@ public class RichiestaTrasformazioneController {
 
 	@Autowired
 	RichiestaTrasformazioneRepository repoRichiesta;
+	@Autowired
+	UtenteRegistratoRepository repoUtente;
+	@Autowired
+	TrasformazioniRepository repoTrasformazione;
 
 	/**
 	 * Restituisce tutti gli allergeni memorizzati nel db
@@ -41,12 +48,32 @@ public class RichiestaTrasformazioneController {
     }
 
     @PostMapping
-    public RichiestaTrasformazione createRichiesta(@RequestBody RichiestaTrasformazione richiesta) {
-        return repoRichiesta.save(richiesta);
+    public ResponseEntity<Object> createRichiesta(@RequestBody RichiestaTrasformazioneDTO dtoTrasformazione) {
+    	
+    	if (!repoUtente.existsById(dtoTrasformazione.getCreatoreId())) {
+            return new ResponseEntity<>("Creatore non trovato", HttpStatus.NOT_FOUND);
+        }
+        if (!repoRichiesta.existsById(dtoTrasformazione.getTrasformazioneId())) {
+            return new ResponseEntity<>("Prodotto non trovato", HttpStatus.NOT_FOUND);
+        }
+        
+        UtenteRegistrato creatore = repoUtente.findById(dtoTrasformazione.getCreatoreId()).get();
+        Trasformazione trasformazione = repoTrasformazione.findById(dtoTrasformazione.getTrasformazioneId()).get();
+
+        RichiestaTrasformazioneBuilder builder = new RichiestaTrasformazioneBuilder();
+        builder.setApprovato(false);
+        builder.setCreatore(creatore);
+        builder.setElemento(trasformazione);
+        builder.setCommento(dtoTrasformazione.getCommentoCuratore());
+
+        RichiestaTrasformazione richiesta = builder.build();
+
+        repoRichiesta.save(richiesta);
+        return new ResponseEntity<>(richiesta, HttpStatus.CREATED);
     }
     
     @PutMapping("/{id}")
-	public ResponseEntity<Object> updateRichiesta(@PathVariable("id") String id, @RequestBody RichiestaTrasformazioneDTO dtoCuratore){
+	public ResponseEntity<Object> updateRichiesta(@PathVariable("id") String id, @RequestBody RichiestaTrasformazioneDTO dtoTrasformazione){
 		if(repoRichiesta.existsById(id)) {
 			RichiestaTrasformazione ric = repoRichiesta.findById(id).get();
 			
