@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,7 @@ import it.vITA.Models.DistributoreDiTipicità;
 import it.vITA.Models.Posizione;
 import it.vITA.Repositories.DistributoreDiTipicitàRepository;
 import it.vITA.Repositories.PosizioniRepository;
+import jakarta.transaction.Transactional;
 
 
 /**
@@ -96,5 +99,56 @@ public class DistributoreDiTipicitàController {
 	    repoDistributori.save(distributore);
 	    return new ResponseEntity<>(distributore, HttpStatus.CREATED);
 	}
+	/**
+	 * Aggiorna i dati del distributore di tipicità
+	 * @param id
+	 * @param dtoDistributore
+	 * @return
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateDistributore(@PathVariable("id") String id, @RequestBody DistributoreDiTipicitàDTO dtoDistributore) {
+
+	    Posizione posizione = null;
+	    String idPosizione = dtoDistributore.getPosizioneGeografica();
+
+	    // Controlla se la posizione esiste
+	    if (repoPosizioni.existsById(idPosizione)) {
+	        posizione = repoPosizioni.findById(idPosizione).get();
+	    } else {
+	        return new ResponseEntity<>("Posizione non trovata", HttpStatus.NOT_FOUND);
+	    }
+
+	    // Controlla se il distributore esiste
+	    if (repoDistributori.existsById(id)) {
+	        DistributoreDiTipicità d = repoDistributori.findById(id).get();
+
+	        // Aggiorna i campi
+	        d.setPartitaIva(dtoDistributore.getPartitaIva());
+	        d.setDenominazioneAzienda(dtoDistributore.getDenominazioneAzienda());
+	        d.setTelefonoAziendale(dtoDistributore.getTelefonoAziendale());
+	        d.setPosizioneGeografica(posizione);
+
+	        // Salva il trasformatore aggiornato
+	        repoDistributori.save(d);
+
+	        return new ResponseEntity<>(d, HttpStatus.OK);
+	    }
+
+	    return new ResponseEntity<>("Trasformatore non trovato", HttpStatus.NOT_FOUND);
+	}
 	
+	/**
+	 * Elimina un distributore di tipicità dal DB
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("/{id}")
+	@Transactional  
+	public ResponseEntity<Object> deleteDistributore(@PathVariable("id") String id) {
+	    if (!repoDistributori.existsById(id)) {
+	        return new ResponseEntity<>("Distributore non trovato", HttpStatus.NOT_FOUND);
+	    }
+	    repoDistributori.deleteById(id);
+	    return new ResponseEntity<>("Distributore eliminato", HttpStatus.OK);
+	}
 }
