@@ -20,6 +20,7 @@ import it.vITA.Repositories.InvitiRepository;
 import it.vITA.Repositories.PosizioniRepository;
 import it.vITA.Repositories.ProdottiInVenditaRepository;
 import it.vITA.Repositories.ProdottoRepository;
+import it.vITA.Repositories.RichiestaProdottoRepository;
 import it.vITA.Repositories.TrasformatoreRepository;
 import it.vITA.Repositories.TrasformazioniRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
@@ -61,6 +62,9 @@ public class FakeDataLoader implements CommandLineRunner {
   
   @Autowired
 	ProdottiInVenditaRepository repoProdottiInVendita;
+  
+  @Autowired
+  RichiestaProdottoRepository repoRichiestaP;
 
 	
 	
@@ -171,6 +175,20 @@ public class FakeDataLoader implements CommandLineRunner {
         repoProdottiInVendita.save(pv3);
         repoProdottiInVendita.save(pv4);
         
+        
+     //  creazione della richiesta prodotto 
+        UtenteRegistrato creatore = repoUtentiRegistrati.findById(ur1.getId()).orElse(null);
+        Prodotto prodotto = repoProdotti.findById(prod1.getId()).orElse(null);
+
+        if (creatore != null && prodotto != null) {
+            it.vITA.RichiesteBuilder.RichiestaProdotto richiesta = new it.vITA.RichiesteBuilder.RichiestaProdotto();
+            richiesta.setApprovato(false);
+            richiesta.setCreatore(creatore);
+            richiesta.setProdotto(prodotto);
+            richiesta.setTipoRichiesta(it.vITA.Models.TipoRichiesta.PRODOTTO);
+            repoRichiestaP.save(richiesta);
+        }
+        
      // === CREAZIONE TRASFORMATORI ===
         Trasformatore trasf1 = new Trasformatore("username", "password" , "email", "nome" , "cognome" ,
         		"telefono", "biografia" , "PIVA123", "Azienda Bio", "0123456789", null);
@@ -217,6 +235,8 @@ public class FakeDataLoader implements CommandLineRunner {
 
         repoTrasformazioni.save(t1);
         repoTrasformazioni.save(t2);
+        
+        
 		
 		logger.info("LOADED FAKE DATA");
 		
