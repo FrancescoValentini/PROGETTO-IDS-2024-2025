@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.IscrizioneDTO;
 import it.vITA.Models.Iscrizione;
+import it.vITA.Repositories.EventiRepository;
 import it.vITA.Repositories.IscrizioneRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
 /**
@@ -34,6 +35,10 @@ public class IscrizioneController {
 	IscrizioneRepository repoIscrizioni;
 	@Autowired
 	UtenteRegistratoRepository repoUtenti;	
+	
+	@Autowired
+	EventiRepository repoEventi;
+	
 	/**
 	 * Restituisce tutte le iscrizioni memorizzate nel db
 	 * 
@@ -58,7 +63,7 @@ public class IscrizioneController {
 		if(repoIscrizioni.existsById(id)) {
 			return new ResponseEntity<>(repoIscrizioni.findById(id).get(),HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Posizione non trovata",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>("Iscrizione non trovata",HttpStatus.NOT_FOUND);
 	}
 	
 	/**
@@ -69,8 +74,14 @@ public class IscrizioneController {
 	@PostMapping
 	public ResponseEntity<Object> createIscrizione(@RequestBody IscrizioneDTO iscrizione){
 		Iscrizione is = new Iscrizione();
+		
+		if(!repoEventi.existsById(iscrizione.getIdEvento())) {
+			return new ResponseEntity<>("Evento non trovato",HttpStatus.NOT_FOUND);
+		}
+		
 		if(repoUtenti.existsById(iscrizione.getIdUtenteRegistrato())) {
 			is.setIscritto(repoUtenti.findById(iscrizione.getIdUtenteRegistrato()).get());
+			is.setEvento(repoEventi.findById(iscrizione.getIdEvento()).get());
 			repoIscrizioni.save(is);
 			return new ResponseEntity<>(is,HttpStatus.CREATED);
 		}
@@ -99,10 +110,16 @@ public class IscrizioneController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateIscrizione(@PathVariable("id") String id, @RequestBody IscrizioneDTO iscrizione){
+		
+		if(!repoEventi.existsById(iscrizione.getIdEvento())) {
+			return new ResponseEntity<>("Evento non trovato",HttpStatus.NOT_FOUND);
+		}
+		
 		if(repoIscrizioni.existsById(id)) {
 			Iscrizione i = repoIscrizioni.findById(id).get();
 			if(repoUtenti.existsById(iscrizione.getIdUtenteRegistrato())) {
 				i.setIscritto(repoUtenti.findById(iscrizione.getIdUtenteRegistrato()).get());
+				i.setEvento(repoEventi.findById(iscrizione.getIdEvento()).get());
 				repoIscrizioni.save(i);
 				return new ResponseEntity<>(i,HttpStatus.CREATED);
 			}

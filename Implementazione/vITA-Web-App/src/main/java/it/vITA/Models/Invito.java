@@ -32,7 +32,6 @@ public class Invito implements CSVExportable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "evento_id", referencedColumnName = "id")
-	@JsonIgnore
 	private Evento evento;
 	
 	public Invito() {}
