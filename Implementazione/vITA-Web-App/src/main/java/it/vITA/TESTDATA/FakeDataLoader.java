@@ -165,10 +165,10 @@ public class FakeDataLoader implements CommandLineRunner {
         repoProdotti.save(prod9);
         repoProdotti.save(prod10);
         
-        ProdottoInVendita pv1 = new ProdottoInVendita(50, 10, prod1);
-        ProdottoInVendita pv2 = new ProdottoInVendita(11, 25, prod2);
-        ProdottoInVendita pv3 = new ProdottoInVendita(14, 10, prod3);
-        ProdottoInVendita pv4 = new ProdottoInVendita(1, 5, prod4);
+        ProdottoInVendita pv1 = new ProdottoInVendita(50, 10,"Descrizione", prod1);
+        ProdottoInVendita pv2 = new ProdottoInVendita(11, 25,"Descrizione", prod2);
+        ProdottoInVendita pv3 = new ProdottoInVendita(14, 10,"Descrizione", prod3);
+        ProdottoInVendita pv4 = new ProdottoInVendita(1, 5,"Descrizione", prod4);
         
         repoProdottiInVendita.save(pv1);
         repoProdottiInVendita.save(pv2);
