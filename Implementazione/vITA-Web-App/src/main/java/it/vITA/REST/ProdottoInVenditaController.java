@@ -74,6 +74,7 @@ public class ProdottoInVenditaController {
         ProdottoInVendita piv = new ProdottoInVendita(
         		dto.getQta(), 
         		dto.getPrezzo(), 
+        		dto.getDescrizione(),
         		prodottoOpt.get()
         );
         
@@ -105,6 +106,7 @@ public class ProdottoInVenditaController {
         esistente.setQta(dto.getQta());
         esistente.setPrezzo(dto.getPrezzo());
         esistente.setProdotto(prodottoOpt.get());
+        esistente.setDescrizione(dto.getDescrizione());
 
         ProdottiInVenditaRepository.save(esistente);
         return new ResponseEntity<>(esistente, HttpStatus.OK);

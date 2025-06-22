@@ -25,6 +25,10 @@ public class Iscrizione {
 	private UtenteRegistrato iscritto;
 	private LocalDateTime dataEoraIscrizione;
 	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "evento_id", referencedColumnName = "id")
+	private Evento evento;
+	
 	public Iscrizione() {}
 
 	/**
@@ -32,9 +36,10 @@ public class Iscrizione {
 	 * 
 	 * @param iscritto
 	 */
-	public Iscrizione(UtenteRegistrato iscritto) {
+	public Iscrizione(UtenteRegistrato iscritto, Evento evento) {
 		this.iscritto = iscritto;
 		this.dataEoraIscrizione = LocalDateTime.now();
+		this.evento = evento;
 	}
 
 	public UtenteRegistrato getIscritto() {
@@ -56,10 +61,20 @@ public class Iscrizione {
 	public String getId() {
 		return id;
 	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "Iscrizione [id=" + id + ", iscritto=" + iscritto + ", dataEoraIscrizione=" + dataEoraIscrizione + "]";
+	}
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 	
 	

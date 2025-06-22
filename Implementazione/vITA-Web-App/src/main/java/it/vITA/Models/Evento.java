@@ -43,19 +43,7 @@ public class Evento implements CSVExportable {
 	private Posizione posizioneGeografica;
 	
 	
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "evento_id") 
-    private List<Iscrizione> iscrizioni;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "evento_id") 
-    private List<Invito> inviti;
-	
-	
-	public Evento() {
-		this.iscrizioni = new ArrayList<>();
-		this.inviti = new ArrayList<>();
-	}
+	public Evento() {}
 
 
 	/**
@@ -80,9 +68,6 @@ public class Evento implements CSVExportable {
 		this.posti = posti;
 		this.tipologiaEvento = tipologiaEvento;
 		this.posizioneGeografica = posizioneGeografica;
-		
-		this.iscrizioni = new ArrayList<>();
-		this.inviti = new ArrayList<>();
 	}
 
 
@@ -166,26 +151,6 @@ public class Evento implements CSVExportable {
 	}
 
 
-	public List<Iscrizione> getIscrizioni() {
-		return iscrizioni;
-	}
-
-
-	public void setIscrizioni(ArrayList<Iscrizione> iscrizioni) {
-		this.iscrizioni = iscrizioni;
-	}
-
-
-	public List<Invito> getInviti() {
-		return inviti;
-	}
-
-
-	public void setInviti(ArrayList<Invito> inviti) {
-		this.inviti = inviti;
-	}
-
-
 	public String getId() {
 		return id;
 	}
@@ -196,7 +161,7 @@ public class Evento implements CSVExportable {
 		return "Evento [id=" + id + ", dataEOraEvento=" + dataEOraEvento + ", dataEOraCreazione=" + dataEOraCreazione
 				+ ", titolo=" + titolo + ", descrizione=" + descrizione + ", prezzoIngresso=" + prezzoIngresso
 				+ ", posti=" + posti + ", tipologiaEvento=" + tipologiaEvento + ", posizioneGeografica="
-				+ posizioneGeografica + ", iscrizioni=" + iscrizioni + ", inviti=" + inviti + "]";
+				+ posizioneGeografica + "]";
 	}
 
 

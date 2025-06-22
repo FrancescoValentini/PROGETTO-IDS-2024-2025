@@ -24,6 +24,8 @@ public class ProdottoInVendita {
 	@JoinColumn(name = "prodotto_id", referencedColumnName = "id")
 	public Prodotto prodotto;
 	
+	private String descrizione;
+	
 	public ProdottoInVendita() {}
 
 	/**
@@ -31,10 +33,11 @@ public class ProdottoInVendita {
 	 * @param prezzo
 	 * @param prodotto
 	 */
-	public ProdottoInVendita(int qta, double prezzo, Prodotto prodotto) {
+	public ProdottoInVendita(int qta, double prezzo, String descrizione, Prodotto prodotto) {
 		this.qta = qta;
 		this.prezzo = prezzo;
 		this.prodotto = prodotto;
+		this.descrizione = descrizione;
 	}
 
 	public String getId() {
@@ -60,6 +63,20 @@ public class ProdottoInVendita {
 	public void setProdotto(Prodotto prodotto) {
 		this.prodotto = prodotto;
 	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public Prodotto getProdotto() {
+		return prodotto;
+	}
+	
+	
 
 
 }
