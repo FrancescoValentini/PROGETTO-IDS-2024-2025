@@ -23,6 +23,11 @@ public class MarketPlaceController {
 	@PostMapping("/compra/{id}")
 	public ResponseEntity<Object> compraProdotto(@PathVariable String id, @RequestBody AcquistoDTO acquisto) {
 	    int qtaRichiesta = acquisto.getQta();
+	    
+	    // Controllo quantità negativa
+	    if (qtaRichiesta < 1) {
+	        return new ResponseEntity<>("Quantità negativa non consentita", HttpStatus.BAD_REQUEST);
+	    }
 
 	    if (!prodottoRepo.existsById(id)) {
 	        return new ResponseEntity<>("Prodotto non trovato", HttpStatus.NOT_FOUND);
