@@ -175,6 +175,8 @@ public class FakeDataLoader implements CommandLineRunner {
         repoProdottiInVendita.save(pv3);
         repoProdottiInVendita.save(pv4);
         
+        System.out.println("ID venduto: " + pv1.getId());
+        
         
      //  creazione della richiesta prodotto 
         UtenteRegistrato creatore = repoUtentiRegistrati.findById(ur1.getId()).orElse(null);
