@@ -37,7 +37,7 @@ public class Evento implements CSVExportable {
 	private Posizione posizioneGeografica;
 	
 	
-	public Evento() {}
+	public Evento() {this.id = UUID.randomUUID().toString();}
 
 
 	/**

@@ -22,7 +22,7 @@ public class Certificazione {
 	private LocalDateTime dataScadenza;
 	// private ArrayList<File> allegati;
 	
-	public Certificazione() {}
+	public Certificazione() {this.id = UUID.randomUUID().toString();}
 	public Certificazione(String denominazione, String descrizione, String denominazioneEnteCertificatore,
 			LocalDateTime dataConseguimento, LocalDateTime dataScadenza) {
 		this.denominazione = denominazione;

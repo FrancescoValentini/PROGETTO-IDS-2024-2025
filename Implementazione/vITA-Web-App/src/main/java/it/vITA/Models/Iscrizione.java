@@ -1,6 +1,7 @@
 package it.vITA.Models;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -29,7 +30,7 @@ public class Iscrizione {
 	@JoinColumn(name = "evento_id", referencedColumnName = "id")
 	private Evento evento;
 	
-	public Iscrizione() {}
+	public Iscrizione() {this.id = UUID.randomUUID().toString();}
 
 	/**
 	 * Crea una nuova iscrizione 
