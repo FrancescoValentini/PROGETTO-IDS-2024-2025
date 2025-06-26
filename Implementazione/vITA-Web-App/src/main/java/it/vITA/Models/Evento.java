@@ -1,30 +1,24 @@
 package it.vITA.Models;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 import it.vITA.DataExporter.CSVExportable;
 import it.vITA.DataExporter.DataExporter;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "EVENTI")
 public class Evento implements CSVExportable {
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", columnDefinition = "VARCHAR(64)")
 	private String id;
 	private LocalDateTime dataEOraEvento;
@@ -69,6 +63,19 @@ public class Evento implements CSVExportable {
 		this.tipologiaEvento = tipologiaEvento;
 		this.posizioneGeografica = posizioneGeografica;
 	}
+	
+	public Evento(String id,LocalDateTime dataEOraEvento, String titolo, String descrizione,
+			double prezzoIngresso, int posti, TipologiaEvento tipologiaEvento, Posizione posizioneGeografica) {
+		this.dataEOraEvento = dataEOraEvento;
+		this.dataEOraCreazione = LocalDateTime.now();
+		this.titolo = titolo;
+		this.descrizione = descrizione;
+		this.prezzoIngresso = prezzoIngresso;
+		this.posti = posti;
+		this.tipologiaEvento = tipologiaEvento;
+		this.posizioneGeografica = posizioneGeografica;
+		this.id = UUID.randomUUID().toString();
+		}
 
 
 	public LocalDateTime getDataEOraEvento() {
