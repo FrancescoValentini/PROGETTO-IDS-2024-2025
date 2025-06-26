@@ -9,6 +9,7 @@ import it.vITA.Models.Invito;
 import it.vITA.Models.Posizione;
 import it.vITA.Models.Prodotto;
 import it.vITA.Models.ProdottoInVendita;
+import it.vITA.Models.Produttore;
 import it.vITA.Models.TipoRichiesta;
 import it.vITA.Models.TipologiaEvento;
 import it.vITA.Models.Trasformatore;
@@ -64,6 +65,9 @@ public class FakeDataLoader implements CommandLineRunner {
   
   @Autowired
 	ProdottiInVenditaRepository repoProdottiInVendita;
+  
+  @Autowired
+  ProduttoriRepository repoProduttori;
   
   @Autowired
   RichiestaProdottoRepository repoRichiestaP;
@@ -144,8 +148,18 @@ public class FakeDataLoader implements CommandLineRunner {
         repoInviti.save(i6);
         
         
-
-
+        // Produttori
+        Produttore produ1 = new Produttore("508135e4-9287-48e0-bc9c-78b7248dc1d5","mrossi", "pass123", "mario.rossi@example.com", "Mario", "Rossi", "3331234567", "Appassionato di tecnologia.","PIVA","DENOMAZIENDA","TELEAZIENDALE",p1);
+        Produttore produ2 = new Produttore("dbc34534-1a31-4e02-8bdc-170609701239","lbianchi", "ciao456", "laura.bianchi@example.com", "Laura", "Bianchi", "3349876543", "Amo la lettura e il trekking.","PIVA","DENOMAZIENDA","TELEAZIENDALE",p1);
+        Produttore produ3 = new Produttore("9eebee05-0785-43cf-9184-052ccd85597a","gverdi", "verde789", "gianni.verdi@example.com", "Gianni", "Verdi", "3351112223", "Scrittore freelance.","PIVA","DENOMAZIENDA","TELEAZIENDALE",p1);
+        Produttore produ4 = new Produttore("8ad25492-4c1a-44bb-8c17-1cb4a0b47c8d","sneri", "sunshine!", "sara.neri@example.com", "Sara", "Neri", "3364445556", "Musicista e insegnante di pianoforte.","PIVA","DENOMAZIENDA","TELEAZIENDALE",p1);
+        Produttore produ5 = new Produttore("c3ce0581-eafb-4ede-abba-0014313c7406","dbruno", "secureMe2024", "davide.bruno@example.com", "Davide", "Bruno", "3377778889", "Appassionato di fotografia.","PIVA","DENOMAZIENDA","TELEAZIENDALE",p1);
+		
+        repoProduttori.save(produ1);
+        repoProduttori.save(produ2);
+        repoProduttori.save(produ3);
+        repoProduttori.save(produ4);
+        repoProduttori.save(produ5);
 
         // === CREAZIONE PRODOTTI ===
         Prodotto prod1 = new Prodotto("b753fc62-2fc3-40d0-8268-79ab06c28f24"," Mela Rossa", "Mela croccante e succosa", LocalDateTime.now().minusDays(10), LocalDateTime.now().plusDays(20), null);
@@ -253,8 +267,9 @@ public class FakeDataLoader implements CommandLineRunner {
         repoTrasformazioni.save(t1);
         repoTrasformazioni.save(t2);
         
+
         
-		
+        
 		logger.info("LOADED FAKE DATA");
 		
 	}
