@@ -9,7 +9,6 @@ import it.vITA.Models.Invito;
 import it.vITA.Models.Posizione;
 import it.vITA.Models.Prodotto;
 import it.vITA.Models.ProdottoInVendita;
-import it.vITA.Models.Produttore;
 import it.vITA.Models.TipologiaEvento;
 import it.vITA.Models.Trasformatore;
 import it.vITA.Models.Trasformazione;
@@ -26,8 +25,6 @@ import it.vITA.Repositories.TrasformazioniRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,9 +68,9 @@ public class FakeDataLoader implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		Posizione p1 = new Posizione("LAT1","LON1");
-		Posizione p2 = new Posizione("LAT2","LON2");
-		Posizione p3 = new Posizione("LAT3","LON3");
+		Posizione p1 = new Posizione("81919e63-4985-44a2-8331-79f82076466e","LAT1","LON1");
+		Posizione p2 = new Posizione("b194f4eb-1c80-4e66-804e-544885ecf396","LAT2","LON2");
+		Posizione p3 = new Posizione("766427fc-aadd-420c-a3be-78f36d308716","LAT3","LON3");
 		
 		repoPosizioni.save(p1);
 		repoPosizioni.save(p2);
@@ -111,11 +108,11 @@ public class FakeDataLoader implements CommandLineRunner {
 		repoEventi.save(e2);
 		repoEventi.save(e3);
 		
-        UtenteRegistrato ur1 = new UtenteRegistrato("mrossi", "pass123", "mario.rossi@example.com", "Mario", "Rossi", "3331234567", "Appassionato di tecnologia.");
-        UtenteRegistrato ur2 = new UtenteRegistrato("lbianchi", "ciao456", "laura.bianchi@example.com", "Laura", "Bianchi", "3349876543", "Amo la lettura e il trekking.");
-        UtenteRegistrato ur3 = new UtenteRegistrato("gverdi", "verde789", "gianni.verdi@example.com", "Gianni", "Verdi", "3351112223", "Scrittore freelance.");
-        UtenteRegistrato ur4 = new UtenteRegistrato("sneri", "sunshine!", "sara.neri@example.com", "Sara", "Neri", "3364445556", "Musicista e insegnante di pianoforte.");
-        UtenteRegistrato ur5 = new UtenteRegistrato("dbruno", "secureMe2024", "davide.bruno@example.com", "Davide", "Bruno", "3377778889", "Appassionato di fotografia.");
+		UtenteRegistrato ur1 = new UtenteRegistrato("9bdc4e74-0518-4a54-a185-60fa3f9ebfae","mrossi", "pass123", "mario.rossi@example.com", "Mario", "Rossi", "3331234567", "Appassionato di tecnologia.");
+		UtenteRegistrato ur2 = new UtenteRegistrato("879a7098-a2ef-43d9-9014-80c3ba7e9548","lbianchi", "ciao456", "laura.bianchi@example.com", "Laura", "Bianchi", "3349876543", "Amo la lettura e il trekking.");
+		UtenteRegistrato ur3 = new UtenteRegistrato("8b87ec22-471e-4027-a9c2-1458e7fa530f","gverdi", "verde789", "gianni.verdi@example.com", "Gianni", "Verdi", "3351112223", "Scrittore freelance.");
+		UtenteRegistrato ur4 = new UtenteRegistrato("49f60305-e6b1-4707-bf12-16319194eab5","sneri", "sunshine!", "sara.neri@example.com", "Sara", "Neri", "3364445556", "Musicista e insegnante di pianoforte.");
+		UtenteRegistrato ur5 = new UtenteRegistrato("0f0e3177-4623-4302-95f1-2129ed324d7c","dbruno", "secureMe2024", "davide.bruno@example.com", "Davide", "Bruno", "3377778889", "Appassionato di fotografia.");
 
         repoUtentiRegistrati.save(ur1);
         repoUtentiRegistrati.save(ur2);
@@ -192,9 +189,9 @@ public class FakeDataLoader implements CommandLineRunner {
         }
         
      // === CREAZIONE TRASFORMATORI ===
-        Trasformatore trasf1 = new Trasformatore("username", "password" , "email", "nome" , "cognome" ,
+        Trasformatore trasf1 = new Trasformatore("a226ca20-47f3-42cf-a495-168048e02ba1","username", "password" , "email", "nome" , "cognome" ,
         		"telefono", "biografia" , "PIVA123", "Azienda Bio", "0123456789", null);
-        Trasformatore trasf2 = new Trasformatore("username", "password" , "email", "nome" , "cognome" ,
+        Trasformatore trasf2 = new Trasformatore("72ea9ec0-65f7-4ed8-846a-4dd7bb4a2a7c","username", "password" , "email", "nome" , "cognome" ,
         		"telefono", "biografia" ,"PIVA456", "Trasformazioni Verdi", "0987654321", null);
         repoTrasformatori.save(trasf1);
         repoTrasformatori.save(trasf2);

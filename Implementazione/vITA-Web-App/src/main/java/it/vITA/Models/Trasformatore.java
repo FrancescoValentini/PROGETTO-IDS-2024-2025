@@ -31,6 +31,16 @@ public class Trasformatore extends UtenteRegistrato {
 		this.telefonoAziendale = telefonoAziendale;
 		this.posizioneGeografica = posizioneGeografica;
 	}
+	
+	public Trasformatore(String id, String username, String password, String email, String nome, String cognome,
+			String telefono, String biografia, String partitaIva, String denominazioneAzienda, String telefonoAziendale,
+			Posizione posizioneGeografica) {
+		super(id, username, password, email, nome, cognome, telefono, biografia);
+		this.partitaIva = partitaIva;
+		this.denominazioneAzienda = denominazioneAzienda;
+		this.telefonoAziendale = telefonoAziendale;
+		this.posizioneGeografica = posizioneGeografica;
+	}
 
 	public String getPartitaIva() {
 		return partitaIva;

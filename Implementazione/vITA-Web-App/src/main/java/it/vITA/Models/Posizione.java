@@ -1,9 +1,9 @@
 package it.vITA.Models;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,7 +11,6 @@ import jakarta.persistence.Table;
 @Table(name = "POSIZIONI_GEOGRAFICHE")
 public class Posizione {
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", columnDefinition = "VARCHAR(64)")
 	private String id;
 	private String latitudine;
@@ -26,8 +25,21 @@ public class Posizione {
 	 * @param longitudine
 	 */
 	public Posizione(String latitudine, String longitudine) {
+		this.id = UUID.randomUUID().toString();
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
+	}
+	
+	/**
+	 * Posizione geografica
+	 * 
+	 * @param latitudine
+	 * @param longitudine
+	 */
+	public Posizione(String id, String latitudine, String longitudine) {
+		this.latitudine = latitudine;
+		this.longitudine = longitudine;
+		this.id = id;
 	}
 
 	public String getLatitudine() {

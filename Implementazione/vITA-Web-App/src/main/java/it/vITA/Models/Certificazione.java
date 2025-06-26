@@ -2,10 +2,10 @@ package it.vITA.Models;
 
 
 import java.time.LocalDateTime;
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 @Table(name="CERTIFICAZIONI")
 public class Certificazione {
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", columnDefinition = "VARCHAR(64)")
 	private String id;
 	private String denominazione;
@@ -31,6 +30,17 @@ public class Certificazione {
 		this.denominazioneEnteCertificatore = denominazioneEnteCertificatore;
 		this.dataConseguimento = dataConseguimento;
 		this.dataScadenza = dataScadenza;
+		this.id = UUID.randomUUID().toString();
+	}
+	
+	public Certificazione(String id, String denominazione, String descrizione, String denominazioneEnteCertificatore,
+			LocalDateTime dataConseguimento, LocalDateTime dataScadenza) {
+		this.denominazione = denominazione;
+		this.descrizione = descrizione;
+		this.denominazioneEnteCertificatore = denominazioneEnteCertificatore;
+		this.dataConseguimento = dataConseguimento;
+		this.dataScadenza = dataScadenza;
+		this.id = id;
 	}
 	public String getDenominazione() {
 		return denominazione;
