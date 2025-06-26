@@ -1,5 +1,7 @@
 package it.vITA.RichiesteBuilder;
 
+import java.util.UUID;
+
 import it.vITA.Models.Prodotto;
 import it.vITA.Models.TipoRichiesta;
 import it.vITA.Models.UtenteRegistrato;
@@ -8,8 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,7 +18,6 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class RichiestaProdotto {
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", columnDefinition = "VARCHAR(64)")
 	private String id;
 	private boolean approvato = false;
@@ -44,6 +43,18 @@ public class RichiestaProdotto {
 		this.creatore = creatore;
 		this.prodotto = prodotto;
 		this.tipoRichiesta = TipoRichiesta.PRODOTTO;
+		this.id = UUID.randomUUID().toString();
+	}
+	
+	public RichiestaProdotto(String id, String commentoCuratore, UtenteRegistrato creatore,
+			Prodotto prodotto, boolean status) {
+		super();
+		this.approvato = status;
+		this.commentoCuratore = commentoCuratore;
+		this.creatore = creatore;
+		this.prodotto = prodotto;
+		this.tipoRichiesta = TipoRichiesta.PRODOTTO;
+		this.id = id;
 	}
 	public String getId() {
 		return id;
