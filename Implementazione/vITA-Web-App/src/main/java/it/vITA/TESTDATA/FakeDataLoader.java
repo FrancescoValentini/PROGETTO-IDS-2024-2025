@@ -152,7 +152,7 @@ public class FakeDataLoader implements CommandLineRunner {
         Prodotto prod7 = new Prodotto("41428ac7-e39d-465a-8e92-660f2c438496","Cipolla Rossa", "Intensa e saporita", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(25), null);
         Prodotto prod8 = new Prodotto("636e8ad1-aa38-4b20-a0a2-8ffc53d23894","Lattuga", "Croccante e fresca", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(5), null);
         Prodotto prod9 = new Prodotto("c07684a7-9fc5-4ada-bdf4-8bce1e2385de","Sedano", "Ottimo per soffritti", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(7), null);
-        Prodotto prod10 = new Prodotto("3c429f6c-c2a0-4316-95c5-9712e1925c48","Cavolo Nero", "Ricco di fibre", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(10), null);
+        Prodotto prod10 =new Prodotto("3c429f6c-c2a0-4316-95c5-9712e1925c48","Cavolo Nero", "Ricco di fibre", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(10), null);
 
         repoProdotti.save(prod1);
         repoProdotti.save(prod2);
