@@ -143,16 +143,16 @@ public class FakeDataLoader implements CommandLineRunner {
 
 
         // === CREAZIONE PRODOTTI ===
-        Prodotto prod1 = new Prodotto("Mela Rossa", "Mela croccante e succosa", LocalDateTime.now().minusDays(10), LocalDateTime.now().plusDays(20), null);
-        Prodotto prod2 = new Prodotto("Pera Verde", "Dolce e succosa, ideale per dolci", LocalDateTime.now().minusDays(8), LocalDateTime.now().plusDays(18), null);
-        Prodotto prod3 = new Prodotto("Pomodoro", "Ideale per sughi e insalate", LocalDateTime.now().minusDays(6), LocalDateTime.now().plusDays(15), null);
-        Prodotto prod4 = new Prodotto("Carota Bio", "Coltivata senza pesticidi", LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(10), null);
-        Prodotto prod5 = new Prodotto("Zucchina", "Fresca e leggera", LocalDateTime.now().minusDays(4), LocalDateTime.now().plusDays(12), null);
-        Prodotto prod6 = new Prodotto("Patata Gialla", "Per fritture perfette", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(30), null);
-        Prodotto prod7 = new Prodotto("Cipolla Rossa", "Intensa e saporita", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(25), null);
-        Prodotto prod8 = new Prodotto("Lattuga", "Croccante e fresca", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(5), null);
-        Prodotto prod9 = new Prodotto("Sedano", "Ottimo per soffritti", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(7), null);
-        Prodotto prod10 = new Prodotto("Cavolo Nero", "Ricco di fibre", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(10), null);
+        Prodotto prod1 = new Prodotto("b753fc62-2fc3-40d0-8268-79ab06c28f24"," Mela Rossa", "Mela croccante e succosa", LocalDateTime.now().minusDays(10), LocalDateTime.now().plusDays(20), null);
+        Prodotto prod2 = new Prodotto("37df3757-5aab-47f7-92eb-789c4ab1e464", "Pera Verde", "Dolce e succosa, ideale per dolci", LocalDateTime.now().minusDays(8), LocalDateTime.now().plusDays(18), null);
+        Prodotto prod3 = new Prodotto("9dfc609a-f2fe-4b7c-ba1e-4db3f9a0caf2","Pomodoro", "Ideale per sughi e insalate", LocalDateTime.now().minusDays(6), LocalDateTime.now().plusDays(15), null);
+        Prodotto prod4 = new Prodotto("ccff1230-208c-4143-b889-6f24d212d869", "Carota Bio", "Coltivata senza pesticidi", LocalDateTime.now().minusDays(5), LocalDateTime.now().plusDays(10), null);
+        Prodotto prod5 = new Prodotto("ca741abd-401b-41f6-8aba-6c2bb9d88369", "Zucchina", "Fresca e leggera", LocalDateTime.now().minusDays(4), LocalDateTime.now().plusDays(12), null);
+        Prodotto prod6 = new Prodotto("7baf2a4a-8772-4393-beee-a108f3656fa5","Patata Gialla", "Per fritture perfette", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(30), null);
+        Prodotto prod7 = new Prodotto("41428ac7-e39d-465a-8e92-660f2c438496","Cipolla Rossa", "Intensa e saporita", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(25), null);
+        Prodotto prod8 = new Prodotto("636e8ad1-aa38-4b20-a0a2-8ffc53d23894","Lattuga", "Croccante e fresca", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(5), null);
+        Prodotto prod9 = new Prodotto("c07684a7-9fc5-4ada-bdf4-8bce1e2385de","Sedano", "Ottimo per soffritti", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(7), null);
+        Prodotto prod10 = new Prodotto("3c429f6c-c2a0-4316-95c5-9712e1925c48","Cavolo Nero", "Ricco di fibre", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(10), null);
 
         repoProdotti.save(prod1);
         repoProdotti.save(prod2);

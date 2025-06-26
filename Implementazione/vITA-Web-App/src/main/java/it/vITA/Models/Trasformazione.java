@@ -37,8 +37,9 @@ public class Trasformazione {
 	  private List<Certificazione> certificazioni;
 	  
 	  public Trasformazione() {}
+	  
 
-	  public Trasformazione(String id ,String denominazione, String descrizione, LocalDateTime dataInizioFase,
+	  public Trasformazione(String denominazione, String descrizione, LocalDateTime dataInizioFase,
 			LocalDateTime dataFineFase, Trasformatore trasformatore, List<Certificazione> certificazioni) {
 		this.id = UUID.randomUUID().toString();
 		this.denominazione = denominazione;
@@ -48,6 +49,17 @@ public class Trasformazione {
 		this.trasformatore = trasformatore;
 		this.certificazioni = certificazioni;
 	}
+	  
+	  public Trasformazione(String id ,String denominazione, String descrizione, LocalDateTime dataInizioFase,
+				LocalDateTime dataFineFase, Trasformatore trasformatore, List<Certificazione> certificazioni) {
+			this.id = id;
+			this.denominazione = denominazione;
+			this.descrizione = descrizione;
+			this.dataInizioFase = dataInizioFase;
+			this.dataFineFase = dataFineFase;
+			this.trasformatore = trasformatore;
+			this.certificazioni = certificazioni;
+		}
 
 	public String getDenominazione() {
 		return denominazione;

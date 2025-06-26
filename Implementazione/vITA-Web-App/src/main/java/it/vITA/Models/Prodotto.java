@@ -3,6 +3,7 @@ package it.vITA.Models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -20,7 +21,6 @@ import jakarta.persistence.Table;
 @Table(name = "PRODOTTI")
 public class Prodotto {
 	  @Id
-      @GeneratedValue(strategy = GenerationType.UUID)
       @Column(name = "id", columnDefinition = "VARCHAR(64)")
 	  private String id;
 	  private String denominazione;
@@ -52,6 +52,7 @@ public class Prodotto {
 	
 	public Prodotto(String denominazione, String descrizione, LocalDateTime dataEoraProduzione,
 			LocalDateTime dataEoraScadenza, Produttore produttore) {
+		this.id = UUID.randomUUID().toString();
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
 		this.dataEoraProduzione = dataEoraProduzione;
@@ -61,6 +62,17 @@ public class Prodotto {
 		this.produttore = produttore;
 	}
 	
+	public Prodotto(String id , String denominazione, String descrizione, LocalDateTime dataEoraProduzione,
+			LocalDateTime dataEoraScadenza, Produttore produttore) {
+		this.id = id;
+		this.denominazione = denominazione;
+		this.descrizione = descrizione;
+		this.dataEoraProduzione = dataEoraProduzione;
+		this.dataEoraScadenza = dataEoraScadenza;
+		this.certificazioni = new ArrayList<>();
+		this.trasformazione = new ArrayList<>();
+		this.produttore = produttore;
+	}
 	
 
 	public String getDenominazione() {
