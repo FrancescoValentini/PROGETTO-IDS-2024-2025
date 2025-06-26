@@ -78,7 +78,7 @@ public class FakeDataLoader implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		Posizione p1 = new Posizione("81919e63-4985-44a2-8331-79f82076466e","LAT1","LON1");
+		/*Posizione p1 = new Posizione("81919e63-4985-44a2-8331-79f82076466e","LAT1","LON1");
 		Posizione p2 = new Posizione("b194f4eb-1c80-4e66-804e-544885ecf396","LAT2","LON2");
 		Posizione p3 = new Posizione("766427fc-aadd-420c-a3be-78f36d308716","LAT3","LON3");
 		
@@ -270,8 +270,8 @@ public class FakeDataLoader implements CommandLineRunner {
         
 
         
-        
-		logger.info("LOADED FAKE DATA");
+        */
+		logger.info("LOADED FAKE DATA FROM DATABASE");
 		
 	}
 	
