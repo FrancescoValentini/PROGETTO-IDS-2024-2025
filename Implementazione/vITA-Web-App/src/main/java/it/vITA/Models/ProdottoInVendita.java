@@ -1,5 +1,7 @@
 package it.vITA.Models;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,7 +16,6 @@ import jakarta.persistence.Table;
 @Table(name="PRODOTTI_IN_VENDITA")
 public class ProdottoInVendita {
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", columnDefinition = "VARCHAR(64)")
 	private String id;
 	private int qta = 1;
@@ -34,6 +35,14 @@ public class ProdottoInVendita {
 	 * @param prodotto
 	 */
 	public ProdottoInVendita(int qta, double prezzo, String descrizione, Prodotto prodotto) {
+		this.id = UUID.randomUUID().toString();
+		this.qta = qta;
+		this.prezzo = prezzo;
+		this.prodotto = prodotto;
+		this.descrizione = descrizione;
+	}
+	public ProdottoInVendita(String id ,int qta, double prezzo, String descrizione, Prodotto prodotto) {
+		this.id = id;
 		this.qta = qta;
 		this.prezzo = prezzo;
 		this.prodotto = prodotto;
