@@ -1,0 +1,2087 @@
+{
+	"info": {
+		"_postman_id": "2de5ad98-b524-4c55-8d63-a5a11acf0b1e",
+		"name": "vITA",
+		"description": "| Metodo HTTP | Endpoint | Descrizione | Esempio |\n| --- | --- | --- | --- |\n| GET | `/nome-risorsa` | Ottiene una lista di risorse. | `GET /users` |\n| GET | `/nome-risorsa/{id}` | Ottiene una risorsa specifica. | `GET /users/123` |\n| POST | `/nome-risorsa` | Crea una nuova risorsa. | `POST /users` |\n| PUT | `/nome-risorsa/{id}` | Aggiorna una risorsa esistente. | `PUT /users/123` |\n| DELETE | `/nome-risorsa/{id}` | Elimina una risorsa. | `DELETE /users/123` |\n\n## **BEST PRACTICES**\n\n- Scrivere in maiuscolo il nome di cartelle e richieste- Inserire sempre una breve descrizione per `Query Params` o `Path Variables`\n    \n- Dove possibile utilizzare le variabili della collection, se necessario creane di nuove\n    \n- Utilizzare nomi brevi ed esplicativi per ogni richiesta\n    \n- **Gerarchia cartelle:** Se necessario creare cartelle aggiuntive per sezioni o funzionalità differenti\n    \n- **Ordine delle richieste:** Ordinare le richieste nelle cartelle in ordine \"logico\" specialmente se le richieste sono dipendenti tra loro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40947787",
+		"_collection_link": "https://ivbjl3sxaqfsoa16kan4f.postman.co/workspace/PROGETTO-IDS~bd0dca4c-1a02-4fff-866b-dab6c7552e34/collection/40947787-2de5ad98-b524-4c55-8d63-a5a11acf0b1e?action=share&source=collection_link&creator=40947787"
+	},
+	"item": [
+		{
+			"name": "UTENTI",
+			"item": [
+				{
+					"name": "ELIMINA UTENTE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/utente/:idUtente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utente",
+								":idUtente"
+							],
+							"variable": [
+								{
+									"key": "idUtente",
+									"value": "0f0e3177-4623-4302-95f1-2129ed324d7c",
+									"description": "Identificativo univoco utente"
+								}
+							]
+						},
+						"description": "### Delete User by ID\n\nThis endpoint is used to delete a specific user by their ID.\n\n#### Request\n\n- Method: DELETE\n    \n- Endpoint: `{{base_url}}users/:idUtente`\n    \n- Path Parameters:\n    \n    - `idUtente`: The ID of the user to be deleted."
+					},
+					"response": []
+				},
+				{
+					"name": "INFO UTENTE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/utente/:idUtente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utente",
+								":idUtente"
+							],
+							"variable": [
+								{
+									"key": "idUtente",
+									"value": "9bdc4e74-0518-4a54-a185-60fa3f9ebfae",
+									"description": "Identificativo univoco utente"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET UTENTI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/utente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD UTENTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"john_doe\",\r\n  \"password\": \"securePassword123\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"nome\": \"John\",\r\n  \"cognome\": \"Doe\",\r\n  \"telefono\": \"+39 123 4567890\",\r\n  \"biografia\": \"Appassionato di tecnologia e sviluppo software. Amante della natura e dei viaggi.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/utente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE UTENTE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"john_doe\",\r\n  \"password\": \"securePassword123\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"nome\": \"Jonny\",\r\n  \"cognome\": \"Doe\",\r\n  \"telefono\": \"+39 123 4567890\",\r\n  \"biografia\": \"Appassionato di tecnologia e sviluppo software. Amante della natura e dei viaggi.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/utente/:idUtente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"utente",
+								":idUtente"
+							],
+							"variable": [
+								{
+									"key": "idUtente",
+									"value": "0f0e3177-4623-4302-95f1-2129ed324d7c"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RICHIESTE DI REVISIONE",
+			"item": [
+				{
+					"name": "PRODOTTO",
+					"item": [
+						{
+							"name": "LISTA RICHIESTE PRODOTTI",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/richiestaProdotto",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richiestaProdotto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INFO RICHIESTA PRODOTTO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/richiestaProdotto/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richiestaProdotto",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "59e760ea-2d86-4d2a-8f20-3c9e0b24148d"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AGGIUNGI RICH PRODOTTO",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"approvato\": false,\r\n  \"commentoCuratore\": \"Richiesta di prova per il prodotto\",\r\n  \"idCreatore\": \"9bdc4e74-0518-4a54-a185-60fa3f9ebfae\",\r\n  \"idProdotto\": \"37df3757-5aab-47f7-92eb-789c4ab1e464\",\r\n  \"tipoRichiesta\": \"PRODOTTO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/richiestaProdotto",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richiestaProdotto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MODIFICA RICH PRODOTTO",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"approvato\": false,\r\n  \"commentoCuratore\": \"Richiesta di prova per il prodotto\",\r\n  \"idCreatore\": \"9bdc4e74-0518-4a54-a185-60fa3f9ebfae\",\r\n  \"idProdotto\": \"9dfc609a-f2fe-4b7c-ba1e-4db3f9a0caf2\",\r\n  \"tipoRichiesta\": \"PRODOTTO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/richiestaProdotto/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richiestaProdotto",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6bada3d7-242e-4dab-84a1-e140036c340c"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ELIMINA RICH PRODOTTO",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/richiestaProdotto/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richiestaProdotto",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TRASFORMAZIONE",
+					"item": [
+						{
+							"name": "LISTA RICHIESTE TRASFORMAZIONI",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/richieste-trasformazione",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richieste-trasformazione"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INFO RICHIESTA TRASFORMAZIONE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/richieste-trasformazione/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richieste-trasformazione",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AGGIUNGI RICH TRASFORMAZIONE",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"approvato\": false,\r\n  \"commentoCuratore\": \"Richiesta di prova per TRASFORMAZIONE\",\r\n  \"creatoreId\": \"9bdc4e74-0518-4a54-a185-60fa3f9ebfae\",\r\n  \"trasformazioneId\": \"27e3b5fc-a56c-40c9-afb4-7b34e94f995e\",\r\n  \"tipoRichiesta\": \"TRASFORMAZIONE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/richieste-trasformazione",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richieste-trasformazione"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MODIFICA RICH TRASFORMAZIONE",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/richieste-trasformazione/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richieste-trasformazione",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ELIMINA RICHIESTA TRASFORMZIONE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/richieste-trasformazione/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"richieste-trasformazione",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PRODOTTI",
+			"item": [
+				{
+					"name": "LISTA PRODOTTI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prodotto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INFO PRODOTTO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prodotto/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotto",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b753fc62-2fc3-40d0-8268-79ab06c28f24",
+									"description": "ID Univoco del prodotto"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI PRODOTTO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"denominazione\": \"Zucchina\",\r\n        \"descrizione\": \"Fresca e leggera\",\r\n        \"dataEoraProduzione\": \"2025-06-22T16:33:22.761393\",\r\n        \"dataEoraScadenza\": \"2025-07-08T16:33:22.761393\",\r\n        \"idProduttore\":\"508135e4-9287-48e0-bc9c-78b7248dc1d5\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/prodotto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIORNA PRODOTTO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"denominazione\": \"Zucchina\",\r\n        \"descrizione\": \"Fresca e leggera - MODIFICA\",\r\n        \"dataEoraProduzione\": \"2025-06-22T16:33:22.761393\",\r\n        \"dataEoraScadenza\": \"2025-07-08T16:33:22.761393\",\r\n        \"idProduttore\":\"9bdc4e74-0518-4a54-a185-60fa3f9ebfae\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/prodotto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA PRODOTTO",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prodotto/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotto",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3c429f6c-c2a0-4316-95c5-9712e1925c48",
+									"description": "ID Univoco del prodotto"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TRASFORMAZIONI",
+			"item": [
+				{
+					"name": "LISTA TRASFORMAZIONI",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trasformazione",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformazione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INFO TRASFORMAZIONE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trasformazione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformazione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "784c4cdd-cbee-49d8-8b16-45a761e7487e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI TRASFORMAZIONE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"denominazione\": \"Trasformazione prova\",\r\n  \"descrizione\": \"Descrizione della trasformazione di prova\",\r\n  \"dataFineFase\": \"2025-07-01T12:00:00\",\r\n  \"idTrasformatore\": \"a226ca20-47f3-42cf-a495-168048e02ba1\",\r\n  \"idCertificazione\": [\"faf9803f-edaf-4c37-8452-49df0e73932d\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trasformazione",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformazione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MODIFICA TRASFORMAZIONE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"denominazione\": \"Trasformazione aggiornata\",\r\n  \"descrizione\": \"Descrizione aggiornata della trasformazione\",\r\n  \"dataInizioFase\": \"2025-06-16T12:12:01\",\r\n  \"dataFineFase\": \"2025-07-01T12:00:00\",\r\n  \"idTrasformatore\": \"22cc64e0-a7a2-4ec4-95d2-fe466cc2ee81\",\r\n  \"idCertificazioni\": [\r\n    \"ea12f57b-3b9d-4773-8f71-8e0c2d0dd31e\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trasformazione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformazione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c21804b0-cc74-42cc-8557-ff000a7568c4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA TRASFORMAZIONE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/trasformazione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformazione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "d1b6eaf2-b0f9-4a36-aa50-eb859ed0b89a"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TRASFORMATORE",
+			"item": [
+				{
+					"name": "LISTA TRASFORMATORI",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idProdotto\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trasformatore",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformatore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INFO TRASFORMATORE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idProdotto\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trasformatore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformatore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a226ca20-47f3-42cf-a495-168048e02ba1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI TRASFORMATORE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"john_doe\",\r\n  \"password\": \"securePassword123\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"nome\": \"John\",\r\n  \"cognome\": \"Doe\",\r\n  \"telefono\": \"+39 123 4567890\",\r\n  \"biografia\": \"Appassionato di tecnologia e sviluppo software. Amante della natura e dei viaggi.\",\r\n  \"partitaIva\": \"12345678901\",\r\n  \"denominazioneAzienda\": \"Azienda Prova\",\r\n  \"telefonoAziendale\": \"0123456789\",\r\n  \"idPosizioneGeografica\": \"81919e63-4985-44a2-8331-79f82076466e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trasformatore",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformatore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MODIFICA TRASFORMATORE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"partitaIva\": \"12345678901\",\r\n    \"denominazioneAzienda\": \"Azienda Prova\",\r\n    \"telefonoAziendale\": \"0123456789\",\r\n    \"idPosizioneGeografica\":\"81919e63-4985-44a2-8331-79f82076466e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trasformatore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformatore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b6d2e582-4c1d-40ea-b9c9-9432a9e12c8e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA TRASFORMATORE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/trasformatore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trasformatore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a226ca20-47f3-42cf-a495-168048e02ba1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MARKETPLACE",
+			"item": [
+				{
+					"name": "COMPRA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"qta\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/marketplace/compra/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"marketplace",
+								"compra",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "ad4184cd-f194-4461-9a15-2cfa583909fc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LISTA PRODOTTI IN VENDITA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/marketplace",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"marketplace"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ANIMATORE",
+			"item": [
+				{
+					"name": "EVENTI",
+					"item": [
+						{
+							"name": "INFO EVENTO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/evento/:idEvento",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"evento",
+										":idEvento"
+									],
+									"variable": [
+										{
+											"key": "idEvento",
+											"value": "8c685c56-ee18-47a9-b9ca-1ce4b36b971d",
+											"description": "Identificativo univoco evento"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AGGIUNGI EVENTO",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"dataEOraEvento\": \"2025-06-03T17:53:51.789628\",\r\n        \"titolo\": \"EVENTO-POSTMAN\",\r\n        \"descrizione\": \"CREATO DA POSTMAN\",\r\n        \"prezzoIngresso\": 10.0,\r\n        \"posti\": 10,\r\n        \"tipologiaEvento\": \"EVENTO_LOCALE\",\r\n\t    \"idPosizioneGeografica\":\"2614cc1a-9969-43e3-84db-c2394d80f4a2\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/evento",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"evento"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AGGIORNA EVENTO",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"dataEOraEvento\": \"2025-06-03T17:53:51.789628\",\r\n        \"titolo\": \"EVENTO-POSTMAN\",\r\n        \"descrizione\": \"CREATO DA POSTMAN\",\r\n        \"prezzoIngresso\": 100.0,\r\n        \"posti\": 10,\r\n        \"tipologiaEvento\": \"EVENTO_LOCALE\",\r\n\t    \"idPosizioneGeografica\":\"2614cc1a-9969-43e3-84db-c2394d80f4a2\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/evento/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"evento",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "c0dffef8-7b7f-4b96-ba1a-8cc6da4e1e21"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ELIMINA EVENTO",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/events/:idEvento",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"events",
+										":idEvento"
+									],
+									"variable": [
+										{
+											"key": "idEvento",
+											"value": "",
+											"description": "Identificativo univoco evento"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LISTA EVENTI",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/evento",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"evento"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ESPORTA CSV",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN2\",\r\n    \"descrizione\": \"CERTIFICAZIONE\",\r\n    \"denominazioneEnteCertificatore\":\"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/evento/csv",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"evento",
+										"csv"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "INVITI",
+					"item": [
+						{
+							"name": "LISTA INVITI",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/invito",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"invito"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "INFO INVITO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/invito/:idInvito",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"invito",
+										":idInvito"
+									],
+									"variable": [
+										{
+											"key": "idInvito",
+											"value": "7e4534f8-2d0b-4ff5-8fd9-1d9236b20e81"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AGGIUNGI INVITO",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/invito",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"invito"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AGGIORNA INVITO",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/invito/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"invito",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "e4af392a-4a60-402d-9f90-4d53e0c00099"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ELIMINA INVITO",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/invito/:idInvito",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"invito",
+										":idInvito"
+									],
+									"variable": [
+										{
+											"key": "idInvito",
+											"value": "9b0e90b0-c164-4283-a538-7a5631738703"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ESPORTA CSV",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN2\",\r\n    \"descrizione\": \"CERTIFICAZIONE\",\r\n    \"denominazioneEnteCertificatore\":\"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/invito/csv",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"invito",
+										"csv"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "POSIZIONE",
+			"item": [
+				{
+					"name": "GET-POSIZIONI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posizione",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posizione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD-POSIZIONE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"latitudine\" : \"latProvaT\",\r\n    \"longitudine\" : \"lonProvaT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/posizione",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posizione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE-POSIZIONE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"latitudine\" : \"latProva1\",\r\n    \"longitudine\" : \"lonProva1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/posizione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posizione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "0286029c-8614-4afe-9f3b-bfabb5d525de"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-POSIZIONE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posizione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posizione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE-POSIZIONE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posizione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posizione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7dc19b88-bc36-40a9-912e-91e47587eb45"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "METODOLOGIE",
+			"item": [
+				{
+					"name": "LISTA METODOLOGIE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/metodologia",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"metodologia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI METODOLOGIA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"METODOLOGIA-POSTMAN\",\r\n    \"descrizione\": \"CREATO DA POSTMAN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/metodologia",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"metodologia"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INFO-METODOLOGIA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/metodologia/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"metodologia",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9027b402-cd72-4e3c-822e-7708a65f0701"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIORNA METODOLOGIA",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"denominazione\": \"DENOMINAZIONE POSTMAN1\",\r\n    \"descrizione\": \"DESCRIZIONE POSTMAN1\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/metodologia/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"metodologia",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9027b402-cd72-4e3c-822e-7708a65f0701"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA METODOLOGIA",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"denominazione\": \"DENOMINAZIONE POSTMAN\",\r\n    \"descrizione\": \"DESCRIZIONE POSTMAN\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/metodologia/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"metodologia",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9027b402-cd72-4e3c-822e-7708a65f0701"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ALLERGENI",
+			"item": [
+				{
+					"name": "LISTA ALLERGENI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/allergene",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"allergene"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INFO ALLERGENE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/allergene/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"allergene",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4544cdd5-2409-46ec-871f-3b6f848a821b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI ALLERGENE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"ALLERGENE-POSTMAN\",\r\n    \"descrizione\": \"CREATO DA POSTMAN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/allergene",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"allergene"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIORNA ALLERGENE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"ALLERGENE-POSTMAN1\",\r\n    \"descrizione\": \"CREATO DA POSTMAN1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/allergene/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"allergene",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4544cdd5-2409-46ec-871f-3b6f848a821b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA ALLERGENE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"ALLERGENE-POSTMAN1\",\r\n    \"descrizione\": \"CREATO DA POSTMAN1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/allergene/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"allergene",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4544cdd5-2409-46ec-871f-3b6f848a821b"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CERTIFICAZIONI",
+			"item": [
+				{
+					"name": "LISTA CERTIFICAZIONI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/certificazione",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"certificazione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INFO CERTIFICAZIONE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/certificazione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"certificazione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "faf9803f-edaf-4c37-8452-49df0e73932d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI CERTIFICAZIONE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN2\",\r\n    \"descrizione\": \"CERTIFICAZIONE\",\r\n    \"denominazioneEnteCertificatore\":\"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/certificazione",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"certificazione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIORNA CERTIFICAZIONE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descrizione\": \"CERTIFICAZIONE1-POSTMAN\",\r\n    \"denominazioneEnteCertificatore\": \"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/certificazione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"certificazione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "faf9803f-edaf-4c37-8452-49df0e73932d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA CERTIFICAZIONE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"ALLERGENE-POSTMAN1\",\r\n    \"descrizione\": \"CREATO DA POSTMAN1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/certificazione/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"certificazione",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "faf9803f-edaf-4c37-8452-49df0e73932d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DISTRIBUTORE TIPICITA'",
+			"item": [
+				{
+					"name": "LISTA DISTRIBUTORI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/distributore",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"distributore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INFO DISTRIBUTORE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/distributore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"distributore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "daca8d51-265a-4060-8856-f3783ef0cc8c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI DISTRIBUTORE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN2\",\r\n    \"descrizione\": \"CERTIFICAZIONE\",\r\n    \"denominazioneEnteCertificatore\":\"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/distributore",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"distributore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIORNA DISTRIBUTORE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN1\",\r\n    \"descrizione\": \"CERTIFICAZIONE1\",\r\n    \"denominazioneEnteCertificatore\": \"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/distributore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"distributore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "daca8d51-265a-4060-8856-f3783ef0cc8c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA DISTRIBUTORE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"denominazione\": \"ALLERGENE-POSTMAN1\",\r\n    \"descrizione\": \"CREATO DA POSTMAN1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/distributore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"distributore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8fc55277-a143-427c-9732-222932ebd4cf"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRODUTTORE",
+			"item": [
+				{
+					"name": "LISTA PRODUTTORI",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produttore",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INFO PRODUTTORE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produttore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c3ce0581-eafb-4ede-abba-0014313c7406"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI PRODUTTORE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"john_doe_produttore\",\r\n  \"password\": \"securePassword123\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"nome\": \"John\",\r\n  \"cognome\": \"Doe\",\r\n  \"telefono\": \"+39 123 4567890\",\r\n  \"biografia\": \"Appassionato di tecnologia e sviluppo software. Amante della natura e dei viaggi.\",\r\n  \"partitaIva\": \"12345678901\",\r\n  \"denominazioneAzienda\": \"Azienda Prova\",\r\n  \"telefonoAziendale\": \"0123456789\",\r\n  \"idPosizione\": \"81919e63-4985-44a2-8331-79f82076466e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produttore",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MODIFICA PRODUTTORE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"partitaIva\": \"12345678901\",\r\n  \"denominazioneAzienda\": \"Azienda ProvaMODIFICATO\",\r\n  \"telefonoAziendale\": \"0123456789\",\r\n  \"idPosizione\": \"81919e63-4985-44a2-8331-79f82076466e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produttore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c3ce0581-eafb-4ede-abba-0014313c7406"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA PRODUTTORE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produttore/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttore",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c3ce0581-eafb-4ede-abba-0014313c7406"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8080/api",
+			"type": "string"
+		}
+	]
+}
