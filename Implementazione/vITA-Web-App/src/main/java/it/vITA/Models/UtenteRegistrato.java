@@ -1,9 +1,9 @@
 package it.vITA.Models;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -14,7 +14,6 @@ import jakarta.persistence.Table;
 @Table(name = "UTENTI")
 public class UtenteRegistrato {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", columnDefinition = "VARCHAR(64)")
 	private String id;
 	private String username;
@@ -46,6 +45,19 @@ public class UtenteRegistrato {
 		this.cognome = cognome;
 		this.telefono = telefono;
 		this.biografia = biografia;
+		this.id = UUID.randomUUID().toString();
+	}
+	
+	public UtenteRegistrato(String id, String username, String password, String email, String nome, String cognome,
+			String telefono, String biografia) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.telefono = telefono;
+		this.biografia = biografia;
+		this.id = id;
 	}
 	
 	public String getUsername() {
