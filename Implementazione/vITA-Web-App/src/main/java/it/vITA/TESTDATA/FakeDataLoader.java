@@ -9,6 +9,7 @@ import it.vITA.Models.Invito;
 import it.vITA.Models.Posizione;
 import it.vITA.Models.Prodotto;
 import it.vITA.Models.ProdottoInVendita;
+import it.vITA.Models.TipoRichiesta;
 import it.vITA.Models.TipologiaEvento;
 import it.vITA.Models.Trasformatore;
 import it.vITA.Models.Trasformazione;
@@ -23,8 +24,12 @@ import it.vITA.Repositories.RichiestaProdottoRepository;
 import it.vITA.Repositories.TrasformatoreRepository;
 import it.vITA.Repositories.TrasformazioniRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
+import it.vITA.RichiesteBuilder.RichiestaProdotto;
+import it.vITA.RichiesteBuilder.RichiestaProdottoBuilder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,6 +82,7 @@ public class FakeDataLoader implements CommandLineRunner {
 		repoPosizioni.save(p3);
 		
 		Evento e1 = new Evento(
+				"f7807ce6-11eb-4de5-b338-6b99ba7bc67e",
 					LocalDateTime.now(),
 					"EVENTO1-TITOLO", 
 					"EVENTO1-DESC", 
@@ -86,6 +92,7 @@ public class FakeDataLoader implements CommandLineRunner {
 				);
 		
 		Evento e2 = new Evento(
+				"b03e74f7-050c-4b89-89f1-e747c29b290f",
 				LocalDateTime.now(),
 				"EVENTO2-TITOLO", 
 				"EVENTO2-DESC", 
@@ -95,6 +102,7 @@ public class FakeDataLoader implements CommandLineRunner {
 			);
 		
 		Evento e3 = new Evento(
+				"bf50b819-a1a0-4544-a66a-3d332d71d599",
 				LocalDateTime.now(), 
 				"EVENTO3-TITOLO", 
 				"EVENTO3-DESC", 
@@ -121,12 +129,12 @@ public class FakeDataLoader implements CommandLineRunner {
         repoUtentiRegistrati.save(ur5);
         
         
-        Invito i1 = new Invito(ur1,e1);
-        Invito i4 = new Invito(ur2,e1);
-        Invito i6 = new Invito(ur4,e1);
-        Invito i2 = new Invito(ur1,e2);
-        Invito i3 = new Invito(ur1,e2);
-        Invito i5 = new Invito(ur3,e3);
+        Invito i1 = new Invito("4101c26f-f853-40d7-96a3-fc0f5c79b2af",ur1,e1);
+        Invito i4 = new Invito("90925979-9021-4344-b7b9-1890454c0e45",ur2,e1);
+        Invito i6 = new Invito("b5775f47-736a-4e76-9354-344da1bcd1bc",ur4,e1);
+        Invito i2 = new Invito("406da84b-d2ee-49fa-aeaf-aceb79dfe65c",ur1,e2);
+        Invito i3 = new Invito("df8867a4-64a9-4843-a6da-2e246fd1b568",ur1,e2);
+        Invito i5 = new Invito("9f54b822-b7b4-4022-ba93-7a44137ce3fc",ur3,e3);
 
         repoInviti.save(i1);
         repoInviti.save(i2);
@@ -162,17 +170,16 @@ public class FakeDataLoader implements CommandLineRunner {
         repoProdotti.save(prod9);
         repoProdotti.save(prod10);
         
-        ProdottoInVendita pv1 = new ProdottoInVendita(50, 10,"Descrizione", prod1);
-        ProdottoInVendita pv2 = new ProdottoInVendita(11, 25,"Descrizione", prod2);
-        ProdottoInVendita pv3 = new ProdottoInVendita(14, 10,"Descrizione", prod3);
-        ProdottoInVendita pv4 = new ProdottoInVendita(1, 5,"Descrizione", prod4);
+        ProdottoInVendita pv1 = new ProdottoInVendita("ad4184cd-f194-4461-9a15-2cfa583909fc",50, 10,"Descrizione", prod1);
+        ProdottoInVendita pv2 = new ProdottoInVendita("f8ea8836-4ba6-48a3-8b70-5d988f0ef836",11, 25,"Descrizione", prod2);
+        ProdottoInVendita pv3 = new ProdottoInVendita("1e44c1e5-caa3-4ef7-9eef-75750548ee8b",14, 10,"Descrizione", prod3);
+        ProdottoInVendita pv4 = new ProdottoInVendita("fbf5ba56-aa1d-414f-87b8-57afb6b027a8",1, 5,"Descrizione", prod4);
         
         repoProdottiInVendita.save(pv1);
         repoProdottiInVendita.save(pv2);
         repoProdottiInVendita.save(pv3);
         repoProdottiInVendita.save(pv4);
         
-        System.out.println("ID venduto: " + pv1.getId());
         
         
      //  creazione della richiesta prodotto 
@@ -180,12 +187,13 @@ public class FakeDataLoader implements CommandLineRunner {
         Prodotto prodotto = repoProdotti.findById(prod1.getId()).orElse(null);
 
         if (creatore != null && prodotto != null) {
-            it.vITA.RichiesteBuilder.RichiestaProdotto richiesta = new it.vITA.RichiesteBuilder.RichiestaProdotto();
-            richiesta.setApprovato(false);
-            richiesta.setCreatore(creatore);
-            richiesta.setProdotto(prodotto);
-            richiesta.setTipoRichiesta(it.vITA.Models.TipoRichiesta.PRODOTTO);
-            repoRichiestaP.save(richiesta);
+            RichiestaProdottoBuilder builderRProdotto = new RichiestaProdottoBuilder();
+            
+            builderRProdotto.setCreatore(creatore);
+            builderRProdotto.setApprovato(false);
+            builderRProdotto.setElemento(prodotto);
+            
+            repoRichiestaP.save(builderRProdotto.build());
         }
         
      // === CREAZIONE TRASFORMATORI ===
@@ -193,44 +201,54 @@ public class FakeDataLoader implements CommandLineRunner {
         		"telefono", "biografia" , "PIVA123", "Azienda Bio", "0123456789", null);
         Trasformatore trasf2 = new Trasformatore("72ea9ec0-65f7-4ed8-846a-4dd7bb4a2a7c","username", "password" , "email", "nome" , "cognome" ,
         		"telefono", "biografia" ,"PIVA456", "Trasformazioni Verdi", "0987654321", null);
+        
         repoTrasformatori.save(trasf1);
         repoTrasformatori.save(trasf2);
         
         
      // === CREAZIONE CERTIFICAZIONI ===
-        Certificazione cert1 = new Certificazione();
-        cert1.setDenominazione("Certificazione Biologica");
-        cert1.setDescrizione("Conforme agli standard biologici UE");
-        cert1.setDenominazioneEnteCertificatore("BioEnte Europa");
-        cert1.setDataConseguimento(LocalDateTime.now());
-        cert1.setDataScadenza(LocalDateTime.now().plusYears(1));
+        Certificazione cert1 = new Certificazione(
+                "faf9803f-edaf-4c37-8452-49df0e73932d",
+                "Certificazione Biologica",
+                "Conforme agli standard biologici UE",
+                "BioEnte Europa",
+                LocalDateTime.now(),
+                LocalDateTime.now().plusYears(1)
+            );
 
-        Certificazione cert2 = new Certificazione();
-        cert2.setDenominazione("Certificazione Sostenibilità");
-        cert2.setDescrizione("Ridotto impatto ambientale nei processi produttivi");
-        cert2.setDenominazioneEnteCertificatore("GreenCert Italia");
-        cert2.setDataConseguimento(LocalDateTime.now());
-        cert2.setDataScadenza(LocalDateTime.now().plusYears(2));
+            Certificazione cert2 = new Certificazione(
+                "a913bcb7-9491-438f-8d2e-749c690d483a",
+                "Certificazione Sostenibilità",
+                "Ridotto impatto ambientale nei processi produttivi",
+                "GreenCert Italia",
+                LocalDateTime.now(),
+                LocalDateTime.now().plusYears(2)
+            );
 
         repoCertificazioni.save(cert1);
         repoCertificazioni.save(cert2);
         
      // === CREAZIONE TRASFORMAZIONI ===
-        Trasformazione t1 = new Trasformazione();
-        t1.setDenominazione("Trasformazione Frutta");
-        t1.setDescrizione("Produzione confetture biologiche");
-        t1.setDataInizioFase(LocalDateTime.now());
-        t1.setDataFineFase(LocalDateTime.now().plusDays(5));
-        //t1.setTrasformatore(trasf1);
-        //t1.setCertificazioni(List.of(cert1, cert2));
+        Trasformazione t1 = new Trasformazione(
+        	    "784c4cdd-cbee-49d8-8b16-45a761e7487e", // id (può essere generato altrove)
+        	    "Trasformazione Frutta",
+        	    "Produzione confetture biologiche",
+        	    LocalDateTime.now(),
+        	    LocalDateTime.now().plusDays(5),
+        	    null, // trasformatore (da impostare se disponibile)
+        	    new ArrayList<>() // certificazioni vuote (o popolate se disponibili)
+        	);
 
-        Trasformazione t2 = new Trasformazione();
-        t2.setDenominazione("Lavorazione Verdure");
-        t2.setDescrizione("Conserve di verdure stagionali");
-        t2.setDataInizioFase(LocalDateTime.now());
-        t2.setDataFineFase(LocalDateTime.now().plusDays(7));
-        //t2.setTrasformatore(trasf2);
-        //t2.setCertificazioni(List.of(cert2));
+        	Trasformazione t2 = new Trasformazione(
+        	    "27e3b5fc-a56c-40c9-afb4-7b34e94f995e",
+        	    "Lavorazione Verdure",
+        	    "Conserve di verdure stagionali",
+        	    LocalDateTime.now(),
+        	    LocalDateTime.now().plusDays(7),
+        	    null,
+        	    new ArrayList<>()
+        	);
+
 
         repoTrasformazioni.save(t1);
         repoTrasformazioni.save(t2);
