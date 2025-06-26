@@ -71,9 +71,10 @@ public class ProduttoreController {
 	 */
 	@PostMapping
 	public ResponseEntity<Object> createProduttore(@RequestBody ProduttoreDTO dtoProduttore) {
-	    
+	    System.out.println(dtoProduttore);
 	    Posizione posizione = null;
-	    String idPosizione = dtoProduttore.getPosizioneGeografica();
+	    String idPosizione = dtoProduttore.getIdPosizione();
+	    System.out.println("POSIZIONE:: " + dtoProduttore.getIdPosizione());
 
 	    // Controlla se la posizione esiste
 	    if (repoPosizioni.existsById(idPosizione)) {
@@ -111,7 +112,7 @@ public class ProduttoreController {
 	public ResponseEntity<Object> updateProduttore(@PathVariable("id") String id, @RequestBody ProduttoreDTO dtoProduttore) {
 
 	    Posizione posizione = null;
-	    String idPosizione = dtoProduttore.getPosizioneGeografica();
+	    String idPosizione = dtoProduttore.getIdPosizione();
 
 	    // Controlla se la posizione esiste
 	    if (repoPosizioni.existsById(idPosizione)) {
