@@ -1,7 +1,5 @@
 package it.vITA.DTO;
 
-import it.vITA.Models.Posizione;
-
 public class ProduttoreDTO {
 	private String username;
 	private String password;
@@ -13,13 +11,13 @@ public class ProduttoreDTO {
 	private String partitaIva;
 	private String denominazioneAzienda;
 	private String telefonoAziendale;
-	private String idPosizioneGeografica;
+	private String idPosizione;
 
 	    public ProduttoreDTO() {}
 
 	    public ProduttoreDTO(String username, String password, String email, String nome, String cognome,
 				String telefono, String biografia, String partitaIva, String denominazioneAzienda, String telefonoAziendale,
-				String idPosizioneGeografica) {
+				String idPosizione) {
 			this.username = username;
 			this.password = password;
 			this.email = email;
@@ -30,7 +28,7 @@ public class ProduttoreDTO {
 			this.partitaIva = partitaIva;
 			this.denominazioneAzienda = denominazioneAzienda;
 			this.telefonoAziendale = telefonoAziendale;
-			this.idPosizioneGeografica = idPosizioneGeografica;
+			this.idPosizione = idPosizione;
 		}
 
 		public String getUsername() {
@@ -113,12 +111,23 @@ public class ProduttoreDTO {
 			this.telefonoAziendale = telefonoAziendale;
 		}
 
-		public String getPosizioneGeografica() {
-			return idPosizioneGeografica;
+		
+
+		@Override
+		public String toString() {
+			return "ProduttoreDTO [username=" + username + ", password=" + password + ", email=" + email + ", nome="
+					+ nome + ", cognome=" + cognome + ", telefono=" + telefono + ", biografia=" + biografia
+					+ ", partitaIva=" + partitaIva + ", denominazioneAzienda=" + denominazioneAzienda
+					+ ", telefonoAziendale=" + telefonoAziendale + ", idPosizioneGeografica=" + idPosizione
+					+ "]";
 		}
 
-		public void setPosizioneGeografica(String idPosizioneGeografica) {
-			this.idPosizioneGeografica = idPosizioneGeografica;
+		public String getIdPosizione() {
+			return idPosizione;
+		}
+
+		public void setIdPosizione(String idPosizione) {
+			this.idPosizione = idPosizione;
 		}
 
 
