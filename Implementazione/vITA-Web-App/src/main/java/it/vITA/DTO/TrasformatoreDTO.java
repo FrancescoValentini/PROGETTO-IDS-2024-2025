@@ -1,7 +1,5 @@
 package it.vITA.DTO;
 
-import it.vITA.Models.Posizione;
-
 public class TrasformatoreDTO {
 	private String username;
 	private String password;
@@ -14,8 +12,6 @@ public class TrasformatoreDTO {
 	private String denominazioneAzienda;
 	private String telefonoAziendale;
 	private String idPosizioneGeografica;
-
-	    public TrasformatoreDTO() {}
 
 	    public TrasformatoreDTO(String username, String password, String email, String nome, String cognome,
 				String telefono, String biografia, String partitaIva, String denominazioneAzienda, String telefonoAziendale,
@@ -120,7 +116,6 @@ public class TrasformatoreDTO {
 		public void setPosizioneGeografica(String idPosizioneGeografica) {
 			this.idPosizioneGeografica = idPosizioneGeografica;
 		}
-
 
 
 }

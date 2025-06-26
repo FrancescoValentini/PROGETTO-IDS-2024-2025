@@ -16,7 +16,7 @@ public class Posizione {
 	private String latitudine;
 	private String longitudine;
 	
-	public Posizione() {}
+	public Posizione() {this.id = UUID.randomUUID().toString();}
 	
 	/**
 	 * Posizione geografica

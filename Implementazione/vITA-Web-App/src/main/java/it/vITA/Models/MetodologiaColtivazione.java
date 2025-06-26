@@ -1,5 +1,7 @@
 package it.vITA.Models;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ public class MetodologiaColtivazione {
 	private String denominazione;
 	private String descrizione;
 	
-	public MetodologiaColtivazione() {}
+	public MetodologiaColtivazione() {this.id = UUID.randomUUID().toString();}
 
 	public MetodologiaColtivazione(String denominazione, String descrizione) {
 		this.denominazione = denominazione;

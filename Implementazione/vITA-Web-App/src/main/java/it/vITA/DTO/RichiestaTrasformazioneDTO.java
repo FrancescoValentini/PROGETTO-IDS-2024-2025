@@ -60,5 +60,14 @@ public class RichiestaTrasformazioneDTO {
     public void setTipoRichiesta(TipoRichiesta tipoRichiesta) {
         this.tipoRichiesta = tipoRichiesta;
     }
+
+	@Override
+	public String toString() {
+		return "RichiestaTrasformazioneDTO [approvato=" + approvato + ", commentoCuratore=" + commentoCuratore
+				+ ", creatoreId=" + creatoreId + ", trasformazioneId=" + trasformazioneId + ", tipoRichiesta="
+				+ tipoRichiesta + "]";
+	}
+    
+    
 }
 

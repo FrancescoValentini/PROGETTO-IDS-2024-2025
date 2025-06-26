@@ -30,7 +30,7 @@ public class Invito implements CSVExportable {
 	@JoinColumn(name = "evento_id", referencedColumnName = "id")
 	private Evento evento;
 	
-	public Invito() {}
+	public Invito() {this.id = UUID.randomUUID().toString();}
 	
 	
 	

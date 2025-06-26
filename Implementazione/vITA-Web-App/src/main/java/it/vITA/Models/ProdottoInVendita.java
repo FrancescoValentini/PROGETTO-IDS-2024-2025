@@ -27,7 +27,7 @@ public class ProdottoInVendita {
 	
 	private String descrizione;
 	
-	public ProdottoInVendita() {}
+	public ProdottoInVendita() {this.id = UUID.randomUUID().toString();}
 
 	/**
 	 * @param qta

@@ -47,6 +47,7 @@ public class Prodotto {
 	  public Prodotto () {
 			this.certificazioni = new ArrayList<>();
 			this.trasformazione = new ArrayList<>();
+			this.id = UUID.randomUUID().toString();
 	  }
 
 	

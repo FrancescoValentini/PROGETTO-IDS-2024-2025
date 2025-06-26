@@ -35,7 +35,7 @@ public class Trasformazione {
 	  @JoinColumn(name = "certificazione_id")
 	  private List<Certificazione> certificazioni;
 	  
-	  public Trasformazione() {}
+	  public Trasformazione() {this.id = UUID.randomUUID().toString();}
 	  
 
 	  public Trasformazione(String denominazione, String descrizione, LocalDateTime dataInizioFase,

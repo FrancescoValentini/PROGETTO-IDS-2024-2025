@@ -49,11 +49,11 @@ public class RichiestaTrasformazioneController {
 
     @PostMapping
     public ResponseEntity<Object> createRichiesta(@RequestBody RichiestaTrasformazioneDTO dtoTrasformazione) {
-    	
+    	System.out.println(dtoTrasformazione);
     	if (!repoUtente.existsById(dtoTrasformazione.getCreatoreId())) {
             return new ResponseEntity<>("Creatore non trovato", HttpStatus.NOT_FOUND);
         }
-        if (!repoRichiesta.existsById(dtoTrasformazione.getTrasformazioneId())) {
+        if (!repoTrasformazione.existsById(dtoTrasformazione.getTrasformazioneId())) {
             return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);
         }
         

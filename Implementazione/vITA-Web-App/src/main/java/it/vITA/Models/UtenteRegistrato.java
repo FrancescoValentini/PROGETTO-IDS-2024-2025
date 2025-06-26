@@ -24,7 +24,7 @@ public class UtenteRegistrato {
 	private String telefono;
 	private String biografia;
 	
-	public UtenteRegistrato() {}
+	public UtenteRegistrato() {this.id = UUID.randomUUID().toString();}
 	/**
 	 * Costruttore per un utente registrato nella piattaforma
 	 * 
