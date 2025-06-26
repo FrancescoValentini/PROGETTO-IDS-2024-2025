@@ -67,6 +67,9 @@ public class FakeDataLoader implements CommandLineRunner {
 	ProdottiInVenditaRepository repoProdottiInVendita;
   
   @Autowired
+  ProduttoriRepository repoProduttori;
+  
+  @Autowired
   RichiestaProdottoRepository repoRichiestaP;
 
 	
@@ -152,7 +155,11 @@ public class FakeDataLoader implements CommandLineRunner {
         Produttore produ4 = new Produttore("8ad25492-4c1a-44bb-8c17-1cb4a0b47c8d","sneri", "sunshine!", "sara.neri@example.com", "Sara", "Neri", "3364445556", "Musicista e insegnante di pianoforte.","PIVA","DENOMAZIENDA","TELEAZIENDALE",p1);
         Produttore produ5 = new Produttore("c3ce0581-eafb-4ede-abba-0014313c7406","dbruno", "secureMe2024", "davide.bruno@example.com", "Davide", "Bruno", "3377778889", "Appassionato di fotografia.","PIVA","DENOMAZIENDA","TELEAZIENDALE",p1);
 		
-
+        repoProduttori.save(produ1);
+        repoProduttori.save(produ2);
+        repoProduttori.save(produ3);
+        repoProduttori.save(produ4);
+        repoProduttori.save(produ5);
 
         // === CREAZIONE PRODOTTI ===
         Prodotto prod1 = new Prodotto("b753fc62-2fc3-40d0-8268-79ab06c28f24"," Mela Rossa", "Mela croccante e succosa", LocalDateTime.now().minusDays(10), LocalDateTime.now().plusDays(20), null);
