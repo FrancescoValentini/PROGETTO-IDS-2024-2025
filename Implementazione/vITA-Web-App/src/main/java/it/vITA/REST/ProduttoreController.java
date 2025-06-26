@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import it.vITA.Models.Posizione;
 import it.vITA.Models.Produttore;
 import it.vITA.Repositories.PosizioniRepository;
 import it.vITA.Repositories.ProduttoriRepository;
+import jakarta.transaction.Transactional;
 
 /**
  * Rest controller che gestisce i produttori
@@ -135,6 +137,21 @@ public class ProduttoreController {
 	    }
 
 	    return new ResponseEntity<>("Produttore non trovato", HttpStatus.NOT_FOUND);
+	}
+	
+	/**
+	 * Elimina un produttore dal DB
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("/{id}")
+	@Transactional  
+	public ResponseEntity<Object> deleteProduttore(@PathVariable("id") String id) {
+	    if (!repoProduttori.existsById(id)) {
+	        return new ResponseEntity<>("Produttore non trovato", HttpStatus.NOT_FOUND);
+	    }
+	    repoProduttori.deleteById(id);
+	    return new ResponseEntity<>("Produttore eliminato", HttpStatus.OK);
 	}
 	
 }
