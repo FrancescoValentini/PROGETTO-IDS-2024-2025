@@ -11,16 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 import it.vITA.DTO.ProduttoreDTO;
-import it.vITA.DTO.TrasformatoreDTO;
 import it.vITA.Models.Posizione;
 import it.vITA.Models.Produttore;
-import it.vITA.Models.Trasformatore;
 import it.vITA.Repositories.PosizioniRepository;
 import it.vITA.Repositories.ProduttoriRepository;
 
@@ -98,6 +97,44 @@ public class ProduttoreController {
 
 	    repoProduttori.save(produttore);
 	    return new ResponseEntity<>(produttore, HttpStatus.CREATED);
+	}
+	
+	/**
+	 * Aggiorna i dati del produttore
+	 * @param id
+	 * @param dtoProduttore
+	 * @return
+	 */
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateProduttore(@PathVariable("id") String id, @RequestBody ProduttoreDTO dtoProduttore) {
+
+	    Posizione posizione = null;
+	    String idPosizione = dtoProduttore.getPosizioneGeografica();
+
+	    // Controlla se la posizione esiste
+	    if (repoPosizioni.existsById(idPosizione)) {
+	        posizione = repoPosizioni.findById(idPosizione).get();
+	    } else {
+	        return new ResponseEntity<>("Posizione non trovata", HttpStatus.NOT_FOUND);
+	    }
+
+	    // Controlla se il produttore esiste
+	    if (repoProduttori.existsById(id)) {
+	        Produttore p = repoProduttori.findById(id).get();
+
+	    // Aggiorna i campi
+	    p.setPartitaIva(dtoProduttore.getPartitaIva());
+	    p.setDenominazioneAzienda(dtoProduttore.getDenominazioneAzienda());
+	    p.setTelefonoAziendale(dtoProduttore.getTelefonoAziendale());
+	    p.setPosizioneGeografica(posizione);
+
+	    // Salva il produttore aggiornato
+	    repoProduttori.save(p);
+
+	        return new ResponseEntity<>(p, HttpStatus.OK);
+	    }
+
+	    return new ResponseEntity<>("Produttore non trovato", HttpStatus.NOT_FOUND);
 	}
 	
 }
