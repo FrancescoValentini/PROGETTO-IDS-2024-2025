@@ -1,6 +1,5 @@
 package it.vITA.RichiesteBuilder;
 
-import it.vITA.Models.Prodotto;
 import it.vITA.Models.TipoRichiesta;
 import it.vITA.Models.Trasformazione;
 import it.vITA.Models.UtenteRegistrato;

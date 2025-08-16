@@ -2,7 +2,6 @@ package it.vITA.DTO;
 
 import java.time.LocalDateTime;
 
-import it.vITA.Models.Posizione;
 import it.vITA.Models.TipologiaEvento;
 
 public class EventoDTO {
