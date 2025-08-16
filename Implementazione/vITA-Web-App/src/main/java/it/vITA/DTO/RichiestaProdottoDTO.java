@@ -1,9 +1,5 @@
 package it.vITA.DTO;
 
-import it.vITA.Models.Prodotto;
-import it.vITA.Models.TipoRichiesta;
-import it.vITA.Models.UtenteRegistrato;
-
  /**
   * RichiestaProdottoDTO
   * @author Giulia Balestra

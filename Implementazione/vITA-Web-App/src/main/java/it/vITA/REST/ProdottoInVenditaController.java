@@ -127,4 +127,5 @@ public class ProdottoInVenditaController {
         ProdottiInVenditaRepository.deleteById(id);
         return new ResponseEntity<>("Prodotto in vendita eliminato", HttpStatus.OK);
     }
+    
 }

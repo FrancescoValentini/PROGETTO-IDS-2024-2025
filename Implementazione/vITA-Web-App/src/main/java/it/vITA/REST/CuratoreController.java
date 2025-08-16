@@ -14,20 +14,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.CuratoreDTO;
 import it.vITA.DTO.RichiestaProdottoDTO;
 import it.vITA.DTO.RichiestaTrasformazioneDTO;
-import it.vITA.DTO.UtenteRegistratoDTO;
 import it.vITA.Models.Curatore;
-import it.vITA.Models.UtenteRegistrato;
+import it.vITA.Models.Prodotto;
 import it.vITA.Repositories.CuratoreRepository;
+import it.vITA.Repositories.ProdottoRepository;
 import it.vITA.Repositories.RichiestaProdottoRepository;
 import it.vITA.Repositories.RichiestaTrasformazioneRepository;
-import it.vITA.Repositories.UtenteRegistratoRepository;
 import it.vITA.RichiesteBuilder.RichiestaProdotto;
 import it.vITA.RichiesteBuilder.RichiestaTrasformazione;
 
+@RestController
+@RequestMapping("/api/curatore")
 public class CuratoreController {
 	private static final Logger logger = LoggerFactory.getLogger(CuratoreController.class);
 	@Autowired
@@ -38,6 +41,9 @@ public class CuratoreController {
 	
 	@Autowired
 	RichiestaTrasformazioneRepository richiestaTrasformazioneRepo;
+	
+	@Autowired
+	ProdottoRepository repoProdotti;
 
 	/**
 	 * Restituisce tutti i curatori
@@ -135,6 +141,15 @@ public class CuratoreController {
 			richiesta.setApprovato(dto.isApprovato());
 			richiesta.setCommentoCuratore(dto.getCommentoCuratore());
 			richiestaProdottoRepo.save(richiesta);
+			
+			// Aggiorna prodotto
+			if(repoProdotti.existsById(dto.getIdProdotto())) {
+				Prodotto p = repoProdotti.findById(dto.getIdProdotto()).get();
+				p.setApprovato(dto.isApprovato());
+				repoProdotti.save(p);
+			}
+			
+			
 
 			String stato = dto.isApprovato() ? "approvata" : "rifiutata";
 			return new ResponseEntity<>("Richiesta prodotto " + stato , HttpStatus.OK);

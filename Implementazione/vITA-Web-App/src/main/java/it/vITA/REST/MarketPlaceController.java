@@ -65,6 +65,7 @@ public class MarketPlaceController {
     public ResponseEntity<Object> getProdottiInVenditaApprovati() {
         List<ProdottoInVendita> prodottiApprovati = ((List<ProdottoInVendita>) prodottiInVenditaRepository.findAll())
                 .stream()
+                .filter(pVendita -> pVendita.prodotto.isApprovato())
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(prodottiApprovati);
