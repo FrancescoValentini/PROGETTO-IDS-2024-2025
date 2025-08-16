@@ -17,12 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.vITA.DTO.EventoDTO;
 import it.vITA.DTO.MetodologiaColtivazioneDTO;
-import it.vITA.DTO.PosizioneDTO;
-import it.vITA.Models.Evento;
 import it.vITA.Models.MetodologiaColtivazione;
-import it.vITA.Models.Posizione;
 import it.vITA.Repositories.MetodologieColtivazioneRepository;
 /**
  * Rest controller REST per operazioni CRUD su metodologie di coltivazione

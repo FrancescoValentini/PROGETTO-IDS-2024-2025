@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.AllergeneDTO;
-import it.vITA.DTO.PosizioneDTO;
 import it.vITA.Models.Allergene;
-import it.vITA.Models.Posizione;
 import it.vITA.Repositories.AllergeniRepository;
 
 /**
