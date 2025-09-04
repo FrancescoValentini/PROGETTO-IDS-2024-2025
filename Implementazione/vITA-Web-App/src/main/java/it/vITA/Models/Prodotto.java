@@ -29,12 +29,7 @@ public class Prodotto {
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "metodologia_id")
 	  private List<MetodologiaColtivazione> metodologieColtivazione;
-	  //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	  //@JoinColumn(name = "allergene_id")
-	  //private List<Allergene> allergeni;
-	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	  @JoinColumn(name = "certificazione_id")
-	  private List<Certificazione> certificazioni;
+
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "trasformazione_id")
 	  private List<Trasformazione> trasformazione;
@@ -43,7 +38,6 @@ public class Prodotto {
 	  private Produttore produttore;
 	  
 	  public Prodotto () {
-			this.certificazioni = new ArrayList<>();
 			this.trasformazione = new ArrayList<>();
 			this.id = UUID.randomUUID().toString();
 	  }
@@ -56,7 +50,6 @@ public class Prodotto {
 		this.descrizione = descrizione;
 		this.dataEoraProduzione = dataEoraProduzione;
 		this.dataEoraScadenza = dataEoraScadenza;
-		this.certificazioni = new ArrayList<>();
 		this.trasformazione = new ArrayList<>();
 		this.produttore = produttore;
 	}
@@ -68,7 +61,6 @@ public class Prodotto {
 		this.descrizione = descrizione;
 		this.dataEoraProduzione = dataEoraProduzione;
 		this.dataEoraScadenza = dataEoraScadenza;
-		this.certificazioni = new ArrayList<>();
 		this.trasformazione = new ArrayList<>();
 		this.produttore = produttore;
 	}
@@ -122,21 +114,6 @@ public class Prodotto {
 		this.metodologieColtivazione = metodologieColtivazione;
 	}
 
-	/*public List<Allergene> getAllergeni() {
-		return allergeni;
-	}
-
-	public void setAllergeni(ArrayList<Allergene> allergeni) {
-		this.allergeni = allergeni;
-	}*/
-
-	public List<Certificazione> getCertificazioni() {
-		return certificazioni;
-	}
-
-	public void setCertificazioni(ArrayList<Certificazione> certificazioni) {
-		this.certificazioni = certificazioni;
-	}
 
 	public List<Trasformazione> getTrasformazione() {
 		return trasformazione;
