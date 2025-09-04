@@ -26,9 +26,6 @@ public class Prodotto {
 	  private LocalDateTime dataEoraProduzione;
 	  private LocalDateTime dataEoraScadenza;
 	  private boolean approvato = false;
-	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	  @JoinColumn(name = "metodologia_id")
-	  private List<MetodologiaColtivazione> metodologieColtivazione;
 
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "trasformazione_id")
@@ -104,14 +101,6 @@ public class Prodotto {
 
 	public void setApprovato(boolean approvato) {
 		this.approvato = approvato;
-	}
-
-	public List<MetodologiaColtivazione> getMetodologieColtivazione() {
-		return metodologieColtivazione;
-	}
-
-	public void setMetodologieColtivazione(ArrayList<MetodologiaColtivazione> metodologieColtivazione) {
-		this.metodologieColtivazione = metodologieColtivazione;
 	}
 
 

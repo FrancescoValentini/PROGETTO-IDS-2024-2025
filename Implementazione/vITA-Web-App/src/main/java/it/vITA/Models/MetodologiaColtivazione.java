@@ -2,11 +2,15 @@ package it.vITA.Models;
 
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,11 +23,16 @@ public class MetodologiaColtivazione {
 	private String denominazione;
 	private String descrizione;
 	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "prdotto_id", referencedColumnName = "id")
+	private Prodotto prodotto;
+	
 	public MetodologiaColtivazione() {this.id = UUID.randomUUID().toString();}
 
-	public MetodologiaColtivazione(String denominazione, String descrizione) {
+	public MetodologiaColtivazione(String denominazione, String descrizione, Prodotto prodotto) {
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
+		this.prodotto = prodotto;
 	}
 
 	public String getDenominazione() {
@@ -50,6 +59,14 @@ public class MetodologiaColtivazione {
 	public String toString() {
 		return "MetodologiaColtivazione [id=" + id + ", denominazione=" + denominazione + ", descrizione=" + descrizione
 				+ "]";
+	}
+
+	public Prodotto getProdotto() {
+		return prodotto;
+	}
+
+	public void setProdotto(Prodotto prodotto) {
+		this.prodotto = prodotto;
 	}
 	
 	
