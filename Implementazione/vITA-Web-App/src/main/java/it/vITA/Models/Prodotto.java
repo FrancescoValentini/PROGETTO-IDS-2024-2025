@@ -1,8 +1,6 @@
 package it.vITA.Models;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
@@ -12,7 +10,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,15 +24,12 @@ public class Prodotto {
 	  private LocalDateTime dataEoraScadenza;
 	  private boolean approvato = false;
 
-	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	  @JoinColumn(name = "trasformazione_id")
-	  private List<Trasformazione> trasformazione;
+
 	  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "produttore_id", referencedColumnName = "id")
 	  private Produttore produttore;
 	  
 	  public Prodotto () {
-			this.trasformazione = new ArrayList<>();
 			this.id = UUID.randomUUID().toString();
 	  }
 
@@ -47,7 +41,6 @@ public class Prodotto {
 		this.descrizione = descrizione;
 		this.dataEoraProduzione = dataEoraProduzione;
 		this.dataEoraScadenza = dataEoraScadenza;
-		this.trasformazione = new ArrayList<>();
 		this.produttore = produttore;
 	}
 	
@@ -58,7 +51,6 @@ public class Prodotto {
 		this.descrizione = descrizione;
 		this.dataEoraProduzione = dataEoraProduzione;
 		this.dataEoraScadenza = dataEoraScadenza;
-		this.trasformazione = new ArrayList<>();
 		this.produttore = produttore;
 	}
 	
@@ -101,15 +93,6 @@ public class Prodotto {
 
 	public void setApprovato(boolean approvato) {
 		this.approvato = approvato;
-	}
-
-
-	public List<Trasformazione> getTrasformazione() {
-		return trasformazione;
-	}
-
-	public void setTrasformazione(ArrayList<Trasformazione> trasformazione) {
-		this.trasformazione = trasformazione;
 	}
 
 	public Produttore getProduttore() {
