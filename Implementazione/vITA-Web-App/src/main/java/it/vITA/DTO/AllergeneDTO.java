@@ -3,6 +3,7 @@ package it.vITA.DTO;
 public class AllergeneDTO {
 	private String denominazione;
 	private String descrizione;
+	private String idProdotto;
 	
 	
 	/**
@@ -10,9 +11,10 @@ public class AllergeneDTO {
 	 * @param descrizione
 	 * 
 	 */
-	public AllergeneDTO(String denominazione, String descrizione) {
+	public AllergeneDTO(String denominazione, String descrizione, String idProdotto) {
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
+		this.idProdotto = idProdotto;
 	}
 
 
@@ -33,6 +35,10 @@ public class AllergeneDTO {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+	
+	public String getidProdotto() {
+		return this.idProdotto;
 	}
 	
 	

@@ -29,9 +29,9 @@ public class Prodotto {
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "metodologia_id")
 	  private List<MetodologiaColtivazione> metodologieColtivazione;
-	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	  @JoinColumn(name = "allergene_id")
-	  private List<Allergene> allergeni;
+	  //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	  //@JoinColumn(name = "allergene_id")
+	  //private List<Allergene> allergeni;
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "certificazione_id")
 	  private List<Certificazione> certificazioni;
@@ -122,13 +122,13 @@ public class Prodotto {
 		this.metodologieColtivazione = metodologieColtivazione;
 	}
 
-	public List<Allergene> getAllergeni() {
+	/*public List<Allergene> getAllergeni() {
 		return allergeni;
 	}
 
 	public void setAllergeni(ArrayList<Allergene> allergeni) {
 		this.allergeni = allergeni;
-	}
+	}*/
 
 	public List<Certificazione> getCertificazioni() {
 		return certificazioni;
