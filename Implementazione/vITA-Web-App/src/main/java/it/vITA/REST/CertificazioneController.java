@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.CertificazioneDTO;
 import it.vITA.Models.Certificazione;
+import it.vITA.Models.Prodotto;
 import it.vITA.Repositories.CertificazioniRepository;
+import it.vITA.Repositories.ProdottoRepository;
 
 
 /**
@@ -34,6 +36,9 @@ public class CertificazioneController {
 	
 	@Autowired
 	CertificazioniRepository repoCertificazioni;
+	
+	@Autowired
+	ProdottoRepository repoProdotti;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(CertificazioneController.class);
@@ -67,12 +72,20 @@ public class CertificazioneController {
 	 */
 	@PostMapping
 	public ResponseEntity<Object> createCertificazione(@RequestBody CertificazioneDTO dtoCertificazione){
+		
+		if(!repoProdotti.existsById(dtoCertificazione.getIdProdotto())) {
+			return new ResponseEntity<>("Prodotto non trovato",HttpStatus.NOT_FOUND);
+		}
+		
+		Prodotto p = repoProdotti.findById(dtoCertificazione.getIdProdotto()).get();
+		
 		Certificazione cert = new Certificazione(
 				dtoCertificazione.getDenominazione(),
 				dtoCertificazione.getDescrizione(),
 				dtoCertificazione.getDenominazioneEnteCertificatore(),
 				LocalDateTime.now(),
-				dtoCertificazione.getDataScadenza()
+				dtoCertificazione.getDataScadenza(),
+				p
 				);
 		
 		repoCertificazioni.save(cert);

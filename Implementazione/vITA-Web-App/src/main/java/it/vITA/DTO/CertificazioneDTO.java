@@ -7,6 +7,7 @@ public class CertificazioneDTO {
 	private String descrizione;
 	private String denominazioneEnteCertificatore;
 	private LocalDateTime dataScadenza;
+	private String idProdotto;
 	
 	/**
 	 * @param denominazione
@@ -16,11 +17,12 @@ public class CertificazioneDTO {
 	 */
 	
 	public CertificazioneDTO(String denominazione, String descrizione, String denominazioneEnteCertificatore,
-			LocalDateTime dataScadenza) {
+			LocalDateTime dataScadenza, String idProdotto) {
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
 		this.denominazioneEnteCertificatore = denominazioneEnteCertificatore;
 		this.dataScadenza = dataScadenza;
+		this.idProdotto = idProdotto;
 	}
 
 
@@ -61,6 +63,16 @@ public class CertificazioneDTO {
 
 	public void setDataScadenza(LocalDateTime dataScadenza) {
 		this.dataScadenza = dataScadenza;
+	}
+
+
+	public String getIdProdotto() {
+		return idProdotto;
+	}
+
+
+	public void setIdProdotto(String idProdotto) {
+		this.idProdotto = idProdotto;
 	}
 	
 	

@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.MetodologiaColtivazioneDTO;
 import it.vITA.Models.MetodologiaColtivazione;
+import it.vITA.Models.Prodotto;
 import it.vITA.Repositories.MetodologieColtivazioneRepository;
+import it.vITA.Repositories.ProdottoRepository;
 /**
  * Rest controller REST per operazioni CRUD su metodologie di coltivazione
  * 
@@ -34,6 +36,9 @@ public class MetodologiaColtivazioneController {
 	
 	@Autowired
 	MetodologieColtivazioneRepository repoMetodologie;
+	
+	@Autowired
+	ProdottoRepository repoProdotti;
 	
 	/**
 	 * Restituisce tutte le metodologie memorizzate nel db
@@ -68,8 +73,15 @@ public class MetodologiaColtivazioneController {
 	 */
 	@PostMapping
 	public ResponseEntity<Object> createMetodologia(@RequestBody MetodologiaColtivazioneDTO dtometodologia){
+		
+		if(!repoProdotti.existsById(dtometodologia.getIdProdotto())) {
+			return new ResponseEntity<>("Prodotto non trovato",HttpStatus.NOT_FOUND);
+		}
+		
+		Prodotto p = repoProdotti.findById(dtometodologia.getIdProdotto()).get();
+		
 		MetodologiaColtivazione met = new MetodologiaColtivazione(dtometodologia.getDenominazione(), 
-				dtometodologia.getDescrizione());
+				dtometodologia.getDescrizione(),p);
 		repoMetodologie.save(met);
 		return new ResponseEntity<>(met,HttpStatus.CREATED);
 	}

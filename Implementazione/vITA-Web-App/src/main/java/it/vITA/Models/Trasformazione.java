@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,11 +34,15 @@ public class Trasformazione {
 	  @JoinColumn(name = "certificazione_id")
 	  private List<Certificazione> certificazioni;
 	  
+	  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	  @JoinColumn(name = "prdotto_id", referencedColumnName = "id")
+	  private Prodotto prodotto;
+	  
 	  public Trasformazione() {this.id = UUID.randomUUID().toString();}
 	  
 
 	  public Trasformazione(String denominazione, String descrizione, LocalDateTime dataInizioFase,
-			LocalDateTime dataFineFase, Trasformatore trasformatore, List<Certificazione> certificazioni) {
+			LocalDateTime dataFineFase, Trasformatore trasformatore, List<Certificazione> certificazioni, Prodotto prodotto) {
 		this.id = UUID.randomUUID().toString();
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
@@ -45,6 +50,7 @@ public class Trasformazione {
 		this.dataFineFase = dataFineFase;
 		this.trasformatore = trasformatore;
 		this.certificazioni = certificazioni;
+		this.prodotto = prodotto;
 	}
 	  
 	  public Trasformazione(String id ,String denominazione, String descrizione, LocalDateTime dataInizioFase,
@@ -70,6 +76,9 @@ public class Trasformazione {
 		return descrizione;
 	}
 
+	
+	
+	
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
@@ -115,6 +124,16 @@ public class Trasformazione {
 		return "Trasformazione [id=" + id + ", denominazione=" + denominazione + ", descrizione=" + descrizione
 				+ ", dataInizioFase=" + dataInizioFase + ", dataFineFase=" + dataFineFase + ", trasformatore="
 				+ trasformatore + ", certificazioni=" + certificazioni + "]";
+	}
+
+
+	public Prodotto getProdotto() {
+		return prodotto;
+	}
+
+
+	public void setProdotto(Prodotto prodotto) {
+		this.prodotto = prodotto;
 	}
 	  
 	  

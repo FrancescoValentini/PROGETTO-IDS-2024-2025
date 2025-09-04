@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.AllergeneDTO;
 import it.vITA.Models.Allergene;
+import it.vITA.Models.Prodotto;
 import it.vITA.Repositories.AllergeniRepository;
+import it.vITA.Repositories.ProdottoRepository;
 
 /**
  * Rest controller che gestisce gli allergeni
@@ -33,6 +35,9 @@ public class AllergeneController {
 	
 	@Autowired
 	AllergeniRepository repoAllergeni;
+	
+	@Autowired
+	ProdottoRepository repoProdotti;
 	
 	/**
 	 * Restituisce tutti gli allergeni memorizzati nel db
@@ -62,7 +67,18 @@ public class AllergeneController {
 	 */
 	@PostMapping
 	public ResponseEntity<Object> createAllergene(@RequestBody AllergeneDTO DTOallergene){
-		Allergene aller = new Allergene(DTOallergene.getDenominazione(), DTOallergene.getDescrizione());
+		
+		if(!repoProdotti.existsById(DTOallergene.getidProdotto())) {
+			return new ResponseEntity<>("Prodotto non trovato",HttpStatus.NOT_FOUND);
+		}
+		
+		Prodotto p = repoProdotti.findById(DTOallergene.getidProdotto()).get();
+		
+		Allergene aller = new Allergene(
+				DTOallergene.getDenominazione(), 
+				DTOallergene.getDescrizione(),
+				p
+				);
 		repoAllergeni.save(aller);
 		return new ResponseEntity<>(aller,HttpStatus.CREATED);
 	}
@@ -75,6 +91,7 @@ public class AllergeneController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateAllergene(@PathVariable("id") String id, @RequestBody AllergeneDTO DTOallergene){
 		if(repoAllergeni.existsById(id)) {
+			
 			Allergene a = repoAllergeni.findById(id).get();
 			a.setDenominazione(DTOallergene.getDenominazione());
 			a.setDescrizione(DTOallergene.getDescrizione());

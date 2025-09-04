@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.vITA.DTO.TrasformazioneDTO;
 import it.vITA.Models.Certificazione;
+import it.vITA.Models.Prodotto;
 import it.vITA.Models.Trasformatore;
 import it.vITA.Models.Trasformazione;
 import it.vITA.Repositories.CertificazioniRepository;
+import it.vITA.Repositories.ProdottoRepository;
 import it.vITA.Repositories.TrasformatoreRepository;
 import it.vITA.Repositories.TrasformazioniRepository;
 
@@ -43,6 +45,9 @@ public class TrasformazioneController {
 	
 	@Autowired
 	CertificazioniRepository repoCertificazioni;
+	
+	@Autowired
+	ProdottoRepository repoProdotti;
 	
 	private static final Logger logger = LoggerFactory.getLogger(TrasformazioneController.class);
 
@@ -80,6 +85,13 @@ public class TrasformazioneController {
 	    if (dto.getIdTrasformatore() == null || !repoTrasformatori.existsById(dto.getIdTrasformatore())) {
 	        return new ResponseEntity<>("Trasformatore non valido", HttpStatus.BAD_REQUEST);
 	    }
+	    
+		if(!repoProdotti.existsById(dto.getIdProdotto())) {
+			return new ResponseEntity<>("Prodotto non trovato",HttpStatus.NOT_FOUND);
+		}
+		
+		Prodotto p = repoProdotti.findById(dto.getIdProdotto()).get();
+		
 
 	    Trasformatore trasformatore = repoTrasformatori.findById(dto.getIdTrasformatore()).get();
 
@@ -89,6 +101,7 @@ public class TrasformazioneController {
 	    trasformazione.setDataInizioFase(LocalDateTime.now());
 	    trasformazione.setDataFineFase(dto.getDataFineFase());
 	    trasformazione.setTrasformatore(trasformatore);
+	    trasformazione.setProdotto(p);
 	    
 	    List<Certificazione> certificazioni = new ArrayList<>();
 
