@@ -180,7 +180,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "59e760ea-2d86-4d2a-8f20-3c9e0b24148d"
+											"value": "059aeafd-b2ea-40b7-a708-2a9991f86496"
 										}
 									]
 								}
@@ -239,7 +239,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "6bada3d7-242e-4dab-84a1-e140036c340c"
+											"value": "4c189e06-86a8-4c62-8758-8b36d4954ece"
 										}
 									]
 								}
@@ -263,7 +263,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": ""
+											"value": "a9e1c895-8eef-435c-b279-a4c127eae4bf"
 										}
 									]
 								}
@@ -309,7 +309,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": ""
+											"value": "39b33043-b835-422c-b725-c69a58c7cd08"
 										}
 									]
 								}
@@ -383,7 +383,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": ""
+											"value": "39b33043-b835-422c-b725-c69a58c7cd08"
 										}
 									]
 								}
@@ -472,7 +472,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\r\n        \"denominazione\": \"Zucchina\",\r\n        \"descrizione\": \"Fresca e leggera - MODIFICA\",\r\n        \"dataEoraProduzione\": \"2025-06-22T16:33:22.761393\",\r\n        \"dataEoraScadenza\": \"2025-07-08T16:33:22.761393\",\r\n        \"idProduttore\":\"9bdc4e74-0518-4a54-a185-60fa3f9ebfae\"\r\n    }",
+							"raw": "    {\r\n        \"denominazione\": \"Zucchina\",\r\n        \"descrizione\": \"Fresca e leggera - MODIFICA\",\r\n        \"dataEoraProduzione\": \"2025-06-22T16:33:22.761393\",\r\n        \"dataEoraScadenza\": \"2025-07-08T16:33:22.761393\",\r\n        \"idProduttore\":\"508135e4-9287-48e0-bc9c-78b7248dc1d5\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -480,12 +480,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/prodotto",
+							"raw": "{{base_url}}/prodotto/:ID",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"prodotto"
+								"prodotto",
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "e0574eef-2134-4dbf-9e15-4dfbd4785a5a"
+								}
 							]
 						}
 					},
@@ -508,7 +515,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "3c429f6c-c2a0-4316-95c5-9712e1925c48",
+									"value": "b753fc62-2fc3-40d0-8268-79ab06c28f24",
 									"description": "ID Univoco del prodotto"
 								}
 							]
@@ -579,7 +586,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "784c4cdd-cbee-49d8-8b16-45a761e7487e"
+									"value": "27e3b5fc-a56c-40c9-afb4-7b34e94f995e"
 								}
 							]
 						}
@@ -593,7 +600,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"denominazione\": \"Trasformazione prova\",\r\n  \"descrizione\": \"Descrizione della trasformazione di prova\",\r\n  \"dataFineFase\": \"2025-07-01T12:00:00\",\r\n  \"idTrasformatore\": \"a226ca20-47f3-42cf-a495-168048e02ba1\",\r\n  \"idCertificazione\": [\"faf9803f-edaf-4c37-8452-49df0e73932d\"]\r\n}",
+							"raw": "{\r\n  \"denominazione\": \"Trasformazione prova\",\r\n  \"descrizione\": \"Descrizione della trasformazione di prova\",\r\n  \"dataFineFase\": \"2025-07-01T12:00:00\",\r\n  \"idTrasformatore\": \"a226ca20-47f3-42cf-a495-168048e02ba1\",\r\n  \"idCertificazione\": [\"faf9803f-edaf-4c37-8452-49df0e73932d\"],\r\n  \"idProdotto\":\"37df3757-5aab-47f7-92eb-789c4ab1e464\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -619,7 +626,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"denominazione\": \"Trasformazione aggiornata\",\r\n  \"descrizione\": \"Descrizione aggiornata della trasformazione\",\r\n  \"dataInizioFase\": \"2025-06-16T12:12:01\",\r\n  \"dataFineFase\": \"2025-07-01T12:00:00\",\r\n  \"idTrasformatore\": \"22cc64e0-a7a2-4ec4-95d2-fe466cc2ee81\",\r\n  \"idCertificazioni\": [\r\n    \"ea12f57b-3b9d-4773-8f71-8e0c2d0dd31e\"\r\n  ]\r\n}",
+							"raw": "{\r\n  \"denominazione\": \"Trasformazione prova\",\r\n  \"descrizione\": \"Descrizione della trasformazione di provaAAAAA\",\r\n  \"dataFineFase\": \"2025-07-01T12:00:00\",\r\n  \"idTrasformatore\": \"a226ca20-47f3-42cf-a495-168048e02ba1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -638,7 +645,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "c21804b0-cc74-42cc-8557-ff000a7568c4"
+									"value": "27e3b5fc-a56c-40c9-afb4-7b34e94f995e"
 								}
 							]
 						}
@@ -662,7 +669,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "d1b6eaf2-b0f9-4a36-aa50-eb859ed0b89a"
+									"value": "27e3b5fc-a56c-40c9-afb4-7b34e94f995e"
 								}
 							]
 						}
@@ -862,7 +869,7 @@
 					"response": []
 				},
 				{
-					"name": "LISTA PRODOTTI IN VENDITA",
+					"name": "LISTA PRODOTTI IN VENDITA (Approvati)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -873,6 +880,32 @@
 							],
 							"path": [
 								"marketplace"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AGGIUNGI PRODOTTO IN VENDITA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qta\":1,\r\n    \"prezzo\":30,\r\n    \"idProdotto\":\"b753fc62-2fc3-40d0-8268-79ab06c28f24\",\r\n    \"descrizione\":\"Prodotto\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/prodotti-in-vendita",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotti-in-vendita"
 							]
 						}
 					},
@@ -918,7 +951,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "    {\r\n        \"dataEOraEvento\": \"2025-06-03T17:53:51.789628\",\r\n        \"titolo\": \"EVENTO-POSTMAN\",\r\n        \"descrizione\": \"CREATO DA POSTMAN\",\r\n        \"prezzoIngresso\": 10.0,\r\n        \"posti\": 10,\r\n        \"tipologiaEvento\": \"EVENTO_LOCALE\",\r\n\t    \"idPosizioneGeografica\":\"2614cc1a-9969-43e3-84db-c2394d80f4a2\"\r\n    }",
+									"raw": "    {\r\n        \"dataEOraEvento\": \"2025-06-03T17:53:51.789628\",\r\n        \"titolo\": \"EVENTO-POSTMAN\",\r\n        \"descrizione\": \"CREATO DA POSTMAN\",\r\n        \"prezzoIngresso\": 10.0,\r\n        \"posti\": 10,\r\n        \"tipologiaEvento\": \"EVENTO_LOCALE\",\r\n\t    \"idPosizioneGeografica\":\"81919e63-4985-44a2-8331-79f82076466e\"\r\n    }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -944,7 +977,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "    {\r\n        \"dataEOraEvento\": \"2025-06-03T17:53:51.789628\",\r\n        \"titolo\": \"EVENTO-POSTMAN\",\r\n        \"descrizione\": \"CREATO DA POSTMAN\",\r\n        \"prezzoIngresso\": 100.0,\r\n        \"posti\": 10,\r\n        \"tipologiaEvento\": \"EVENTO_LOCALE\",\r\n\t    \"idPosizioneGeografica\":\"2614cc1a-9969-43e3-84db-c2394d80f4a2\"\r\n    }",
+									"raw": "    {\r\n        \"dataEOraEvento\": \"2025-06-03T17:53:51.789628\",\r\n        \"titolo\": \"EVENTO-POSTMAN\",\r\n        \"descrizione\": \"CREATO DA POSTMAN\",\r\n        \"prezzoIngresso\": 100.0,\r\n        \"posti\": 10,\r\n        \"tipologiaEvento\": \"EVENTO_LOCALE\",\r\n\t    \"idPosizioneGeografica\":\"81919e63-4985-44a2-8331-79f82076466e\"\r\n    }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -963,7 +996,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "c0dffef8-7b7f-4b96-ba1a-8cc6da4e1e21"
+											"value": "aaddea3c-5e40-4bc6-8976-a1d82088ccec"
 										}
 									]
 								}
@@ -976,18 +1009,18 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/events/:idEvento",
+									"raw": "{{base_url}}/evento/:idEvento",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
-										"events",
+										"evento",
 										":idEvento"
 									],
 									"variable": [
 										{
 											"key": "idEvento",
-											"value": "",
+											"value": "aaddea3c-5e40-4bc6-8976-a1d82088ccec",
 											"description": "Identificativo univoco evento"
 										}
 									]
@@ -1088,6 +1121,15 @@
 							"request": {
 								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idUtenteRegistrato\":\"\",\r\n    \"idEvento\":\"aaddea3c-5e40-4bc6-8976-a1d82088ccec\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/invito",
 									"host": [
@@ -1105,6 +1147,15 @@
 							"request": {
 								"method": "PUT",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idUtenteRegistrato\":\"\",\r\n    \"idEvento\":\"0e1caaf6-b398-4d41-8121-b0b7ec737bf4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/invito/:id",
 									"host": [
@@ -1117,7 +1168,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "e4af392a-4a60-402d-9f90-4d53e0c00099"
+											"value": "4ac6fd26-293d-4389-80d7-28bc20be4be0"
 										}
 									]
 								}
@@ -1141,7 +1192,7 @@
 									"variable": [
 										{
 											"key": "idInvito",
-											"value": "9b0e90b0-c164-4283-a538-7a5631738703"
+											"value": "4ac6fd26-293d-4389-80d7-28bc20be4be0"
 										}
 									]
 								}
@@ -1249,7 +1300,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "0286029c-8614-4afe-9f3b-bfabb5d525de"
+									"value": "4537c293-ae6f-4ca0-87a8-675907874a9c"
 								}
 							]
 						}
@@ -1333,7 +1384,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"denominazione\": \"METODOLOGIA-POSTMAN\",\r\n    \"descrizione\": \"CREATO DA POSTMAN\"\r\n}",
+							"raw": "{\r\n    \"denominazione\": \"METODOLOGIA-POSTMAN\",\r\n    \"descrizione\": \"CREATO DA POSTMAN\",\r\n    \"idProdotto\":\"b753fc62-2fc3-40d0-8268-79ab06c28f24\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1376,7 +1427,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "9027b402-cd72-4e3c-822e-7708a65f0701"
+									"value": "e0b0dbf0-0211-418b-a28e-eb9ab388cfb8"
 								}
 							]
 						}
@@ -1409,7 +1460,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "9027b402-cd72-4e3c-822e-7708a65f0701"
+									"value": "e0b0dbf0-0211-418b-a28e-eb9ab388cfb8"
 								}
 							]
 						}
@@ -1442,7 +1493,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "9027b402-cd72-4e3c-822e-7708a65f0701"
+									"value": "e0b0dbf0-0211-418b-a28e-eb9ab388cfb8"
 								}
 							]
 						}
@@ -1500,7 +1551,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "4544cdd5-2409-46ec-871f-3b6f848a821b"
+									"value": "66480fa7-fade-468a-ac0f-77b6d0449e66"
 								}
 							]
 						}
@@ -1514,7 +1565,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"denominazione\": \"ALLERGENE-POSTMAN\",\r\n    \"descrizione\": \"CREATO DA POSTMAN\"\r\n}",
+							"raw": "{\r\n    \"denominazione\": \"ALLERGENE-POSTMAN\",\r\n    \"descrizione\": \"CREATO DA POSTMAN\",\r\n    \"idProdotto\":\"b753fc62-2fc3-40d0-8268-79ab06c28f24\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1559,7 +1610,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "4544cdd5-2409-46ec-871f-3b6f848a821b"
+									"value": "66480fa7-fade-468a-ac0f-77b6d0449e66"
 								}
 							]
 						}
@@ -1664,7 +1715,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN2\",\r\n    \"descrizione\": \"CERTIFICAZIONE\",\r\n    \"denominazioneEnteCertificatore\":\"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}",
+							"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN2\",\r\n    \"descrizione\": \"CERTIFICAZIONE\",\r\n    \"denominazioneEnteCertificatore\":\"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\",\r\n    \"idProdotto\":\"b753fc62-2fc3-40d0-8268-79ab06c28f24\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1709,7 +1760,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "faf9803f-edaf-4c37-8452-49df0e73932d"
+									"value": "2f8fa2ec-97e6-4afd-ac0e-51e1f3a60818"
 								}
 							]
 						}
@@ -1742,7 +1793,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "faf9803f-edaf-4c37-8452-49df0e73932d"
+									"value": "b26e996e-1fe2-4bf8-bfa5-30eed599a7bb"
 								}
 							]
 						}
@@ -1800,7 +1851,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "daca8d51-265a-4060-8856-f3783ef0cc8c"
+									"value": "d1cfe10e-3c22-46ac-86aa-72f7461fcc5a"
 								}
 							]
 						}
@@ -1814,7 +1865,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN2\",\r\n    \"descrizione\": \"CERTIFICAZIONE\",\r\n    \"denominazioneEnteCertificatore\":\"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}",
+							"raw": "{\r\n  \"username\": \"john_doe_produttore\",\r\n  \"password\": \"securePassword123\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"nome\": \"John\",\r\n  \"cognome\": \"Doe\",\r\n  \"telefono\": \"+39 123 4567890\",\r\n  \"biografia\": \"Appassionato di tecnologia e sviluppo software. Amante della natura e dei viaggi.\",\r\n  \"partitaIva\": \"12345678901\",\r\n  \"denominazioneAzienda\": \"Azienda Prova\",\r\n  \"telefonoAziendale\": \"0123456789\",\r\n  \"idPosizione\": \"81919e63-4985-44a2-8331-79f82076466e\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1840,7 +1891,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"denominazione\": \"CERTIFICAZIONE-POSTMAN1\",\r\n    \"descrizione\": \"CERTIFICAZIONE1\",\r\n    \"denominazioneEnteCertificatore\": \"ENTE POSTMAN2\",\r\n    \"dataScadenza\": \"2026-12-31T00:00:00\"\r\n}",
+							"raw": "{\r\n  \"username\": \"john_doe_produttore\",\r\n  \"password\": \"securePassword123\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"nome\": \"John\",\r\n  \"cognome\": \"Doe\",\r\n  \"telefono\": \"+39 123 4567890\",\r\n  \"biografia\": \"Appassionato di tecnologia e sviluppo software. Amante della natura e dei viaggi.\",\r\n  \"partitaIva\": \"1234567890aaaaaaaaa1\",\r\n  \"denominazioneAzienda\": \"Azienda Prova\",\r\n  \"telefonoAziendale\": \"0123456789\",\r\n  \"idPosizione\": \"81919e63-4985-44a2-8331-79f82076466e\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1859,7 +1910,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "daca8d51-265a-4060-8856-f3783ef0cc8c"
+									"value": "d1cfe10e-3c22-46ac-86aa-72f7461fcc5a"
 								}
 							]
 						}
@@ -1892,7 +1943,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "8fc55277-a143-427c-9732-222932ebd4cf"
+									"value": "d1cfe10e-3c22-46ac-86aa-72f7461fcc5a"
 								}
 							]
 						}
@@ -2021,7 +2072,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "c3ce0581-eafb-4ede-abba-0014313c7406"
+									"value": "07b550b8-3261-482f-be3f-59529775a97b"
 								}
 							]
 						}
@@ -2045,7 +2096,53 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "c3ce0581-eafb-4ede-abba-0014313c7406"
+									"value": "508135e4-9287-48e0-bc9c-78b7248dc1d5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CURATORE",
+			"item": [
+				{
+					"name": "VALUTA PRODOTTO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"approvato\":true,\r\n    \"commentoCuratore\":\"Prodotto valido!\",\r\n    \"idCreatore\":\"1\",\r\n    \"idProdotto\":\"b753fc62-2fc3-40d0-8268-79ab06c28f24\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/curatore/valutaProdotto/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"curatore",
+								"valutaProdotto",
+								":id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4c189e06-86a8-4c62-8758-8b36d4954ece"
 								}
 							]
 						}
