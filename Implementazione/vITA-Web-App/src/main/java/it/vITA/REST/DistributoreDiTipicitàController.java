@@ -73,7 +73,7 @@ public class DistributoreDiTipicitàController {
 	public ResponseEntity<Object> createDistributore(@RequestBody DistributoreDiTipicitàDTO dtoDistributore) {
 	    
 	    Posizione posizione = null;
-	    String idPosizione = dtoDistributore.getPosizioneGeografica();
+	    String idPosizione = dtoDistributore.getIdPosizione();
 
 	    // Controlla se la posizione esiste
 	    if (repoPosizioni.existsById(idPosizione)) {
@@ -109,7 +109,7 @@ public class DistributoreDiTipicitàController {
 	public ResponseEntity<Object> updateDistributore(@PathVariable("id") String id, @RequestBody DistributoreDiTipicitàDTO dtoDistributore) {
 
 	    Posizione posizione = null;
-	    String idPosizione = dtoDistributore.getPosizioneGeografica();
+	    String idPosizione = dtoDistributore.getIdPosizione();
 
 	    // Controlla se la posizione esiste
 	    if (repoPosizioni.existsById(idPosizione)) {
