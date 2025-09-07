@@ -172,7 +172,9 @@ public class FakeDataLoader implements CommandLineRunner {
         Prodotto prod8 = new Prodotto("636e8ad1-aa38-4b20-a0a2-8ffc53d23894","Lattuga", "Croccante e fresca", LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(5), produ1);
         Prodotto prod9 = new Prodotto("c07684a7-9fc5-4ada-bdf4-8bce1e2385de","Sedano", "Ottimo per soffritti", LocalDateTime.now().minusDays(2), LocalDateTime.now().plusDays(7), produ1);
         Prodotto prod10 = new Prodotto("3c429f6c-c2a0-4316-95c5-9712e1925c48","Cavolo Nero", "Ricco di fibre", LocalDateTime.now().minusDays(3), LocalDateTime.now().plusDays(10), produ1);
-
+        
+        prod4.setApprovato(true);
+        
         repoProdotti.save(prod1);
         repoProdotti.save(prod2);
         repoProdotti.save(prod3);
@@ -187,7 +189,9 @@ public class FakeDataLoader implements CommandLineRunner {
         ProdottoInVendita pv1 = new ProdottoInVendita("ad4184cd-f194-4461-9a15-2cfa583909fc",50, 10,"Descrizione", prod1);
         ProdottoInVendita pv2 = new ProdottoInVendita("f8ea8836-4ba6-48a3-8b70-5d988f0ef836",11, 25,"Descrizione", prod2);
         ProdottoInVendita pv3 = new ProdottoInVendita("1e44c1e5-caa3-4ef7-9eef-75750548ee8b",14, 10,"Descrizione", prod3);
-        ProdottoInVendita pv4 = new ProdottoInVendita("fbf5ba56-aa1d-414f-87b8-57afb6b027a8",1, 5,"Descrizione", prod4);
+        
+       
+        ProdottoInVendita pv4 = new ProdottoInVendita("fbf5ba56-aa1d-414f-87b8-57afb6b027a8",10, 5,"Descrizione", prod4);
         
         repoProdottiInVendita.save(pv1);
         repoProdottiInVendita.save(pv2);
