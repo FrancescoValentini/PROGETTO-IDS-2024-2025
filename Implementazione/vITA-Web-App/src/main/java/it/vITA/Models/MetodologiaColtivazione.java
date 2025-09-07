@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -23,8 +24,8 @@ public class MetodologiaColtivazione {
 	private String denominazione;
 	private String descrizione;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "prdotto_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "prodotto_id", referencedColumnName = "id")
 	private Prodotto prodotto;
 	
 	public MetodologiaColtivazione() {this.id = UUID.randomUUID().toString();}
