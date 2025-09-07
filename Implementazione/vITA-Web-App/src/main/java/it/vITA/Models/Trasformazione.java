@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import it.vITA.RichiesteBuilder.RichiestaTrasformazione;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,11 +35,16 @@ public class Trasformazione {
 	  
 	  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	  @JoinColumn(name = "certificazione_id")
+	  @OnDelete(action = OnDeleteAction.CASCADE)
 	  private List<Certificazione> certificazioni;
 	  
-	  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	  @JoinColumn(name = "prdotto_id", referencedColumnName = "id")
+	  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	  @JoinColumn(name = "prodotto_id", referencedColumnName = "id")
 	  private Prodotto prodotto;
+
+		@OneToMany(mappedBy = "trasformazione", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+		@OnDelete(action = OnDeleteAction.CASCADE)
+		private List<RichiestaTrasformazione> richiesteTrasformazione;
 	  
 	  public Trasformazione() {this.id = UUID.randomUUID().toString();}
 	  

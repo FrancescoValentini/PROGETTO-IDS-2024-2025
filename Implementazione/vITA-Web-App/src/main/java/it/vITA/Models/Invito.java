@@ -43,12 +43,13 @@ public class Invito implements CSVExportable {
 		this.dataEoraCreazioneInvito = LocalDateTime.now();
 		this.invitato = invitato;
 		this.evento = evento;
+		this.id = UUID.randomUUID().toString();
 	}
 	public Invito(String id, UtenteRegistrato invitato, Evento evento) {
 		this.dataEoraCreazioneInvito = LocalDateTime.now();
 		this.invitato = invitato;
 		this.evento = evento;
-		this.id = UUID.randomUUID().toString();
+		this.id = id;
 	}
 	
 	public String getId() {

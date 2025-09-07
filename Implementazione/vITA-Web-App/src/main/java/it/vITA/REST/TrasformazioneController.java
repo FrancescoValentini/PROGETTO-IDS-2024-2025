@@ -27,6 +27,7 @@ import it.vITA.Repositories.CertificazioniRepository;
 import it.vITA.Repositories.ProdottoRepository;
 import it.vITA.Repositories.TrasformatoreRepository;
 import it.vITA.Repositories.TrasformazioniRepository;
+import jakarta.transaction.Transactional;
 
 /**
  * Controller REST per operazioni CRUD su trasformazioni
@@ -102,18 +103,20 @@ public class TrasformazioneController {
 	    trasformazione.setDataFineFase(dto.getDataFineFase());
 	    trasformazione.setTrasformatore(trasformatore);
 	    trasformazione.setProdotto(p);
-	    
+	 /*   
 	    List<Certificazione> certificazioni = new ArrayList<>();
 
 	    if (dto.getIdCertificazione() != null) {
 	        for (String id : dto.getIdCertificazione()) {
+	        	System.out.println(id);
 	            if (repoCertificazioni.existsById(id)) {
 	                Certificazione cert = repoCertificazioni.findById(id).get();
 	                certificazioni.add(cert);
+	                System.out.println(cert.getDenominazione());
 	            }
 	        }
 	    }
-	    trasformazione.setCertificazioni(certificazioni);
+	    trasformazione.setCertificazioni(certificazioni);*/
 
 	    repoTrasformazioni.save(trasformazione);
 
@@ -141,24 +144,28 @@ public class TrasformazioneController {
 		t.setDataFineFase(dto.getDataFineFase());
 		t.setTrasformatore(repoTrasformatori.findById(dto.getIdTrasformatore()).get());
 
-		List<Certificazione> certificazioni = new ArrayList<>();
+		/*List<Certificazione> certificazioni = new ArrayList<>();
 		if (dto.getIdCertificazione() != null) {
+			
+			certificazioni.clear();
 			for (String idCert : dto.getIdCertificazione()) {
+				System.out.println(idCert);
 				if (repoCertificazioni.existsById(idCert)) {
 					certificazioni.add(repoCertificazioni.findById(idCert).get());
 				}
 			}
 		}
-		t.setCertificazioni(certificazioni);
+		t.setCertificazioni(certificazioni);*/
 
 		repoTrasformazioni.save(t);
 		return new ResponseEntity<>(t, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
+	@Transactional
 	public ResponseEntity<Object> deleteTrasformazione(@PathVariable("id") String id) {
 		if (repoTrasformazioni.existsById(id)) {
-			repoTrasformazioni.deleteById(id);
+			repoTrasformazioni.deleteTrasformazioneById(id);
 			return new ResponseEntity<>("Trasformazione eliminata", HttpStatus.OK);
 		}
 		return new ResponseEntity<>("Trasformazione non trovata", HttpStatus.NOT_FOUND);

@@ -11,13 +11,13 @@ public class DistributoreDiTipicitàDTO {
 		private String partitaIva;
 		private String denominazioneAzienda;
 		private String telefonoAziendale;
-		private String idPosizioneGeografica;
+		private String idPosizione;
 
 		    public DistributoreDiTipicitàDTO() {}
 
 		    public DistributoreDiTipicitàDTO(String username, String password, String email, String nome, String cognome,
 					String telefono, String biografia, String partitaIva, String denominazioneAzienda, String telefonoAziendale,
-					String idPosizioneGeografica) {
+					String idPosizione) {
 				this.username = username;
 				this.password = password;
 				this.email = email;
@@ -28,7 +28,7 @@ public class DistributoreDiTipicitàDTO {
 				this.partitaIva = partitaIva;
 				this.denominazioneAzienda = denominazioneAzienda;
 				this.telefonoAziendale = telefonoAziendale;
-				this.idPosizioneGeografica = idPosizioneGeografica;
+				this.idPosizione = idPosizione;
 			}
 
 			public String getUsername() {
@@ -111,12 +111,12 @@ public class DistributoreDiTipicitàDTO {
 				this.telefonoAziendale = telefonoAziendale;
 			}
 
-			public String getPosizioneGeografica() {
-				return idPosizioneGeografica;
+			public String getIdPosizione() {
+				return idPosizione;
 			}
 
 			public void setPosizioneGeografica(String idPosizioneGeografica) {
-				this.idPosizioneGeografica = idPosizioneGeografica;
+				this.idPosizione = idPosizioneGeografica;
 			}
 	}
 

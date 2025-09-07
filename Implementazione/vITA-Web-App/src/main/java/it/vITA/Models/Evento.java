@@ -1,10 +1,15 @@
 package it.vITA.Models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import it.vITA.DataExporter.CSVExportable;
 import it.vITA.DataExporter.DataExporter;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +18,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -35,6 +41,10 @@ public class Evento implements CSVExportable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "posizione_id", referencedColumnName = "id")
 	private Posizione posizioneGeografica;
+	
+	@OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private List<Invito> inviti;
 	
 	
 	public Evento() {this.id = UUID.randomUUID().toString();}
@@ -62,6 +72,7 @@ public class Evento implements CSVExportable {
 		this.posti = posti;
 		this.tipologiaEvento = tipologiaEvento;
 		this.posizioneGeografica = posizioneGeografica;
+		this.id = UUID.randomUUID().toString();
 	}
 	
 	public Evento(String id,LocalDateTime dataEOraEvento, String titolo, String descrizione,
@@ -74,7 +85,7 @@ public class Evento implements CSVExportable {
 		this.posti = posti;
 		this.tipologiaEvento = tipologiaEvento;
 		this.posizioneGeografica = posizioneGeografica;
-		this.id = UUID.randomUUID().toString();
+		this.id = id;
 		}
 
 
