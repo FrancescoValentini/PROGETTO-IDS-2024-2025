@@ -62,6 +62,7 @@ public class Evento implements CSVExportable {
 		this.posti = posti;
 		this.tipologiaEvento = tipologiaEvento;
 		this.posizioneGeografica = posizioneGeografica;
+		this.id = UUID.randomUUID().toString();
 	}
 	
 	public Evento(String id,LocalDateTime dataEOraEvento, String titolo, String descrizione,
@@ -74,7 +75,7 @@ public class Evento implements CSVExportable {
 		this.posti = posti;
 		this.tipologiaEvento = tipologiaEvento;
 		this.posizioneGeografica = posizioneGeografica;
-		this.id = UUID.randomUUID().toString();
+		this.id = id;
 		}
 
 
