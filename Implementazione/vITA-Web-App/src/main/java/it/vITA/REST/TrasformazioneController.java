@@ -107,6 +107,7 @@ public class TrasformazioneController {
 
 	    if (dto.getIdCertificazione() != null) {
 	        for (String id : dto.getIdCertificazione()) {
+	        	System.out.println(id);
 	            if (repoCertificazioni.existsById(id)) {
 	                Certificazione cert = repoCertificazioni.findById(id).get();
 	                certificazioni.add(cert);
@@ -143,7 +144,10 @@ public class TrasformazioneController {
 
 		List<Certificazione> certificazioni = new ArrayList<>();
 		if (dto.getIdCertificazione() != null) {
+			
+			certificazioni.clear();
 			for (String idCert : dto.getIdCertificazione()) {
+				System.out.println(idCert);
 				if (repoCertificazioni.existsById(idCert)) {
 					certificazioni.add(repoCertificazioni.findById(idCert).get());
 				}

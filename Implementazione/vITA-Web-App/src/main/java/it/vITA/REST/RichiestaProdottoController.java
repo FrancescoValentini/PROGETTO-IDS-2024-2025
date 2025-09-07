@@ -23,6 +23,7 @@ import it.vITA.Repositories.RichiestaProdottoRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
 import it.vITA.RichiesteBuilder.RichiestaProdotto;
 import it.vITA.RichiesteBuilder.RichiestaProdottoBuilder;
+import jakarta.transaction.Transactional;
 
 
 /**
@@ -143,11 +144,12 @@ public class RichiestaProdottoController {
 	     * @return richiesta prodotto eliminata
 	     */
 	    @DeleteMapping("/{id}")
+	    @Transactional
 	    public ResponseEntity<Object> deleteRichiestaProdotto(@PathVariable String id) {
 	        if (!repoRichiestaP.existsById(id)) {
 	            return new ResponseEntity<>("Richiesta prodotto non trovata", HttpStatus.NOT_FOUND);
 	        }
-	        repoRichiestaP.deleteById(id);
+	        repoRichiestaP.deleteRichiestaProdottoById(id);
 	        return new ResponseEntity<>("Richiesta prodotto eliminata", HttpStatus.OK);
 	    }   
 }

@@ -2,6 +2,7 @@ package it.vITA.REST;
 
 import it.vITA.RichiesteBuilder.RichiestaTrasformazione;
 import it.vITA.RichiesteBuilder.RichiestaTrasformazioneBuilder;
+import jakarta.transaction.Transactional;
 import it.vITA.DTO.RichiestaTrasformazioneDTO;
 import it.vITA.Models.Trasformazione;
 import it.vITA.Models.UtenteRegistrato;
@@ -87,9 +88,10 @@ public class RichiestaTrasformazioneController {
 		return new ResponseEntity<>("Curatore non trovato",HttpStatus.NOT_FOUND);
 	}
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> deleteRichiesta(@PathVariable String id) {
         if (repoRichiesta.existsById(id)) {
-        	repoRichiesta.deleteById(id);
+        	repoRichiesta.deleteRichiestaTrasformazioneById(id);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
