@@ -2,6 +2,9 @@ package it.vITA.Models;
 
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,6 +24,7 @@ public class Produttore extends UtenteRegistrato {
 	private Posizione posizioneGeografica;
 	
 	@OneToMany(mappedBy = "produttore", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Prodotto> prodotti;
 	
 	public Produttore () {}

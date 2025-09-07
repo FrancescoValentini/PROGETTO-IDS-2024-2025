@@ -20,6 +20,7 @@ import it.vITA.Models.Prodotto;
 import it.vITA.Models.Produttore;
 import it.vITA.Repositories.ProdottoRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
+import jakarta.transaction.Transactional;
 
 /**
  * Rest controller per i prodotti
@@ -113,11 +114,12 @@ public class ProdottoController {
      * Elimina un prodotto per ID
      */
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Object> deleteProdotto(@PathVariable("id") String id) {
         if (!repoProdotti.existsById(id)) {
             return new ResponseEntity<>("Prodotto non trovato", HttpStatus.NOT_FOUND);
         }
-        repoProdotti.deleteById(id);
+        repoProdotti.deleteProdottoById(id);
         return new ResponseEntity<>("Prodotto eliminato", HttpStatus.OK);
     }
     
