@@ -78,7 +78,7 @@ public class FakeDataLoader implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		/*Posizione p1 = new Posizione("81919e63-4985-44a2-8331-79f82076466e","LAT1","LON1");
+		Posizione p1 = new Posizione("81919e63-4985-44a2-8331-79f82076466e","LAT1","LON1");
 		Posizione p2 = new Posizione("b194f4eb-1c80-4e66-804e-544885ecf396","LAT2","LON2");
 		Posizione p3 = new Posizione("766427fc-aadd-420c-a3be-78f36d308716","LAT3","LON3");
 		
@@ -127,6 +127,7 @@ public class FakeDataLoader implements CommandLineRunner {
 		UtenteRegistrato ur4 = new UtenteRegistrato("49f60305-e6b1-4707-bf12-16319194eab5","sneri", "sunshine!", "sara.neri@example.com", "Sara", "Neri", "3364445556", "Musicista e insegnante di pianoforte.");
 		UtenteRegistrato ur5 = new UtenteRegistrato("0f0e3177-4623-4302-95f1-2129ed324d7c","dbruno", "secureMe2024", "davide.bruno@example.com", "Davide", "Bruno", "3377778889", "Appassionato di fotografia.");
 
+		
         repoUtentiRegistrati.save(ur1);
         repoUtentiRegistrati.save(ur2);
         repoUtentiRegistrati.save(ur3);
@@ -213,9 +214,9 @@ public class FakeDataLoader implements CommandLineRunner {
         
      // === CREAZIONE TRASFORMATORI ===
         Trasformatore trasf1 = new Trasformatore("a226ca20-47f3-42cf-a495-168048e02ba1","username", "password" , "email", "nome" , "cognome" ,
-        		"telefono", "biografia" , "PIVA123", "Azienda Bio", "0123456789", null);
+        		"telefono", "biografia" , "PIVA123", "Azienda Bio", "0123456789", p1);
         Trasformatore trasf2 = new Trasformatore("72ea9ec0-65f7-4ed8-846a-4dd7bb4a2a7c","username", "password" , "email", "nome" , "cognome" ,
-        		"telefono", "biografia" ,"PIVA456", "Trasformazioni Verdi", "0987654321", null);
+        		"telefono", "biografia" ,"PIVA456", "Trasformazioni Verdi", "0987654321", p1);
         
         repoTrasformatori.save(trasf1);
         repoTrasformatori.save(trasf2);
@@ -230,6 +231,7 @@ public class FakeDataLoader implements CommandLineRunner {
                 LocalDateTime.now(),
                 LocalDateTime.now().plusYears(1)
             );
+        cert1.setProdotto(prod1);
 
             Certificazione cert2 = new Certificazione(
                 "a913bcb7-9491-438f-8d2e-749c690d483a",
@@ -239,6 +241,7 @@ public class FakeDataLoader implements CommandLineRunner {
                 LocalDateTime.now(),
                 LocalDateTime.now().plusYears(2)
             );
+            cert2.setProdotto(prod1);
 
         repoCertificazioni.save(cert1);
         repoCertificazioni.save(cert2);
@@ -250,7 +253,7 @@ public class FakeDataLoader implements CommandLineRunner {
         	    "Produzione confetture biologiche",
         	    LocalDateTime.now(),
         	    LocalDateTime.now().plusDays(5),
-        	    null, // trasformatore (da impostare se disponibile)
+        	    trasf1, // trasformatore (da impostare se disponibile)
         	    new ArrayList<>() // certificazioni vuote (o popolate se disponibili)
         	);
 
@@ -260,7 +263,7 @@ public class FakeDataLoader implements CommandLineRunner {
         	    "Conserve di verdure stagionali",
         	    LocalDateTime.now(),
         	    LocalDateTime.now().plusDays(7),
-        	    null,
+        	    trasf1,
         	    new ArrayList<>()
         	);
 
@@ -270,7 +273,7 @@ public class FakeDataLoader implements CommandLineRunner {
         
 
         
-        */
+        
 		logger.info("LOADED FAKE DATA FROM DATABASE");
 		
 	}

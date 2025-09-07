@@ -1,10 +1,13 @@
 package it.vITA.Models;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "PRODUTTORI")
@@ -16,6 +19,9 @@ public class Produttore extends UtenteRegistrato {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "posizione_id", referencedColumnName = "id")
 	private Posizione posizioneGeografica;
+	
+	@OneToMany(mappedBy = "produttore", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<Prodotto> prodotti;
 	
 	public Produttore () {}
 

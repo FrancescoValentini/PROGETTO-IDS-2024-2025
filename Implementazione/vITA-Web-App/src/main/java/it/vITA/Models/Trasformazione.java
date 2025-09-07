@@ -34,9 +34,10 @@ public class Trasformazione {
 	  @JoinColumn(name = "certificazione_id")
 	  private List<Certificazione> certificazioni;
 	  
-	  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	  @JoinColumn(name = "prdotto_id", referencedColumnName = "id")
+	  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	  @JoinColumn(name = "prodotto_id", referencedColumnName = "id")
 	  private Prodotto prodotto;
+
 	  
 	  public Trasformazione() {this.id = UUID.randomUUID().toString();}
 	  

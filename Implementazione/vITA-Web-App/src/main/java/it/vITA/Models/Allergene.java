@@ -22,7 +22,7 @@ public class Allergene {
 	private String denominazione;
 	private String descrizione;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "prdotto_id", referencedColumnName = "id")
 	private Prodotto prodotto;
 	
