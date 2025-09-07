@@ -10,7 +10,6 @@ import it.vITA.Models.Posizione;
 import it.vITA.Models.Prodotto;
 import it.vITA.Models.ProdottoInVendita;
 import it.vITA.Models.Produttore;
-import it.vITA.Models.TipoRichiesta;
 import it.vITA.Models.TipologiaEvento;
 import it.vITA.Models.Trasformatore;
 import it.vITA.Models.Trasformazione;
@@ -26,7 +25,6 @@ import it.vITA.Repositories.RichiestaProdottoRepository;
 import it.vITA.Repositories.TrasformatoreRepository;
 import it.vITA.Repositories.TrasformazioniRepository;
 import it.vITA.Repositories.UtenteRegistratoRepository;
-import it.vITA.RichiesteBuilder.RichiestaProdotto;
 import it.vITA.RichiesteBuilder.RichiestaProdottoBuilder;
 
 import java.time.LocalDateTime;
@@ -256,6 +254,7 @@ public class FakeDataLoader implements CommandLineRunner {
         	    trasf1, // trasformatore (da impostare se disponibile)
         	    new ArrayList<>() // certificazioni vuote (o popolate se disponibili)
         	);
+			t1.setProdotto(prod1);
 
         	Trasformazione t2 = new Trasformazione(
         	    "27e3b5fc-a56c-40c9-afb4-7b34e94f995e",
@@ -266,6 +265,7 @@ public class FakeDataLoader implements CommandLineRunner {
         	    trasf1,
         	    new ArrayList<>()
         	);
+			t2.setProdotto(prod1);
 
 
         repoTrasformazioni.save(t1);
